@@ -1,0 +1,62 @@
+# ================================================
+# .htaccess – Marie Bezděkovská / poradnamala.cz
+# ================================================
+
+# Chybová stránka 404
+ErrorDocument 404 /404.html
+
+# ================================================
+# Bezpečnostní HTTP hlavičky
+# ================================================
+<IfModule mod_headers.c>
+
+    # Zabraňuje clickjackingu – stránka nesmí být vložena do iframe
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Vypíná MIME-type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Referrer Policy – posílá jen origin (bez cesty) při přechodu na jiný web
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Permissions Policy – omezuje přístup k citlivým API
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+    # Content Security Policy
+    # Upravte podle skutečně použitých externích zdrojů (Google Fonts, Font Awesome CDN, Formspree)
+    Header always set Content-Security-Policy "\
+        default-src 'self'; \
+        script-src 'self' 'unsafe-inline'; \
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; \
+        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; \
+        img-src 'self' data:; \
+        form-action 'self' https://formspree.io; \
+        connect-src 'self' https://formspree.io; \
+        frame-ancestors 'self'"
+
+    # Strict Transport Security – aktivovat až po přechodu na HTTPS
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+</IfModule>
+
+# ================================================
+# Komprese gzip
+# ================================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# ================================================
+# Cache-Control pro statické soubory
+# ================================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css                  "access plus 1 month"
+    ExpiresByType application/javascript    "access plus 1 month"
+    ExpiresByType image/jpeg                "access plus 6 months"
+    ExpiresByType image/png                 "access plus 6 months"
+    ExpiresByType image/svg+xml             "access plus 6 months"
+    ExpiresByType image/avif                "access plus 6 months"
+    ExpiresByType image/webp                "access plus 6 months"
+    ExpiresByType text/html                 "access plus 1 hour"
+</IfModule>
