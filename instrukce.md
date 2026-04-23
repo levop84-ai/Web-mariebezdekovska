@@ -94,8 +94,8 @@ Více stránkový web.
   - Pro pozůstalé
   - Pro organizace
   - Access Bars
-- Zkušenosti klientů
 - O mně
+- Zkušenosti klientů
 - Kontakt
 
 - Jednotlivé položky z „Moje služby" budou mít každá svou stránku.
