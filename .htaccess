@@ -5,11 +5,15 @@
 # ================================================
 # Čisté URL (bez přípony .html)
 # ================================================
+<IfModule mod_dir.c>
+    DirectoryIndex index.html
+</IfModule>
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # /index.html → / (301)
-    RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]
+    # /index.html nebo /index → / (301)
+    RewriteCond %{THE_REQUEST} \s/index(\.html)?[\s?] [NC]
     RewriteRule ^ / [R=301,L]
 
     # *.html → * (301)
