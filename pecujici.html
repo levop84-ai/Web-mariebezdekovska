@@ -699,9 +699,16 @@
             margin-bottom: var(--s4);
         }
 
+        .dot-list--2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: var(--s4);
+            row-gap: 0;
+        }
+
         .dot-list li {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: var(--s2);
             padding: 8px 0;
             font-size: 1.05rem;
@@ -712,6 +719,7 @@
             color: var(--gold);
             flex-shrink: 0;
             font-size: 0.7rem;
+            margin-top: 0.80em;
         }
 
         /* ================================================
@@ -1276,6 +1284,10 @@
                 grid-template-columns: 1fr !important;
             }
 
+            .dot-list--2col {
+                grid-template-columns: 1fr;
+            }
+
             /* bubble-field: přechod z absolutního na flow layout */
             .bubble-field {
                 aspect-ratio: unset;
@@ -1465,7 +1477,7 @@
                         <span class="eyebrow">Co možná řešíte</span>
                         <h2 id="intro-h">Mohu vám pomoci, když</h2>
                         <div class="divider divider--left"></div>
-                        <ul class="dot-list" aria-label="Témata poradenství">
+                        <ul class="dot-list dot-list--2col" aria-label="Témata poradenství">
                             <li><i class="fa-solid fa-circle" aria-hidden="true"></i>je pro&nbsp;vás diagnóza blízkého
                                 nová</li>
                             <li><i class="fa-solid fa-circle" aria-hidden="true"></i>hledáte informace a&nbsp;možnosti
@@ -1473,6 +1485,17 @@
                             <li><i class="fa-solid fa-circle" aria-hidden="true"></i>nevíte si rady s&nbsp;dalšími kroky
                             </li>
                             <li><i class="fa-solid fa-circle" aria-hidden="true"></i>chcete nastavit funkční plán péče
+                            </li>
+                            <li><i class="fa-solid fa-circle" aria-hidden="true"></i>nevíte na koho se obrátit
+                            </li>
+                            <li><i class="fa-solid fa-circle" aria-hidden="true"></i>máte strach komunikovat
+                                o&nbsp;závěru života
+                            </li>
+                            <li><i class="fa-solid fa-circle" aria-hidden="true"></i>nevíte jaké pomůcky k&nbsp;péči
+                                bude potřeba
+                            </li>
+                            <li><i class="fa-solid fa-circle" aria-hidden="true"></i>chcete se naučit manipulovat
+                                s&nbsp;nemocným
                             </li>
                             <li><i class="fa-solid fa-circle" aria-hidden="true"></i>ztrácíte se v&nbsp;administrativě
                             </li>
@@ -1677,8 +1700,60 @@
         </section>
 
 
+        <!-- PRAKTICKÉ INFO -->
+        <section class="section section--bg" id="prakticke-info" aria-labelledby="prakticke-info-h">
+            <div class="container">
+                <div class="split__grid" style="align-items: start;">
+
+                    <div class="split__img-wrap reveal" style="aspect-ratio: 1/1;">
+                        <img src="Obrazky/prostor_poradna.jpg" alt="Poradna Marie Bezděkovské – útulný prostor pro setkání"
+                            class="split__img" loading="lazy" width="600" height="600">
+                    </div>
+
+                    <div class="split__body reveal rv-d2">
+                        <span class="eyebrow">Praktické info</span>
+                        <h2 id="prakticke-info-h">Místo a cena</h2>
+                        <div class="divider divider--left"></div>
+
+                        <ul class="dot-list" style="margin-top:var(--s3);">
+
+                            <li>
+                                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                                <div>
+                                    <p style="font-family:var(--font-h); font-style:italic; font-size:1.2rem; color:var(--cta); margin-bottom:var(--s2);">
+                                        1.&nbsp;máje 97/25, 460&nbsp;07 Liberec&nbsp;III&nbsp;– Jeřáb (budova finančního úřadu).
+                                    </p>
+                                    <p class="split__text">
+                                        Setkání probíhají v&nbsp;poradně na výše uvedené adrese.
+                                        Potřebujete-li, abych vás navštívila doma či jinde, je to samozřejmě po&nbsp;domluvě možné.
+                                    </p>
+                                </div>
+                            </li>
+
+                            <li>
+                                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                                <div>
+                                    <p style="font-family:var(--font-h); font-style:italic; font-size:1.2rem; color:var(--cta); margin-bottom:var(--s2);">
+                                        Cena služby: 950&nbsp;Kč&nbsp;/ 60 minut
+                                    </p>
+                                    <p class="split__text">
+                                        Peníze nesmí být podmínkou pro konzultaci s&nbsp;rodinou, která pečuje o&nbsp;blízkého nebo je pozůstalá. Respektuji finanční možnosti každé rodiny.
+                                    </p>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                        <a href="#kontakt" class="btn btn--primary">Ozvěte se mi</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
         <!-- CONTACT -->
-        <section class="contact section--bg" id="kontakt" aria-labelledby="contact-h">
+        <section class="contact section--white" id="kontakt" aria-labelledby="contact-h">
             <div class="container">
                 <div class="section-header reveal" style="margin-bottom:var(--s6);">
                     <span class="eyebrow">Kontakt</span>
@@ -1729,7 +1804,7 @@
                         </p>
                     </div>
                     <div class="cform reveal rv-d2">
-                        <form action="https://formspree.io/f/PLACEHOLDER" method="POST" novalidate
+                        <form action="https://formspree.io/f/mvzlqkdd" method="POST" novalidate
                             aria-label="Kontaktní formulář">
                             <label class="hp-field" for="hp-website" aria-hidden="true">Nevyplňujte</label>
                             <input class="hp-field" type="text" id="hp-website" name="website" tabindex="-1"

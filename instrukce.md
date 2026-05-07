@@ -330,6 +330,13 @@ Používá se na pecujici.html, pozustali.html, organizace.html a access-bars.ht
 - `li`: `display: flex; align-items: center; gap: var(--s2); padding: 8px 0; font-size: 1.05rem; line-height: 1.75`
 - Ikona: `fa-solid fa-circle`, barva `var(--gold)`, `font-size: 0.7rem` — bez margin-top (odrážka zarovnaná na střed textu)
 
+**Varianta `.dot-list--2col`** (pecujici.html – sekce „Mohu vám pomoci, když"):
+- `display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s4); row-gap: 0`
+- `li`: `align-items: flex-start` (místo center — ikona zarovnaná na první řádek)
+- Ikona: `margin-top: 0.80em` (kompenzace half-leading pro optické zarovnání na účaří prvního řádku)
+- **Mobilní (≤768px):** `grid-template-columns: 1fr` — odrážky se seřadí do jednoho sloupce
+- **Pozor:** tato varianta je definována pouze v inline `<style>` bloku pecujici.html, nikoliv v style.css (podstránky mají vlastní inline CSS)
+
 ---
 
 ### Highlight box (`.highlight-box`)
@@ -524,9 +531,9 @@ Shodná na všech stránkách.
 - **Levý sloupec:** fotka Marie (kruh 230×230px, `object-position: top`) + jméno + telefon + e-mail + social tlačítka + `.contact__note`
 - **`.contact__detail`** (řádek ikona + text): `align-items: center` (ikona vertikálně vystředěna s jednořádkovým textem), `width: 16px` na ikoně, bez `margin-top`
 - **Pravý sloupec:** formulář `.cform` (bílé pozadí, shadow, border-radius `--r-lg`)
-- **Formulář:** pole Jméno, E-mail, Telefon, Zpráva; antispam honeypot `#hp-website`; backend Formspree (placeholder URL)
+- **Formulář:** pole Jméno, E-mail, Telefon, Zpráva; antispam honeypot `#hp-website`; backend Formspree — endpoint `https://formspree.io/f/mvzlqkdd` (nasazen na všech 6 stránkách)
 - **Tlačítko odeslat:** bez ikony — pouze text „Odeslat zprávu" (ikony v tlačítkách se nepoužívají)
-- **Contact note:** Lora, italic, `1.05rem`, `line-height: 1.8`; hover: `var(--shadow-hover)`
+- **Contact note:** Lora, italic, `1.05rem`, `line-height: 1.8`; hover: `var(--shadow-hover)`; text se liší dle stránky — na pecujici.html a pozustali.html popis situace + odkaz na poradnu/domácí návštěvy; na organizace.html popis situace + věta o prostorách pro školení
 - Foto v kontaktu: `Obrazky/marie_hero.jpg` na všech stránkách
 
 ---
@@ -593,7 +600,17 @@ Položka s `fa-scale-balanced` je přítomna na **všech** stránkách webu.
 
 **O mně:** split flip (foto `Obrazky/marie_omne.jpg` vlevo, text vpravo); tlačítko „Číst více" → `o-mne.html`.
 
-**Reference:** grid `repeat(3, 1fr)`; hover `translateY(-4px)`; ikona autora `Obrazky/Ikony/testimonial.png`; texty zatím Lorem ipsum.
+**Reference:** grid `repeat(3, 1fr)`; hover `translateY(-4px)`; ikona autora `Obrazky/Ikony/testimonial.png`. Skutečné reference:
+- **Marta K.** — „Maruška se o našeho tatínka starala naprosto skvěle…" (poznámka: komplexní provázení rodiny a nemocného až do konce). Text oříznut na 9 řádků třídou `testi-card__text--clamped` (`-webkit-line-clamp: 9`), tlačítko „Číst více" / „Zobrazit méně" (JS funkce `testitoggle`).
+- **Karel R.** — „Po naší konzultaci mám najednou pocit, že všechno zvládnu…" (poznámka: konzultace s plánem péče)
+- **Vilma O.** — „Několik let pečuji o svou maminku…" (poznámka: sezení Access Bars®)
+
+**Struktura testi-card:**
+- `testi-card__body` (`flex: 1`) — wrapper pro text + tlačítko, zajišťuje že autor vždy sedí dole
+- `testi-card__text--clamped` — pouze na 1. kartě, CSS: `display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 9; overflow: hidden`
+- `testi-card__readmore` — tlačítko bez podtržení, hover barva `#b08a60`, transition 0.2s
+- `testi-card__author-info` (`display: flex; flex-direction: column; gap: 2px`) — wrapper pro jméno + poznámku (pod sebou, ne vedle sebe)
+- `testi-card__note` — `font-size: 0.8rem; color: #888888; font-style: italic`
 
 ---
 
@@ -622,17 +639,22 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 |---|---|---|---|
 | 1 | Page Hero | foto + overlay | btn--glass |
 | 2 | Intro | `section--white` | eyebrow „Poradenství pro pečující", h2 „Uvolněte si ruce pro to důležité", btn--outline „S čím vám mohu pomoci" → `#co-resite` |
-| 3 | Co možná řešíte | `section--bg` | id="co-resite"; split grid: foto vlevo `pro_pecujici_sezeni.jpg` (aspect 1:1), text vpravo (dot-list 6 bodů, btn--primary) |
+| 3 | Co možná řešíte | `section--bg` | id="co-resite"; split grid: foto vlevo `pro_pecujici_sezeni.jpg` (aspect 1:1), text vpravo (dot-list 10 bodů ve 2 sloupcích `.dot-list--2col`, btn--primary) |
 | 4 | Bezpečný prostor | `section--white` | split grid `align-items:start`: text vlevo (5 odstavců), bubble-field vpravo |
 | 5 | Jak pracuji | `background:#FAF7F2` | split grid `align-items:start`: text vlevo, 2×2 how-cards vpravo |
 | 6 | Spolupráce | `section--white` | section-header + 3 how-cards (grid 3 cols) + pull-quote + btn--primary |
-| 7 | Kontakt | `section--bg` | id="kontakt" |
+| 7 | Praktické info | `section--bg` | id="prakticke-info"; split grid: foto vlevo `prostor_poradna.jpg` (aspect 1:1), vpravo eyebrow + h2 „Místo a cena" + divider + dot-list (2 odrážky) + btn--primary „Ozvěte se mi" → `#kontakt` |
+| 8 | Kontakt | `section--white` | id="kontakt" |
 
 **Bubble field (sekce Bezpečný prostor):** foto `Obrazky/otazky.jpg`, overlay 0.58, 14 plovoucích bublin s otázkami. Bubliny pokrývají celou plochu (top 7–89%, left 6–62%). Animace pouze float (translateY ±9px), bez fade.
 
 **How-cards (sekce Jak pracuji):** 2×2 grid v pravém sloupci splitu — Krátkodobá péče / Náhlá změna situace / Dlouhodobá péče / Potřeba se připravit.
 
 **How-cards (sekce Spolupráce):** 3 karty v řadě — Jednorázová konzultace / Dlouhodobé provázení / Převzetí organizačních záležitostí.
+
+**Sekce Praktické info — dot-list (2 odrážky):** ikona `fa-solid fa-circle` (zlatý puntík), každá odrážka obsahuje `<div>` se dvěma odstavci:
+- 1. odrážka: adresa poradny „1. máje 97/25, 460 07 Liberec III – Jeřáb (budova finančního úřadu)." — Lora, italic, 1.2rem, barva `--cta`; pod tím: „Setkání probíhají v poradně na výše uvedené adrese. Potřebujete-li, abych vás navštívila doma či jinde, je to samozřejmě po domluvě možné."
+- 2. odrážka: „Cena služby: 950 Kč / 60 minut" — stejný styl (Lora, italic, 1.2rem, `--cta`); pod tím: text o respektování finančních možností rodiny
 
 ---
 
@@ -648,7 +670,8 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 | 2 | Intro | `section--white` | eyebrow „Dopřejte si čas", h2 „Cílem není zapomenout", btn--outline → `#bezpecny-prostor` |
 | 3 | Bezpečný prostor | `section--bg` | id="bezpecny-prostor"; split grid: foto vlevo `Obrazky/bezpecny_prostor.png` (aspect 1:1), text vpravo (dot-list 4 body, btn--primary) |
 | 4 | Spolupráce | `section--white` | section-header + 3 how-cards (grid 3 cols) + pull-quote + btn--primary |
-| 5 | Kontakt | `section--bg` | id="kontakt" |
+| 5 | Praktické info | `section--bg` | id="prakticke-info"; identická sekce jako na pecujici.html — split grid: foto vlevo `prostor_poradna.jpg` (aspect 1:1), vpravo eyebrow + h2 + divider + dot-list (2 odrážky) + btn--primary „Ozvěte se mi" → `#kontakt` |
+| 6 | Kontakt | `section--white` | id="kontakt" |
 
 **How-cards (sekce Spolupráce):** 3 karty — Jednorázová konzultace / Dlouhodobé provázení / Praktická pomoc.
 
@@ -669,7 +692,7 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 | 3 | Bezpečný prostor | `section section--bg` | split grid `align-items:start`; vlevo foto `organizace_tym.jpg` (`align-self:stretch`, `min-height:360px`); vpravo eyebrow „Bezpečný prostor", h2 „Otevřené rozhovory s týmem", text, dot-list 4 body, btn--primary |
 | 4 | Výzvy neopečovaných pečujících | `section section--white` | section-header (eyebrow + h2 + divider + text) s `margin-bottom: var(--s3)`; pod tím centrovaný `.dot-list` (`display: table; margin: 0 auto`) — 4 odrážky |
 | 5 | Podpora organizace | `section section--bg` | split grid `align-items:start`; vlevo `split__body` s `align-self:start` — eyebrow „Podpora organizace", h2 „Pokud cítíte, že se vaše organizace s těmito výzvami setkává, ráda vás podpořím", divider, 3 odstavce, btn--primary „Domluvit konzultaci" → `#kontakt`; vpravo foto `pro_organizace.jpg` (`align-self:stretch`, `min-height:360px`) |
-| 6 | Spolupráce | `section section--white` | id="sluzby"; section-header + 4 `.reason-card` v `how-grid repeat(4,1fr)` — každá s ikonou PNG + nadpis, vše centrováno; btn--primary „Domluvit konzultaci" → `#kontakt` |
+| 6 | Spolupráce | `section section--white` | id="sluzby"; section-header (2 odstavce — „Spolupráce může probíhat různými formami…" + „Nejčastější témata, která v organizacích školím: Úvod do paliativní péče, Komunikace s rodinou, Doprovázení klientů v sociální péči v závěru života, Péče o sebe v nejen těžkých situacích, a další.") + 4 `.reason-card` v `how-grid repeat(4,1fr)` — každá s ikonou PNG + nadpis, vše centrováno; btn--primary „Domluvit konzultaci" → `#kontakt` |
 | 7 | Kontakt | `contact section--white` + inline `background-color: #FAF7F2` | id="kontakt" |
 
 **Sekce Výzvy neopečovaných pečujících:** místo karet je `ul.dot-list` s `display: table; margin: 0 auto` (vycentrovaný seznam). Section-header má `margin-bottom: var(--s3)` (ne výchozích `var(--s6)`).
@@ -735,6 +758,7 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 | `Obrazky/access_bars_hero.jpg` | access-bars.html page hero pozadí (`background-position: center top`) |
 | `Obrazky/access_bars_sezeni.jpg` | access-bars.html sekce „Jak Barsy pomáhají" (vlevo) |
 | `Obrazky/access_bars_pece.jpg` | access-bars.html sekce „Průběh sezení" (vpravo) |
+| `Obrazky/prostor_poradna.jpg` | pecujici.html a pozustali.html sekce „Praktické info" (vlevo, aspect-ratio 1:1) |
 | `Obrazky/otazky.jpg` | pecujici.html bubble-field pozadí |
 | `Obrazky/o_mne_hero.jpg` | o-mne.html page hero pozadí (`background-position: center 40%`) |
 | `Obrazky/marie_1.jpg` | o-mne.html split „Příběh" — sekce Příběh je nyní intro (bez fotky), foto nevyužito |
@@ -748,7 +772,8 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 Obecné pravidlo: sekce se střídají mezi `section--white` a `section--bg`. Page Hero má vždy tmavé pozadí (foto + overlay nebo `#3a3028`).
 
 Kontaktní sekce (`#kontakt`) — pozadí dle stránky:
-- index.html, pecujici.html, pozustali.html: `section--bg`
+- index.html: `section--bg`
+- pecujici.html, pozustali.html: `section--white` (přepnuto po přidání sekce Praktické info před Kontakt — aby se střídání zachovalo)
 - organizace.html: `contact section--white` + inline `style="background-color: #FAF7F2"` (vizuálně shodné s `--bg`)
 - access-bars.html: `contact section--white` (bílé pozadí)
 

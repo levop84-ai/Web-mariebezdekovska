@@ -612,6 +612,13 @@ p {
     margin-bottom: var(--s4);
 }
 
+.dot-list--2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--s4);
+    row-gap: 0;
+}
+
 .dot-list li {
     display: flex;
     align-items: center;
@@ -954,6 +961,10 @@ p {
     box-shadow: var(--shadow-hover);
 }
 
+.testi-card__body {
+    flex: 1;
+}
+
 .testi-card__author {
     display: flex;
     align-items: center;
@@ -978,6 +989,12 @@ p {
     object-fit: contain;
 }
 
+.testi-card__author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
 .testi-card__name {
     font-family: var(--font-h);
     font-size: 1rem;
@@ -985,11 +1002,43 @@ p {
     color: var(--cta);
 }
 
+.testi-card__note {
+    font-size: 0.8rem;
+    color: #888888;
+    font-style: italic;
+}
+
 .testi-card__text {
     font-size: 1rem;
     line-height: 1.75;
     color: #333333;
     font-style: italic;
+}
+
+.testi-card__text--clamped {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 9;
+    overflow: hidden;
+}
+
+.testi-card__readmore {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-top: 0.35em;
+    font-family: var(--font-h);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--cta);
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    transition: color 0.2s;
+}
+
+.testi-card__readmore:hover {
+    color: #b08a60;
 }
 
 /* ================================================
