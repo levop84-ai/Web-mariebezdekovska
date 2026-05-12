@@ -1,0 +1,1392 @@
+﻿<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- SEO -->
+    <title>Zásady zpracování osobních údajů | Marie Bezděkovská</title>
+    <meta name="description"
+        content="Zásady zpracování osobních údajů Marie Bezděkovské – jak nakládám s vašimi osobními údaji, jaká máte práva a jak je uplatnit.">
+    <link rel="canonical" href="https://www.mariebezdekovska.cz/gdpr">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    </noscript>
+
+    <style>
+        :root {
+            --bg: #FAF7F2;
+            --bg-alt: #EDE0CC;
+            --sand: #D9C4A8;
+            --gold: #C4A882;
+            --cta: #82664A;
+            --cta-hover: #634C36;
+            --text: #333333;
+            --text-muted: #665D56;
+            --white: #FFFFFF;
+            --font-h: 'Lora', Georgia, serif;
+            --font-b: 'Jost', system-ui, sans-serif;
+            --r-sm: 8px;
+            --r-md: 16px;
+            --r-lg: 24px;
+            --shadow: 0 2px 20px rgba(155, 126, 96, 0.08);
+            --shadow-hover: 0 8px 36px rgba(155, 126, 96, 0.15);
+            --s1: 8px;
+            --s2: 16px;
+            --s3: 24px;
+            --s4: 32px;
+            --s5: 48px;
+            --s6: 64px;
+            --s7: 96px;
+            --s8: 128px;
+            --max-w: 1200px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-b);
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-h);
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--text);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+        }
+
+        h2 {
+            font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+        }
+
+        h3 {
+            font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.75;
+        }
+
+        .container {
+            width: 100%;
+            padding-inline: var(--s8);
+        }
+
+        .eyebrow {
+            display: block;
+            font-family: var(--font-b);
+            font-size: 0.87rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--cta);
+            margin-bottom: var(--s2);
+        }
+
+        .divider {
+            width: 44px;
+            height: 1px;
+            background: var(--gold);
+            margin: var(--s3) auto;
+        }
+
+        .divider--left {
+            margin-left: 0;
+        }
+
+        /* NAV */
+        .nav {
+            position: fixed;
+            inset: 0 0 auto;
+            z-index: 200;
+            background: var(--white);
+            border-bottom: 1px solid rgba(196, 168, 130, 0.18);
+            transition: box-shadow 0.3s;
+        }
+
+        .nav.scrolled {
+            box-shadow: 0 2px 24px rgba(155, 126, 96, 0.12);
+        }
+
+        .nav__inner {
+            width: 100%;
+            padding-inline: var(--s8);
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav__logo {
+            font-family: var(--font-h);
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+        }
+
+        .nav__logo small {
+            display: block;
+            font-family: var(--font-b);
+            font-size: 0.62rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--cta);
+            font-weight: 400;
+        }
+
+        .nav__links {
+            display: flex;
+            align-items: center;
+            gap: var(--s4);
+        }
+
+        .nav__item {
+            position: relative;
+        }
+
+        .nav__link {
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text);
+            padding-bottom: 3px;
+            position: relative;
+            transition: color 0.22s;
+        }
+
+        .nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--cta);
+            transition: width 0.3s;
+        }
+
+        .nav__link:hover {
+            color: var(--cta);
+        }
+
+        .nav__link:hover::after {
+            width: 100%;
+        }
+
+        .nav__link--btn {
+            border: 1.5px solid var(--cta);
+            border-radius: 50px;
+            padding: 6px 18px;
+            color: var(--cta);
+            transition: background 0.22s, color 0.22s;
+        }
+
+        .nav__link--btn::after {
+            display: none;
+        }
+
+        .nav__link--btn:hover {
+            background: var(--cta);
+            color: var(--white);
+        }
+
+        .nav__dropdown {
+            position: absolute;
+            top: calc(100% + 14px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--white);
+            border: 1px solid rgba(196, 168, 130, 0.18);
+            border-radius: var(--r-md);
+            padding: var(--s1) 0;
+            min-width: 195px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.22s, visibility 0.22s, top 0.22s;
+        }
+
+        .nav__item:hover .nav__dropdown,
+        .nav__item:focus-within .nav__dropdown {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            top: calc(100% + 8px);
+        }
+
+        .nav__item:hover::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: -10px;
+            right: -10px;
+            height: 12px;
+        }
+
+        .nav__drop-link {
+            display: block;
+            padding: 9px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: var(--text);
+            transition: background 0.18s, color 0.18s;
+        }
+
+        .nav__drop-link:hover {
+            background: var(--bg-alt);
+            color: var(--cta);
+        }
+
+        .nav__burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .nav__burger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--text);
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .nav__burger.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg);
+        }
+
+        .nav__burger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav__burger.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg);
+        }
+
+        .nav__mobile {
+            display: none;
+            flex-direction: column;
+            background: var(--white);
+            border-top: 1px solid var(--sand);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .nav__mobile.open {
+            max-height: 600px;
+        }
+
+        .nav__mob-link {
+            display: block;
+            padding: 11px 24px;
+            font-size: 0.94rem;
+            font-weight: 500;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: var(--text);
+            border-bottom: 1px solid rgba(196, 168, 130, 0.14);
+            transition: color 0.18s;
+        }
+
+        .nav__mob-link--sub {
+            padding-left: 40px;
+            font-size: 0.84rem;
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: 0.03em;
+            color: var(--text-muted);
+        }
+
+        .nav__mob-link--btn {
+            align-self: flex-start;
+            margin: 12px 24px;
+            padding: 10px 20px;
+            border: 1.5px solid var(--cta);
+            border-radius: 50px;
+            color: var(--cta);
+            text-align: center;
+            letter-spacing: 0.1em;
+        }
+
+        .nav__mob-link:hover {
+            color: var(--cta);
+        }
+
+        /* PAGE HERO */
+        .page-hero {
+            padding-top: 72px;
+            min-height: 44vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .page-hero__bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #2e2620 0%, #4a3a2c 50%, #3a2e22 100%);
+        }
+
+        .page-hero__overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(20, 14, 8, 0.35);
+        }
+
+        .page-hero__content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: var(--s6) var(--s8);
+        }
+
+        .page-hero__body {
+            max-width: 820px;
+            margin-inline: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .page-hero__content .eyebrow {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .page-hero__title {
+            margin-bottom: var(--s3);
+            color: var(--white);
+        }
+
+        .page-hero__body .divider--left {
+            background: rgba(255, 255, 255, 0.45);
+        }
+
+        .page-hero__lead {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.82);
+            max-width: 520px;
+        }
+
+        /* GDPR CONTENT */
+        .gdpr {
+            padding: var(--s7) 0 var(--s8);
+            background: var(--bg);
+        }
+
+        .gdpr__inner {
+            max-width: 820px;
+            margin-inline: auto;
+        }
+
+        .gdpr__intro {
+            margin-bottom: var(--s6);
+        }
+
+        .gdpr__intro p {
+            margin-bottom: var(--s3);
+            color: var(--text);
+        }
+
+        .gdpr__toc {
+            background: var(--white);
+            border: 1px solid rgba(196, 168, 130, 0.2);
+            border-radius: var(--r-md);
+            padding: var(--s4) var(--s5);
+            margin-bottom: var(--s6);
+            box-shadow: var(--shadow);
+        }
+
+        .gdpr__toc-title {
+            font-family: var(--font-b);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--cta);
+            margin-bottom: var(--s3);
+        }
+
+        .gdpr__toc ol {
+            list-style: none;
+            padding: 0;
+        }
+
+        .gdpr__toc ol li {
+            padding: 5px 0;
+            font-size: 0.97rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(196, 168, 130, 0.12);
+        }
+
+        .gdpr__toc ol li:last-child {
+            border-bottom: none;
+        }
+
+        .gdpr__toc ol li a {
+            color: var(--text-muted);
+            transition: color 0.2s;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+        }
+
+        .gdpr__toc ol li a:hover {
+            color: var(--cta);
+            text-decoration-color: var(--cta);
+        }
+
+        .gdpr__section {
+            margin-bottom: var(--s6);
+            scroll-margin-top: 90px;
+        }
+
+        .gdpr__section-title {
+            font-family: var(--font-h);
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 400;
+            color: var(--cta);
+            margin-bottom: var(--s3);
+            padding-bottom: var(--s2);
+            border-bottom: 1px solid rgba(196, 168, 130, 0.3);
+        }
+
+        .gdpr__subsection {
+            margin-bottom: var(--s4);
+        }
+
+        .gdpr__subsection-title {
+            font-family: var(--font-b);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--cta-hover);
+            margin-bottom: var(--s3);
+            margin-top: var(--s4);
+        }
+
+        .gdpr__p {
+            margin-bottom: var(--s3);
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .gdpr__p:last-child {
+            margin-bottom: 0;
+        }
+
+        .gdpr__num {
+            color: var(--cta);
+            font-weight: 500;
+        }
+
+        .gdpr__list {
+            margin: var(--s2) 0 var(--s3) var(--s3);
+        }
+
+        .gdpr__list li {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text);
+            margin-bottom: var(--s1);
+            padding-left: var(--s2);
+            position: relative;
+        }
+
+        .gdpr__list li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        .gdpr__list--alpha {
+            counter-reset: alpha-list;
+            list-style: none;
+        }
+
+        .gdpr__list--alpha li {
+            counter-increment: alpha-list;
+            padding-left: var(--s3);
+        }
+
+        .gdpr__list--alpha li::before {
+            content: counter(alpha-list, lower-alpha) ')';
+            color: var(--cta);
+            font-weight: 500;
+        }
+
+        .gdpr__contact-box {
+            background: var(--white);
+            border: 1px solid rgba(196, 168, 130, 0.2);
+            border-radius: var(--r-md);
+            padding: var(--s4);
+            margin-bottom: var(--s4);
+            box-shadow: var(--shadow);
+        }
+
+        .gdpr__contact-box p {
+            font-size: 1rem;
+            line-height: 1.9;
+            margin: 0;
+            color: var(--text);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--text);
+            color: rgba(250, 247, 242, 0.7);
+            padding: var(--s7) 0 var(--s4);
+        }
+
+        .footer__inner {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: var(--s6);
+            margin-bottom: var(--s6);
+        }
+
+        .footer__name {
+            font-family: var(--font-h);
+            font-size: 1.5rem;
+            color: var(--bg);
+            margin-bottom: 3px;
+        }
+
+        .footer__tagline {
+            font-size: 0.78rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: var(--s3);
+        }
+
+        .footer__blurb {
+            font-size: 0.95rem;
+            line-height: 1.75;
+            max-width: 280px;
+        }
+
+        .footer__socials {
+            display: flex;
+            gap: 10px;
+            margin-top: var(--s4);
+        }
+
+        .footer__head {
+            font-size: 0.76rem;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: var(--s3);
+        }
+
+        .footer__link {
+            display: block;
+            font-size: 0.95rem;
+            color: rgba(250, 247, 242, 0.6);
+            padding: 4px 0;
+            transition: color 0.2s;
+        }
+
+        .footer__link:hover {
+            color: var(--bg);
+        }
+
+        .footer__ci {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .footer__ci i {
+            color: var(--gold);
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            width: 1.1em;
+            text-align: center;
+        }
+
+        .footer__ci a,
+        .footer__ci span {
+            font-size: 0.92rem;
+            color: rgba(250, 247, 242, 0.6);
+            transition: color 0.2s;
+        }
+
+        .footer__ci a:hover {
+            color: var(--bg);
+        }
+
+        .footer__bottom {
+            border-top: 1px solid rgba(250, 247, 242, 0.1);
+            padding-top: var(--s3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--s2);
+        }
+
+        .footer__copy {
+            font-size: 0.72rem;
+            color: rgba(250, 247, 242, 0.35);
+        }
+
+        .footer__legal {
+            font-size: 0.72rem;
+            color: rgba(250, 247, 242, 0.35);
+            text-align: right;
+        }
+
+        .footer__legal a {
+            color: rgba(250, 247, 242, 0.35);
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: color 0.2s, text-decoration-color 0.2s;
+        }
+
+        .footer__legal a:hover {
+            color: rgba(250, 247, 242, 0.7);
+            text-decoration-color: rgba(250, 247, 242, 0.4);
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-alt);
+            border: 1px solid var(--sand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cta);
+            transition: background 0.3s, color 0.3s, transform 0.25s;
+        }
+
+        .social-btn:hover {
+            background: var(--cta);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .social-btn--dark {
+            background: rgba(250, 247, 242, 0.08);
+            border-color: rgba(250, 247, 242, 0.12);
+            color: rgba(250, 247, 242, 0.65);
+        }
+
+        .social-btn--dark:hover {
+            background: var(--cta);
+            color: var(--white);
+        }
+
+        /* BACK TO TOP */
+        #backToTop {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--white);
+            color: var(--cta);
+            border: 1.5px solid var(--sand);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            box-shadow: 0 2px 12px rgba(155, 126, 96, 0.15);
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.35s, transform 0.35s, background 0.2s, border-color 0.2s, box-shadow 0.2s;
+            z-index: 900;
+            pointer-events: none;
+        }
+
+        #backToTop.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        #backToTop:hover {
+            background: var(--bg-alt);
+            border-color: var(--gold);
+            box-shadow: 0 4px 20px rgba(155, 126, 96, 0.25);
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                padding-inline: var(--s5);
+            }
+
+            .nav__inner {
+                padding-inline: var(--s5);
+            }
+
+            .page-hero__content {
+                padding-inline: var(--s5);
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gdpr__inner {
+                padding-inline: var(--s5);
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --s8: 80px;
+                --s7: 60px;
+            }
+
+            .container {
+                padding-inline: 20px;
+            }
+
+            .nav__inner {
+                padding-inline: 20px;
+            }
+
+            .nav__links {
+                display: none;
+            }
+
+            .nav__burger {
+                display: flex;
+            }
+
+            .nav__mobile {
+                display: flex;
+            }
+
+            .page-hero {
+                min-height: 36vh;
+            }
+
+            .page-hero__content {
+                padding: var(--s4) 20px;
+            }
+
+            .page-hero__body {
+                align-items: center;
+                text-align: center;
+            }
+
+            .page-hero__body .divider--left {
+                margin-left: auto;
+            }
+
+            .gdpr__inner {
+                padding-inline: var(--s4);
+            }
+
+            .gdpr__toc {
+                padding: var(--s3);
+            }
+
+            .footer .container {
+                padding-inline: var(--s4);
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr;
+                gap: var(--s5);
+            }
+
+            .footer__bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer__legal {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gdpr__list {
+                margin-left: var(--s2);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="nav" aria-label="Hlavní navigace">
+        <div class="nav__inner">
+            <a href="/" class="nav__logo" aria-label="Marie Bezděkovská – zpět na úvod">
+                Marie Bezděkovská
+                <small>Průvodce péčí v&nbsp;závěru života</small>
+            </a>
+            <ul class="nav__links" role="list">
+                <li class="nav__item">
+                    <button class="nav__link" aria-haspopup="true" aria-expanded="false"
+                        style="background:none;border:none;cursor:pointer;font-family:inherit;">
+                        Moje služby <i class="fa-solid fa-chevron-down" style="font-size:.55rem;margin-left:3px;"
+                            aria-hidden="true"></i>
+                    </button>
+                    <ul class="nav__dropdown" role="list" aria-label="Podmenu Moje služby">
+                        <li><a href="/pecujici" class="nav__drop-link">Pro pečující</a></li>
+                        <li><a href="/pozustali" class="nav__drop-link">Pro pozůstalé</a></li>
+                        <li><a href="/organizace" class="nav__drop-link">Pro organizace</a></li>
+                        <li><a href="/access-bars" class="nav__drop-link">Access Bars®</a></li>
+                    </ul>
+                </li>
+                <li class="nav__item"><a href="/o-mne" class="nav__link">O&nbsp;mně</a></li>
+                <li class="nav__item"><a href="/#reference" class="nav__link">Zkušenosti klientů</a></li>
+                <li class="nav__item"><a href="/#kontakt" class="nav__link nav__link--btn">Kontakt</a></li>
+            </ul>
+            <button class="nav__burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"
+                aria-controls="mobileNav">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <nav class="nav__mobile" id="mobileNav" aria-label="Mobilní navigace">
+            <a href="/#sluzby" class="nav__mob-link">Moje služby</a>
+            <a href="/pecujici" class="nav__mob-link nav__mob-link--sub">Pro pečující</a>
+            <a href="/pozustali" class="nav__mob-link nav__mob-link--sub">Pro pozůstalé</a>
+            <a href="/organizace" class="nav__mob-link nav__mob-link--sub">Pro organizace</a>
+            <a href="/access-bars" class="nav__mob-link nav__mob-link--sub">Access Bars®</a>
+            <a href="/o-mne" class="nav__mob-link">O&nbsp;mně</a>
+            <a href="/#reference" class="nav__mob-link">Zkušenosti klientů</a>
+            <a href="/#kontakt" class="nav__mob-link nav__mob-link--btn">Kontakt</a>
+        </nav>
+    </nav>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="page-hero" aria-labelledby="ph-title">
+            <div class="page-hero__bg" aria-hidden="true"></div>
+            <div class="page-hero__overlay" aria-hidden="true"></div>
+            <div class="page-hero__content">
+                <div class="page-hero__body">
+                    <span class="eyebrow">Ochrana osobních údajů</span>
+                    <h1 class="page-hero__title" id="ph-title">Zásady zpracování<br>osobních údajů</h1>
+                    <div class="divider divider--left"></div>
+                    <p class="page-hero__lead">Informace o tom, jak nakládám s&nbsp;vašimi osobními údaji a&nbsp;jaká
+                        máte práva</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- OBSAH -->
+        <section class="gdpr" aria-label="Zásady zpracování osobních údajů">
+            <div class="gdpr__inner">
+
+                <!-- Intro -->
+                <div class="gdpr__intro">
+                    <p class="gdpr__p">Níže naleznete zásady zpracování osobních údajů, které mně jako správci
+                        poskytnete, pokud navštívíte mé webové stránky dostupné na internetové adrese
+                        www.mariebezdekovska.cz, dále pokud jste mými zákazníky nebo zájemci o naše produkty či služby.
+                    </p>
+                    <p class="gdpr__p">Osobní údaje zpracovávám v souladu s platnými a účinnými právními předpisy,
+                        zejména v souladu s nařízením Evropského parlamentu a Rady (EU) 2016/679 - obecné nařízení o
+                        ochraně osobních údajů (dále jen „GDPR") a v souladu se zákonem č. 110/2019 Sb., o zpracování
+                        osobních údajů.</p>
+                    <p class="gdpr__p">Účelem tohoto dokumentu je seznámit Vás s tím, jak bude s Vašimi osobními údaji
+                        nakládáno a informovat Vás o Vašich právech.</p>
+                </div>
+
+                <!-- Obsah -->
+                <div class="gdpr__toc" aria-label="Obsah dokumentu">
+                    <p class="gdpr__toc-title">Obsah</p>
+                    <ol>
+                        <li><a href="#gdpr-i">I. Správce osobních údajů – naše identifikační a kontaktní údaje</a></li>
+                        <li><a href="#gdpr-ii">II. Zdroj osobních údajů – odkud získám k Vašim osobním údajům
+                                přístup</a></li>
+                        <li><a href="#gdpr-iii">III. Kategorie osobních údajů a požadavek na jejich poskytnutí – které
+                                osobní údaje o Vás zpracovávám, zda máte povinnost mi je poskytnout a jaký je důsledek
+                                jejich neposkytnutí</a></li>
+                        <li><a href="#gdpr-iv">IV. Účely a doba zpracování – k jakým účelům a po jakou dobu Vaše osobní
+                                údaje zpracovávám a co mě k tomu opravňuje</a></li>
+                        <li><a href="#gdpr-v">V. Automatizované rozhodování a profilování – zda z mé strany dochází k
+                                automatizovanému individuálnímu rozhodování nebo k profilování</a></li>
+                        <li><a href="#gdpr-vi">VI. Cookies – které cookies používám</a></li>
+                        <li><a href="#gdpr-vii">VII. Příjemci osobních údajů – komu Vaše osobní údaje zpřístupňuji</a>
+                        </li>
+                        <li><a href="#gdpr-viii">VIII. Předávání osobních údajů do třetí země nebo mezinárodní
+                                organizaci – zda Vaše osobní údaje budou předány do země mimo Evropskou unii</a></li>
+                        <li><a href="#gdpr-ix">IX. Zabezpečení osobních údajů – která technická a organizační opatření k
+                                zabezpečení Vašich osobních údajů jsem přijala</a></li>
+                        <li><a href="#gdpr-x">X. Vaše práva – jaká máte práva ve vztahu ke zpracování osobních údajů</a>
+                        </li>
+                        <li><a href="#gdpr-xi">XI. Závěrečná ustanovení – účinnost tohoto dokumentu a možnost jeho
+                                změny</a></li>
+                    </ol>
+                </div>
+
+                <!-- I. SPRÁVCE -->
+                <div class="gdpr__section" id="gdpr-i">
+                    <h2 class="gdpr__section-title">I.&nbsp;&nbsp;Správce osobních údajů</h2>
+                    <p class="gdpr__p">Správcem osobních údajů je:</p>
+                    <div class="gdpr__contact-box">
+                        <p>
+                            <strong>Marie Bezděkovská</strong><br>
+                            Zapsaná v živnostenském rejstříku Magistrátu města Liberce podle §71 odst. 2 živnostenského
+                            zákona<br>
+                            IČO: 18048391<br>
+                            Sídlo: Polesí 36, 463&nbsp;53 Rynoltice<br>
+                            Telefonní číslo: 608&nbsp;213&nbsp;485<br>
+                            E-mail: info.bezdekovska@gmail.com
+                        </p>
+                    </div>
+                </div>
+
+                <!-- II. ZDROJ -->
+                <div class="gdpr__section" id="gdpr-ii">
+                    <h2 class="gdpr__section-title">II.&nbsp;&nbsp;Zdroj osobních údajů</h2>
+                    <p class="gdpr__p">Zpracovávám osobní údaje, které získám přímo od Vás. Vaše osobní údaje získávám
+                        tím, že navštívíte mé webové stránky, že na mých webových stránkách vyplníte a odešlete
+                        kontaktní formulář nebo jiným způsobem (např. tím, že mi je poskytnete e-mailem, telefonicky, v
+                        průběhu videohovoru, prostřednictvím sociálních sítí nebo při osobním jednání).</p>
+                </div>
+
+                <!-- III. KATEGORIE -->
+                <div class="gdpr__section" id="gdpr-iii">
+                    <h2 class="gdpr__section-title">III.&nbsp;&nbsp;Kategorie osobních údajů a požadavek na jejich
+                        poskytnutí</h2>
+                    <p class="gdpr__p"><span class="gdpr__num">1.</span> V nezbytném rozsahu o Vás zpracovávám zejména následující běžné osobní údaje,
+                        pokud mi je zpřístupníte: jméno a příjmení, IČO, DIČ, adresa bydliště, adresa sídla, platební
+                        údaje, telefonní číslo, e-mailová adresa, identifikátor jiné formy komunikace na dálku, IP
+                        adresa, informace o Vámi objednaných produktech či službách a další informace, které mi v
+                        průběhu naší komunikace či spolupráce poskytnete (údaje týkající se Vašeho rodinného stavu,
+                        osobních a majetkových poměrů apod.).</p>
+                    <p class="gdpr__p"><span class="gdpr__num">2.</span> Pokud mi umožníte zveřejnit Vaši referenci, a případně mi také poskytnete svou
+                        fotografii či videozáznam, zpracovávám o Vás rovněž osobní údaje uvedené v referenci a
+                        příslušnou fotografii či videozáznam. Pokud využijete možnosti přihlášení, diskuze, hodnocení
+                        nebo sdílení prostřednictvím sociálních sítí (Facebook, Instagram, YouTube, příp. další),
+                        zpracovávám o Vás také informace uvedené ve Vašem příspěvku či komentáři a veřejné informace na
+                        Vašem profilu v příslušné sociální síti (zejm. jméno a příjmení, fotografie, věková kategorie a
+                        další veřejné informace podle Vašeho nastavení). S Vaším souhlasem pak zpracovávám rovněž Vaše
+                        osobní údaje spočívající v marketingových a analytických cookies a informace o Vašich zájmech a
+                        preferencích. A pokud se zúčastníte některé z mnou pořádaných akcí naživo, mohu o Vás
+                        zpracovávat také osobní údaje zachycené na fotografiích či videozáznamech z této akce.</p>
+                    <p class="gdpr__p"><span class="gdpr__num">3.</span> Poskytnutí kategorie běžných osobních údajů uvedených v odstavci 1 tohoto
+                        článku je nezbytné pro vzájemnou komunikaci nebo pro uzavření a splnění smlouvy; v případě
+                        jejich neposkytnutí tedy nebude možné vzájemně komunikovat nebo uzavřít a splnit smlouvu. V
+                        případech, kdy zpracování osobních údajů je založeno na Vašem souhlasu, závisí pouze na Vašem
+                        rozhodnutí, zda mi své osobní údaje poskytnete či nikoli.</p>
+                    <p class="gdpr__p"><span class="gdpr__num">4.</span> Zvláštní kategorie osobních údajů (citlivé údaje) o Vás zpracovávám jen tehdy,
+                        pokud mi tyto údaje v průběhu naší spolupráce dobrovolně sdělíte a jen s Vaším výslovným
+                        souhlasem. Jedná se o osobní údaje, které vypovídají o rasovém či etnickém původu, politických
+                        názorech, náboženském vyznání či filozofickém přesvědčení, členství v odborech, zdravotním
+                        stavu, sexuálním životě nebo sexuální orientaci.</p>
+                </div>
+
+                <!-- IV. ÚČELY -->
+                <div class="gdpr__section" id="gdpr-iv">
+                    <h2 class="gdpr__section-title">IV.&nbsp;&nbsp;Účely a doba zpracování</h2>
+
+                    <div class="gdpr__subsection">
+                        <p class="gdpr__subsection-title">A. Zpracování osobních údajů pro účely uzavření a splnění
+                            smlouvy</p>
+                        <p class="gdpr__p"><span class="gdpr__num">1.</span> Vaše osobní údaje zpracovávám pro účely uzavření smlouvy a splnění mezi
+                            námi uzavřené smlouvy (vzájemná komunikace před i po uzavření smlouvy, dodání objednaného
+                            produktu nebo služby, uskutečnění platby). K tomuto účelu zpracovávám Vaše běžné osobní
+                            údaje uvedené v čl. III odst. 1 výše a s Vaším výslovným souhlasem i zvláštní kategorie
+                            osobních údajů (citlivé údaje) uvedené v čl. III odst. 4 výše.</p>
+                        <p class="gdpr__p"><span class="gdpr__num">2.</span> Právním titulem (oprávněním) pro zpracování osobních údajů je splnění
+                            smlouvy uzavřené mezi námi a provedení opatření přijatých před uzavřením smlouvy na Vaši
+                            žádost.</p>
+                        <p class="gdpr__p"><span class="gdpr__num">3.</span> K tomuto účelu Vaše osobní údaje zpracovávám po dobu trvání smluvního
+                            vztahu mezi námi a po jeho skončení pak některé Vaše osobní údaje dále zpracovávám za jinými
+                            účely (viz písmena B až F níže).</p>
+                    </div>
+
+                    <div class="gdpr__subsection">
+                        <p class="gdpr__subsection-title">B. Zpracování osobních údajů pro účely splnění právních
+                            povinností</p>
+                        <p class="gdpr__p"><span class="gdpr__num">1.</span> Osobní údaje zpracovávám dále pro účely splnění právních povinností, které
+                            se na mě vztahují (např. zákonné povinnosti v oblasti daní). K tomuto účelu zpracovávám tyto
+                            Vaše osobní údaje: jméno a příjmení, IČO, DIČ, adresa bydliště, adresa sídla, platební údaje
+                            a informace o Vámi objednaných produktech či službách.</p>
+                        <p class="gdpr__p"><span class="gdpr__num">2.</span> Právním titulem (oprávněním) pro zpracování osobních údajů je tedy splnění
+                            právní povinnosti, která se na mě vztahuje.</p>
+                        <p class="gdpr__p"><span class="gdpr__num">3.</span> K tomuto účelu Vaše osobní údaje zpracovávám po dobu stanovenou obecně
+                            závaznými právními předpisy.</p>
+                    </div>
+
+                    <div class="gdpr__subsection">
+                        <p class="gdpr__subsection-title">C. Zpracování osobních údajů pro účely přímého marketingu</p>
+                        <p class="gdpr__p"><span class="gdpr__num">1.</span> Vaše osobní údaje nezpracovávám pro účely přímého marketingu (zasílání
+                            obchodních sdělení, newsletterů apod.), jelikož v současnosti neprovozuji přímý marketing.
+                        </p>
+                    </div>
+
+                    <div class="gdpr__subsection">
+                        <p class="gdpr__subsection-title">D. Zpracování osobních údajů pro účely veřejné prezentace</p>
+                        <p class="gdpr__p"><span class="gdpr__num">1.</span> Z hromadných akcí naživo, které pořádám, bývají pořizovány fotografie a
+                            videozáznamy za účelem mé propagace a prezentace mých produktů a služeb na webových
+                            stránkách a sociálních sítích, případně v jiných propagačních materiálech. K tomuto účelu
+                            tedy zpracovávám Vaše osobní údaje zachycené na fotografiích a videozáznamech z dané akce.
+                        </p>
+                        <p class="gdpr__p"><span class="gdpr__num">2.</span> V případě, že fotografie či videozáznam zachycují celkovou atmosféru dané
+                            akce (tedy nikoli Vaši osobu v detailu), je právním titulem (oprávněním) pro takové
+                            zpracování osobních údajů můj oprávněný zájem. Pokud se však na fotografiích a ve videích
+                            objevit nechcete, můžete mi tuto skutečnost před zahájením či v průběhu dané akce sdělit a v
+                            takovém případě Vás fotografovat a natáčet nebudu.</p>
+                        <p class="gdpr__p"><span class="gdpr__num">3.</span> K tomuto účelu Vaše osobní údaje zpracovávám po dobu zveřejnění fotografií
+                            a videozáznamů z dané akce na webových stránkách, sociálních sítích nebo v jiných
+                            propagačních materiálech.</p>
+                    </div>
+
+                    <div class="gdpr__subsection">
+                        <p class="gdpr__subsection-title">E. Zpracování osobních údajů pro účely ochrany práv a vymáhání
+                            nároků</p>
+                        <p class="gdpr__p"><span class="gdpr__num">1.</span> Osobní údaje zpracovávám i pro účely ochrany našich práv a vymáhání
+                            právních nároků (zejm. z uzavřených smluv nebo způsobené újmy). K tomuto účelu zpracovávám
+                            Vaše osobní údaje z uzavřených smluv a naší vzájemné komunikace.</p>
+                        <p class="gdpr__p"><span class="gdpr__num">2.</span> Právním titulem (oprávněním) pro zpracování osobních údajů je můj
+                            oprávněný zájem.</p>
+                        <p class="gdpr__p"><span class="gdpr__num">3.</span> K tomuto účelu Vaše osobní údaje zpracovávám po dobu trvání smluvního
+                            vztahu a následující 4 roky po jeho ukončení, nebo po dobu 4 let od našeho posledního
+                            kontaktu, pokud k uzavření smlouvy nedošlo, a v případě vzniku sporu rovněž po celou dobu
+                            trvání sporu až do jeho pravomocného skončení a uspokojení všech nároků.</p>
+                    </div>
+
+                    <div class="gdpr__subsection">
+                        <p class="gdpr__subsection-title">F. Zpracování osobních údajů na základě Vašeho souhlasu</p>
+                        <p class="gdpr__p"><span class="gdpr__num">1.</span> Na základě Vašeho souhlasu budu Vaše osobní údaje zpracovávat k
+                            následujícím účelům:</p>
+                        <ol class="gdpr__list gdpr__list--alpha">
+                            <li>zasílání newsletterů, informací o novinkách, našich produktech a službách a jiných
+                                obchodní sdělení, pokud nejste mým zákazníkem;</li>
+                            <li>zasílání obchodních sdělení týkajících se třetích osob;</li>
+                            <li>analýza Vašich preferencí a zájmů, zlepšování mých webových stránek a cílení reklamy;
+                            </li>
+                            <li>zveřejnění Vaší reference na mých webových stránkách, sociálních sítích či v jiných
+                                propagačních materiálech;</li>
+                            <li>zveřejnění detailního zachycení Vaší osoby na fotografii či videozáznamu z akce naživo
+                                na mých webových stránkách, sociálních sítích či v jiných propagačních materiálech;</li>
+                            <li>diskuze, hodnocení nebo sdílení informací prostřednictvím sociálních sítí.</li>
+                        </ol>
+                        <p class="gdpr__p"><span class="gdpr__num">2.</span> Souhlas mi můžete udělit např. prostřednictvím vyplnění a odeslání
+                            kontaktního formuláře na mých webových stránkách, v průběhu individuální komunikace (např.
+                            e-mailem), v listinné podobě, vložením příspěvku, komentáře nebo reakce na příspěvek či
+                            komentář v sociální síti, případně jiným způsobem. Před udělením souhlasu Vás budu
+                            informovat, které osobní údaje budu na základě Vašeho souhlasu zpracovávat a k jakému
+                            konkrétnímu účelu zpracování se bude Váš souhlas vztahovat.</p>
+                        <p class="gdpr__p"><span class="gdpr__num">3.</span> Svůj souhlas můžete kdykoli odvolat kliknutím na příslušný odkaz, který
+                            najdete v každém zaslaném e-mailu, nebo tím, že mi odvolání souhlasu oznámíte na mou shora
+                            uvedenou e-mailovou adresu, a v případě cookies tím, že ve svém prohlížeči nebo
+                            prostřednictvím cookie lišty umístěné na mých webových stránkách ukládání těchto cookies
+                            zakážete. Pokud ovšem Vaše osobní údaje zpracovávám i na základě jiných právních titulů
+                            uvedených pod písmeny A až E výše, budu je na základě tohoto příslušného titulu zpracovávat
+                            i po odvolání Vašeho souhlasu.</p>
+                    </div>
+                </div>
+
+                <!-- V. AUTOMATIZOVANÉ ROZHODOVÁNÍ -->
+                <div class="gdpr__section" id="gdpr-v">
+                    <h2 class="gdpr__section-title">V.&nbsp;&nbsp;Automatizované rozhodování a profilování</h2>
+                    <p class="gdpr__p"><span class="gdpr__num">1.</span> Z mé strany nedochází k automatizovanému individuálnímu rozhodování ve smyslu
+                        čl. 22 GDPR.</p>
+                </div>
+
+                <!-- VI. COOKIES -->
+                <div class="gdpr__section" id="gdpr-vi">
+                    <h2 class="gdpr__section-title">VI.&nbsp;&nbsp;Cookies</h2>
+                    <p class="gdpr__p"><span class="gdpr__num">1.</span> Při užívání webových stránek používám cookies a další související technologie.
+                        Cookies jsou obsahově malé soubory, které slouží k ukládání a přijímání identifikátorů a dalších
+                        informací o zařízeních, z nichž přistupujete na mé webové stránky.</p>
+                    <p class="gdpr__p"><span class="gdpr__num">2.</span> Používám technické a funkční soubory cookies, analytické cookies a
+                        marketingové cookies. Technické a funkční soubory cookies zajišťují správnou funkci mých
+                        webových stránek a usnadňují jejich návštěvu. Tyto cookies mohou být umístěny bez Vašeho
+                        souhlasu. Analytické cookies používám k analýze dat za účelem zlepšení našich produktů a služeb.
+                        Marketingové cookies jsou používány ke sledování preferencí uživatelů webových stránek za účelem
+                        cílení reklamy. Analytické a marketingové cookies využívám ve spolupráci s nástroji třetích osob
+                        jen na základě Vašeho předchozího souhlasu.</p>
+                    <p class="gdpr__p"><span class="gdpr__num">3.</span> Využití cookies můžete v nastavení svého internetového prohlížeče odmítnout,
+                        nebo si můžete nastavit užívání jen některých cookies.</p>
+                    <p class="gdpr__p"><span class="gdpr__num">4.</span> Více informací o jednotlivých cookies, které používám, najdete na mých
+                        webových stránkách.</p>
+                </div>
+
+                <!-- VII. PŘÍJEMCI -->
+                <div class="gdpr__section" id="gdpr-vii">
+                    <h2 class="gdpr__section-title">VII.&nbsp;&nbsp;Příjemci osobních údajů</h2>
+                    <p class="gdpr__p"><span class="gdpr__num">1.</span> Pokud Vaše osobní údaje sdílím s jinou osobou, dbám na to, aby byla zajištěna
+                        jejich ochrana.</p>
+                    <p class="gdpr__p"><span class="gdpr__num">2.</span> Vzhledem k tomu, že veškeré činnosti v rámci svého podnikání nedokáži zajistit
+                        vlastními silami, využívám služeb a aplikací třetích osob, které tak získají k Vašim osobním
+                        údajům přístup. S těmito osobami mám uzavřeny příslušné smlouvy podle GDPR.</p>
+                    <p class="gdpr__p"><span class="gdpr__num">3.</span> Konkrétně se jedná o následující příjemce osobních údajů:</p>
+                    <ol class="gdpr__list gdpr__list--alpha">
+                        <li>webhosting a doména: Webkitty hosting s.r.o.</li>
+                        <li>e-mailing:</li>
+                        <li>fakturační systém:</li>
+                        <li>rezervační systém:</li>
+                        <li>platební brána:</li>
+                        <li>e-shopová platforma:</li>
+                        <li>přeprava zboží:</li>
+                        <li>sociální sítě: Facebook a Instagram (Meta Platforms) / YouTube (Google)</li>
+                        <li>virtuální asistentka</li>
+                        <li>účetní firma</li>
+                        <li>marketingová firma</li>
+                        <li>IT firma</li>
+                        <li>cloudové úložiště</li>
+                    </ol>
+                    <p class="gdpr__p"><span class="gdpr__num">4.</span> S Vaším souhlasem mohou být Vaše osobní údaje, které mi poskytnete (zejm.
+                        e-mailová adresa, telefonní číslo, cookies), v zašifrované podobě sdíleny s třetími osobami
+                        (např. Meta Platforms, Google) za účelem analýzy Vašich preferencí a zájmů a cílení reklamy.</p>
+                    <p class="gdpr__p"><span class="gdpr__num">5.</span> K Vašim osobním údajům mají přístup také další uživatelé sociálních sítí, kam
+                        vkládáte příspěvky, komentáře či reakce, a dále ostatní klienti, kteří si zakoupili tentýž
+                        produkt či službu jako Vy (např. v případě skupinového volání v rámci online kurzu je Vaše
+                        jméno, příp. přezdívka, a při zapnuté kameře i Váš obraz viditelný pro všechny účastníky tohoto
+                        volání). Využitím těchto možností vyslovujete s tímto sdílením svých osobních údajů souhlas.</p>
+                    <p class="gdpr__p"><span class="gdpr__num">6.</span> Vaše osobní údaje budou zpřístupněny i příslušným správním orgánům nebo
+                        soudům, případně právním zástupcům, abych splnila svou zákonnou povinnost nebo ochránila svá
+                        práva a oprávněné zájmy.</p>
+                    <p class="gdpr__p"><span class="gdpr__num">7.</span> Pokud by v budoucnu došlo k využívání dalších aplikací nebo služeb jiných
+                        osob, budu při jejich výběru dbát na to, aby byl zachován standard zabezpečení a zpracování
+                        osobních údajů.</p>
+                </div>
+
+                <!-- VIII. PŘEDÁVÁNÍ DO TŘETÍCH ZEMÍ -->
+                <div class="gdpr__section" id="gdpr-viii">
+                    <h2 class="gdpr__section-title">VIII.&nbsp;&nbsp;Předávání osobních údajů do třetí země nebo
+                        mezinárodní organizaci</h2>
+                    <p class="gdpr__p">Jelikož využívám některé zahraniční zpracovatele, mohou být Vaše osobní údaje
+                        předávány do třetích zemí, a to do Spojených států amerických. Dne 10. 7. 2023 přijala Evropská
+                        komise rozhodnutí o odpovídající úrovni ochrany osobních údajů ve smyslu čl. 45 odst. 3 GDPR.
+                        Podle něj Spojené státy americké zajišťují odpovídající úroveň ochrany osobním údajům předávaným
+                        z Evropské unie organizacím ve Spojených státech amerických, které jsou zapsány na příslušném
+                        seznamu, tzv. Data Privacy Famework List. Zpracovatelé, společnosti Meta Platforms a Google,
+                        jsou na tomto seznamu zapsáni, čímž je zajištěna odpovídající úroveň ochrany Vašich osobních
+                        údajů.</p>
+                </div>
+
+                <!-- IX. ZABEZPEČENÍ -->
+                <div class="gdpr__section" id="gdpr-ix">
+                    <h2 class="gdpr__section-title">IX.&nbsp;&nbsp;Zabezpečení osobních údajů</h2>
+                    <p class="gdpr__p"><span class="gdpr__num">1.</span> Jako správce jsem přijala veškerá technická a organizační opatření k
+                        zabezpečení Vašich osobních údajů, aby nemohlo dojít k náhodnému nebo protiprávnímu přístupu k
+                        Vašim osobním údajům, k jejich změně, zničení či ztrátě, k jejich neoprávněnému zpracování či k
+                        jejich jinému zneužití. Přijatá technická a organizační opatření odpovídají míře rizika pro
+                        práva a svobody fyzických osob, povaze, rozsahu a účelům zpracování osobních údajů.</p>
+                    <p class="gdpr__p"><span class="gdpr__num">2.</span> K zabezpečení Vašich osobních údajů jsem přijala zejména následující technická
+                        a organizační opatření:</p>
+                    <ol class="gdpr__list gdpr__list--alpha">
+                        <li>ochrana přístupu k výpočetní technice, jíž jsou zpracovávány osobní údaje, individuálními
+                            silnými hesly a ochrana těchto hesel před vyzrazením;</li>
+                        <li>ochrana této výpočetní techniky antivirovými programy;</li>
+                        <li>ochrana přenosné výpočetní techniky nebo přenosných úložišť dat (dohled, zaheslování dat
+                            atd.);</li>
+                        <li>uzamykání prostor, v nichž jsou uloženy dokumenty s osobními údaji;</li>
+                        <li>svěření přístupu k osobním údajům pouze pověřeným osobám, které jsou vázány povinností
+                            zachovávat mlčenlivost o Vašich osobních údajích i přijatých bezpečnostních opatřeních.</li>
+                    </ol>
+                    <p class="gdpr__p"><span class="gdpr__num">3.</span> Zavedená technická a organizační opatření jsou pravidelně testována a je
+                        posuzována a hodnocena jejich účinnost pro zajištění bezpečnosti zpracování osobních údajů.</p>
+                </div>
+
+                <!-- X. VAŠE PRÁVA -->
+                <div class="gdpr__section" id="gdpr-x">
+                    <h2 class="gdpr__section-title">X.&nbsp;&nbsp;Vaše práva</h2>
+                    <p class="gdpr__p"><span class="gdpr__num">1.</span> Ve vztahu ke zpracování osobních údajů máte následující práva:</p>
+                    <ol class="gdpr__list gdpr__list--alpha">
+                        <li><strong>Právo na přístup k osobním údajům (čl. 15 GDPR)</strong><br>Máte právo získat
+                            informaci, zda Vaše osobní údaje jsou či nejsou zpracovávány, a pokud zpracovávány jsou,
+                            máte právo na přístup k osobním údajům a na podrobnosti týkající se zpracování Vašich
+                            osobních údajů.</li>
+                        <li><strong>Právo na opravu, resp. doplnění osobních údajů (čl. 16 GDPR)</strong><br>Máte právo
+                            požadovat, abych opravila nepřesné osobní údaje, které se Vás týkají, a s přihlédnutím k
+                            účelům zpracování máte rovněž právo na doplnění neúplných osobních údajů.</li>
+                        <li><strong>Právo na výmaz osobních údajů (čl. 17 GDPR)</strong><br>Máte právo požadovat, abych
+                            vymazala osobní údaje, které se Vás týkají, a pokud je dán některý z důvodů uvedených v čl.
+                            17 GDPR, mám povinnost Vaše osobní údaje na základě Vaší žádosti vymazat.</li>
+                        <li><strong>Právo na omezení zpracování osobních údajů (čl. 18 GDPR)</strong><br>Jsou-li splněny
+                            podmínky stanovené v čl. 18 GDPR, máte právo na to, abych omezila zpracování Vašich osobních
+                            údajů.</li>
+                        <li><strong>Právo na přenositelnost osobních údajů (čl. 20 GDPR)</strong><br>Pokud je zpracování
+                            Vašich osobních údajů prováděno automatizovaně, a zároveň je založeno na souhlasu nebo na
+                            smlouvě, máte právo získat osobní údaje, které se Vás týkají, ve strukturovaném, běžně
+                            používaném a strojově čitelném formátu, a předat je jinému správci. Je-li to technicky
+                            proveditelné, máte rovněž právo požadovat, abych Vaše osobní údaje sama předala jinému
+                            správci.</li>
+                        <li><strong>Právo vznést námitku proti zpracování osobních údajů (čl. 21 GDPR)</strong><br>Za
+                            podmínek uvedených v čl. 21 GDPR máte právo kdykoli vznést námitku proti zpracování osobních
+                            údajů. Pokud vznesete námitku proti zpracování osobních údajů pro účely přímého marketingu,
+                            vč. profilování, nebudu již Vaše osobní údaje pro tyto účely zpracovávat.</li>
+                        <li><strong>Právo odvolat souhlas se zpracováním osobních údajů</strong><br>Pokud jsou osobní
+                            údaje zpracovávány na základě Vašeho souhlasu, máte právo kdykoli svůj souhlas se
+                            zpracováním osobních údajů odvolat. Odvoláním souhlasu není dotčena zákonnost zpracování
+                            založená na dříve uděleném souhlasu.</li>
+                        <li><strong>Právo podat stížnost k Úřadu pro ochranu osobních údajů</strong><br>V případě, že se
+                            domníváte, že bylo porušeno Vaše právo na ochranu osobních údajů, máte právo podat stížnost
+                            k Úřadu pro ochranu osobních údajů (<a href="https://uoou.gov.cz/" target="_blank"
+                                rel="noopener noreferrer"
+                                style="color:var(--cta);text-decoration:underline;">https://uoou.gov.cz/</a>).</li>
+                    </ol>
+                    <p class="gdpr__p"><span class="gdpr__num">2.</span> Svá práva můžete u mě uplatnit s využitím kontaktů uvedených výše (poštovní či
+                        e-mailová adresa). Před vyřízením Vaší žádosti Vás mohu ještě kontaktovat, a to za tím účelem,
+                        abych si přiměřeným způsobem ověřila Vaši totožnost.</p>
+                </div>
+
+                <!-- XI. ZÁVĚREČNÁ USTANOVENÍ -->
+                <div class="gdpr__section" id="gdpr-xi">
+                    <h2 class="gdpr__section-title">XI.&nbsp;&nbsp;Závěrečná ustanovení</h2>
+                    <p class="gdpr__p"><span class="gdpr__num">1.</span> Tyto zásady zpracování osobních údajů jsem oprávněna v přiměřeném rozsahu
+                        změnit. Jejich aktuální znění naleznete na mých shora uvedených webových stránkách.</p>
+                    <p class="gdpr__p"><span class="gdpr__num">2.</span> Tyto zásady zpracování osobních údajů nabývají účinnosti dnem 1. 5. 2026.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" aria-label="Patička webu">
+        <div class="container">
+            <div class="footer__inner">
+                <div>
+                    <p class="footer__name">Marie Bezděkovská</p>
+                    <p class="footer__tagline">Průvodce péčí v&nbsp;závěru života</p>
+                    <p class="footer__blurb">Provedu vás procesem péče s&nbsp;laskavostí, profesionalitou
+                        a&nbsp;lidskostí. Jsem tu pro&nbsp;vás i&nbsp;po&nbsp;ztrátě.</p>
+                    <div class="footer__socials">
+                        <a href="https://www.facebook.com/opeciazaveru" class="social-btn social-btn--dark"
+                            target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i
+                                class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/poradna_mala_pruvodcepeci"
+                            class="social-btn social-btn--dark" target="_blank" rel="noopener noreferrer"
+                            aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <nav aria-label="Navigace v patičce">
+                    <p class="footer__head">Navigace</p>
+                    <a href="/pecujici" class="footer__link">Pro pečující</a>
+                    <a href="/pozustali" class="footer__link">Pro pozůstalé</a>
+                    <a href="/organizace" class="footer__link">Pro organizace</a>
+                    <a href="/access-bars" class="footer__link">Access Bars®</a>
+                    <a href="/#reference" class="footer__link">Zkušenosti klientů</a>
+                    <a href="/o-mne" class="footer__link">O&nbsp;mně</a>
+                    <a href="/#kontakt" class="footer__link">Kontakt</a>
+                </nav>
+                <div>
+                    <p class="footer__head">Kontakt</p>
+                    <div class="footer__ci"><i class="fa-solid fa-phone" aria-hidden="true"></i><a
+                            href="tel:+420608213485">+420&nbsp;608&nbsp;213&nbsp;485</a></div>
+                    <div class="footer__ci"><i class="fa-solid fa-envelope" aria-hidden="true"></i><a
+                            href="mailto:info.bezdekovska@gmail.com">info.bezdekovska@gmail.com</a></div>
+                    <div class="footer__ci"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>Polesí 36,
+                            463&nbsp;53 Rynoltice</span></div>
+                    <div class="footer__ci"><i class="fa-solid fa-building" aria-hidden="true"></i><span>IČO:
+                            18048391</span></div>
+                    <div class="footer__ci"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i><span>Fyzická
+                            osoba zapsaná v&nbsp;živnostenském rejstříku Magistrátu města Liberce podle §71 odst. 2
+                            živnostenského zákona</span></div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copy">&copy; 2026 Marie Bezděkovská. Všechna práva vyhrazena.</p>
+                <p class="footer__legal"><a href="/gdpr">Zásady ochrany osobních údajů</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" aria-label="Zpět nahoru">
+        <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
+    <script>
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+
+        const burger = document.getElementById('burger');
+        const mobileNav = document.getElementById('mobileNav');
+        burger.addEventListener('click', () => {
+            const open = mobileNav.classList.toggle('open');
+            burger.classList.toggle('open', open);
+            burger.setAttribute('aria-expanded', open);
+        });
+        mobileNav.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => { mobileNav.classList.remove('open'); burger.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); });
+        });
+
+        const btt = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => { btt.classList.toggle('visible', window.scrollY > 400); }, { passive: true });
+        btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    </script>
+
+</body>
+
+</html>

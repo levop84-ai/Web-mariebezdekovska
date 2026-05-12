@@ -160,7 +160,7 @@ Vytvoř moderní mobile-first web: použít můžeš trendy jako souměrný bent
 | h4 | `clamp(1.05rem, 1.5vw, 1.25rem)` | 400 | Lora |
 | p (běžný text) | `1.05rem` | 400 | Jost, line-height 1.75 |
 | `.eyebrow` | `0.87rem` | 500 | Jost, uppercase, letter-spacing 0.18em, barva `--cta` |
-| `.pull-quote` | `1.15rem` | 400 | Lora, italic, barva `--cta`, line-height 1.7 |
+| `.pull-quote` | `1.15rem` (třída) / **`1.3rem`** (inline na index.html a o-mne.html) | 400 | Lora, italic, barva `--cta`, line-height 1.7 |
 | `.btn` | `0.9rem` | 500 | Jost, uppercase, letter-spacing 0.09em |
 
 ---
@@ -279,6 +279,7 @@ Na index.html je tento blok vícenásobně formátovaný (víceřádkový styl).
 - `.split__text`: `margin-bottom: var(--s3); color: var(--text)`
 - `.split__img-wrap`: `border-radius: var(--r-lg); overflow: hidden`; hover: `scale(1.04)` na `.split__img`
 - Inline `style="align-items: start"` na gridu tam, kde je jeden sloupec výrazně vyšší než druhý
+- Na o-mne.html (sekce Vlastní zkušenost): foto má `align-self: center` (centrováno v řádku mřížky); pull-quote je umístěn **mimo grid**, v samostatném `div` pod oběma sloupci (`margin-top: var(--s7); text-align: center`), bez levého pruhu — stejný vzor jako pull-quote na index.html
 - Na mobilu (≤768px): `grid-template-columns: 1fr`, `direction: ltr`
 
 **Fotky v split sekcích:** pokud foto vyplňuje celou výšku sousedního textového sloupce, používá se inline styl:
@@ -462,16 +463,16 @@ Struktura obsahu: eyebrow (bílá 75% opacity) → H1 → divider (bílý 45% op
 **Fotky v page-hero:** nastaveny přes inline `style` na `.page-hero__bg`:
 - pecujici.html: v CSS `.page-hero__bg { background-image: url('Obrazky/pro_pecujici_hero.jpg'); background-position: center; }`
 - pozustali.html: v CSS `.page-hero__bg { background-image: url('Obrazky/pro_pozustale_hero.png'); background-position: center; }`
-- organizace.html: inline `style="background-image: url('Obrazky/pro_organizace_hero.jpg'); background-position: center bottom;"`
+- organizace.html: inline `style="background-image: url('Obrazky/pro_organizace_hero.jpg'); background-position: center bottom;"` — na mobilu (≤768px) přebito přes media query: `.page-hero__bg { background-position: 85% bottom !important; }` (žena je vpravo, `!important` nutné kvůli inline stylu)
 - access-bars.html: inline `style="background-image: url('Obrazky/access_bars_hero.jpg'); background-position: center top;"`
 
-`background-position` je výchozí `center`, ale lze přepsat inline stylem pro lepší ořez konkrétní fotky. organizace.html používá `center bottom` (vidět spodní část s Marie), access-bars.html `center top` (vidět horní část s rukama).
+`background-position` je výchozí `center`, ale lze přepsat inline stylem pro lepší ořez konkrétní fotky. organizace.html používá `center bottom` (vidět spodní část s Marie), access-bars.html `center top` (vidět horní část s rukama). Pokud je subjekt fotky posunutý mimo střed a na mobilu vypadá mimo záběr, použij `background-position` override s `!important` v media query.
 
 ### Page hero (`.page-hero`) – o-mne.html
 
 o-mne.html používá stejný tmavý page-hero jako ostatní podstránky — foto na pozadí s overlay. Třída a CSS jsou totožné s ostatními podstránkami (viz sekce výše).
 
-- **Fotka pozadí:** `Obrazky/o_mne_hero.jpg`, `background-position: center 40%`
+- **Fotka pozadí:** `Obrazky/o_mne_hero.jpg`, `background-position: center 40%` — na mobilu (≤768px) přebito přes media query: `.page-hero__bg { background-position: 75% 40% !important; }` (žena je vpravo)
 - **Obsah:** eyebrow „O mně" → H1 „Marie Bezděkovská" → divider → lead text → `btn--glass` „Číst více" → `#pribeh`
 - Bez `white-space: nowrap` na titulu (název se může zalomit)
 
@@ -545,7 +546,7 @@ Shodná na všech stránkách.
 - Na mobilu (≤768px): `.footer .container { padding-inline: var(--s4); }` = 32px (více než globální 20px u ostatních sekcí)
 - Kontaktní údaje: telefon, e-mail, adresa (Polesí 36, 463 53 Rynoltice), IČO 18048391, zápis v rejstříku
 - Social tlačítka: `.social-btn--dark` (tmavá varianta)
-- Spodní lišta: copyright + odkaz na `gdpr.html`
+- Spodní lišta: copyright + odkaz na `gdpr.html` (relativní cesta `href="gdpr.html"`, funguje lokálně i v produkci)
 
 **`.footer__ci` — řádek s ikonou a textem:**
 ```css
@@ -621,11 +622,13 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 | Pořadí | Sekce | Pozadí |
 |---|---|---|
 | 1 | Page Hero (tmavý, foto + overlay) | `Obrazky/o_mne_hero.jpg`, `center 40%` |
-| 2 | Příběh (intro – centrovaný text) | `section--white` — bez fotky, třída `.intro` |
-| 3 | Zkušenost z praxe (split flip) | `section--bg` — foto `Obrazky/marie_podpora.jpg` (aspect 4:3) |
-| 4 | Hodnoty (6 karet `.value-card`) | `section--white` |
-| 5 | Fotografie (split + `.photo-row`) | `section--bg` |
-| 6 | Kontakt | `section--bg` |
+| 2 | Příběh (`id="pribeh"`, intro – centrovaný text) | `section--white` — bez fotky, třída `.intro` |
+| 3 | Vlastní zkušenost (split, foto vlevo) | `section--bg` — foto `Obrazky/marie_muj_pribeh.jpg` (aspect 4:5, `align-self: center`) |
+| 4 | Kontakt | `section--white` |
+
+**Příběh (sekce 2):** H2 „Hledala jsem smysl své práce". 3 odstavce — (1) zkušenosti z ČR i zahraničí, odchod ze systémové soc. péče; (2) hospicové působení a odchod z oboru; (3) kurzívou „Ale jak se říká – řekněte Bohu své plány…" (inline styl `font-family: var(--font-h); font-style: italic`).
+
+**Vlastní zkušenost (sekce 3):** eyebrow „Vlastní zkušenost", H2 „Sama jsem si prošla péčí i ztrátou blízkého". Split grid: foto vlevo (`marie_muj_pribeh.jpg`, `aspect-ratio: 4/5`, `align-self: center`), text vpravo — 5 odstavců (péče o dědečka v době covidu, přicházející rodiny, náročnost péče i přes zkušenosti, dědův odchod a formování vlastní cesty, odvaha jít touto cestou). Pod gridem (mimo split, `margin-top: var(--s7); text-align: center`) dva pull-quote odstavce (`font-size: 1.3rem`): „Protože podpora, kterou mohu rodinám dát, může být zásadní pro to, jak celé tohle náročné období zvládnou." a „A proto jsem vděčná, že mohu **nabízet rodinám komplexní péči o jejich blízkého.**" (slovo tučně `<strong>`). Pull-quote nemá levý pruh — je centrovaný, stejný styl jako pull-quote na index.html.
 
 ---
 
@@ -738,13 +741,55 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 
 ---
 
+### gdpr.html – Zásady zpracování osobních údajů
+
+Samostatná stránka s plným zněním GDPR dokumentu. Stejná struktura jako ostatní podstránky: inline `<style>`, navigace, page-hero, obsah, patička.
+
+**Page Hero:** tmavý gradient (bez fotografie) `linear-gradient(135deg, #2e2620 0%, #4a3a2c 50%, #3a2e22 100%)` + overlay `rgba(20,14,8,0.35)`. Výška `min-height: 44vh`. Obsah: eyebrow „Ochrana osobních údajů" → H1 → divider → lead text (bez CTA tlačítka).
+
+**Zarovnání hero obsahu do tunelu:** hero na této stránce nepoužívá jednoduché `padding: var(--s6) var(--s8)` na `.page-hero__content` — místo toho je obsah zabalen do `.page-hero__body` s `max-width: 820px; margin-inline: auto`, stejně jako `.gdpr__inner`. Tím je levý okraj textu v hero i v obsahu na stejné linii.
+
+```css
+.page-hero__content { position: relative; z-index: 1; width: 100%; padding: var(--s6) var(--s8); }
+.page-hero__body { max-width: 820px; margin-inline: auto; display: flex; flex-direction: column; align-items: flex-start; }
+```
+
+Na mobilu (≤768px): `.page-hero__content { padding: var(--s4) 20px; }` + `.page-hero__body { align-items: center; text-align: center; }`.
+
+**Obsah stránky na mobilu:** `.gdpr__inner { padding-inline: var(--s4); }` = 32px (shodné s patičkou — viz `.footer .container { padding-inline: var(--s4); }`). Výchozí globální 20px nestačilo — obsah byl příliš blízko okrajům.
+
+**Obsah stránky:** max-width `820px`, `margin-inline: auto`. Struktura:
+- Úvodní 3 odstavce
+- Klikatelný obsah (I–XI) ve white kartě `.gdpr__toc`
+- Sekce I–XI se zákotnami `id="gdpr-i"` … `id="gdpr-xi"` (pro scroll z obsahu)
+
+**Nadpisy sekcí (`.gdpr__section-title`):** Lora, `clamp(1.1rem, 2vw, 1.4rem)`, barva `--cta`, border-bottom `1px solid rgba(196,168,130,0.3)`.
+
+**Podnadpisy A–F (`.gdpr__subsection-title`):** Jost, `0.95rem`, font-weight `500`, uppercase, letter-spacing `0.1em`, barva `--cta-hover` (`#634C36`).
+
+**Nadpis Obsah (`.gdpr__toc-title`):** Jost, `0.95rem`, font-weight `500`, uppercase, letter-spacing `0.14em`, barva `--cta`.
+
+**Číslování odstavců (`.gdpr__num`):** čísla na začátku odstavců (1., 2., 3. atd.) jsou obalena v `<span class="gdpr__num">` — barva `--cta`, font-weight `500`. Vizuálně shodné se zvýrazněním písmen v odrážkových seznamech.
+
+**Písmenkové seznamy (`.gdpr__list--alpha`):** odrážky označené a), b), c)... místo pomlček. Implementace přes CSS counter:
+```css
+.gdpr__list--alpha { counter-reset: alpha-list; list-style: none; }
+.gdpr__list--alpha li { counter-increment: alpha-list; padding-left: var(--s3); }
+.gdpr__list--alpha li::before { content: counter(alpha-list, lower-alpha) ')'; color: var(--cta); font-weight: 500; }
+```
+Použito v sekcích: IV/F bod 1, VII bod 3, IX bod 2, X bod 1.
+
+**Kontaktní box správce (sekce I):** `.gdpr__contact-box` — white karta s border `rgba(196,168,130,0.2)`, border-radius `--r-md`, shadow.
+
+---
+
 ## Přehled fotografií dle umístění
 
 | Soubor | Použití |
 |---|---|
 | `Obrazky/marie_hero.jpg` | index.html hero (vpravo), kontaktní sekce na všech stránkách |
 | `Obrazky/marie_sezeni.jpg` | index.html split „S čím za mnou rodiny přicházejí" |
-| `Obrazky/marie_omne.jpg` | index.html split „O mně" |
+| `Obrazky/marie_omne.jpg` | index.html split „O mně"; o-mne.html OG image a structured data (jen v meta tagu, ve split sekci již není) |
 | `Obrazky/pro_pecujici.jpg` | index.html service karta „Pro pečující" |
 | `Obrazky/pro_pozustale.png` | index.html service karta „Pro pozůstalé" |
 | `Obrazky/pro_organizace.jpg` | index.html service karta „Pro organizace"; organizace.html sekce „Podpora organizace" (vpravo) |
@@ -761,8 +806,9 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 | `Obrazky/prostor_poradna.jpg` | pecujici.html a pozustali.html sekce „Praktické info" (vlevo, aspect-ratio 1:1) |
 | `Obrazky/otazky.jpg` | pecujici.html bubble-field pozadí |
 | `Obrazky/o_mne_hero.jpg` | o-mne.html page hero pozadí (`background-position: center 40%`) |
+| `Obrazky/marie_muj_pribeh.jpg` | o-mne.html split „Vlastní zkušenost" (vlevo, aspect 4:5, `align-self: center`) |
 | `Obrazky/marie_1.jpg` | o-mne.html split „Příběh" — sekce Příběh je nyní intro (bez fotky), foto nevyužito |
-| `Obrazky/marie_podpora.jpg` | o-mne.html split „Zkušenost z praxe" (vlevo) |
+| `Obrazky/marie_podpora.jpg` | o-mne.html split „Zkušenost z praxe" (vlevo) — původní foto, nahrazeno `marie_muj_pribeh.jpg` |
 | `Obrazky/marie_2.jpg` | původně access-bars.html „Průběh sezení" — nahrazeno `access_bars_pece.jpg` |
 
 ---
