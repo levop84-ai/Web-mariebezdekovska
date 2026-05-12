@@ -717,7 +717,7 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 | 3 | Jak „Barsy" pomáhají | `prinaset-title` | `section--bg` | split grid `align-items:start`; vlevo foto `access_bars_sezeni.jpg` (`align-self:stretch`, `min-height:360px`); vpravo eyebrow, h2 „Každý prožitek je individuální", divider, 3 odstavce + dot-list 6 bodů |
 | 4 | Kdy využít sílu Access Bars® | `kdy-h` | `section--white` | Centrovaný `section-header` + `.kdy-grid` (2 karty + šipka uprostřed) |
 | 5 | Kdo může Access Bars® využít | `kdo-h` | `section--bg` | split grid `align-items:start`; vlevo text (eyebrow + h2 + divider + 2 odstavce); vpravo foto `access_bars.jpg` (`align-self:stretch`, `min-height:360px`) |
-| 6 | Průběh sezení | `jak-h` | `section--white` | split grid; vlevo eyebrow + h2 + divider + text + 3 kroky `.steps` + btn--primary „Domluvit sezení"; vpravo foto `access_bars_pece.jpg` (`align-self:stretch`, `min-height:360px`) |
+| 6 | Průběh sezení | `jak-h` | `section--white` | split grid; vlevo foto `access_bars_pece.jpg` (`align-self:stretch`, `min-height:360px`); vpravo eyebrow + h2 + divider + text + 3 kroky `.steps` + btn--primary „Domluvit sezení" |
 | 7 | Access Bars® pro každého | `formy-h` | inline `background: #FAF7F2` | section-header + 4 `.forma-card` 2×2 + btn--primary „Kontaktujte mě" → `#kontakt` |
 | 8 | Kontakt | `kontakt` | `contact section--white` | Standardní kontaktní sekce |
 
@@ -802,7 +802,7 @@ Použito v sekcích: IV/F bod 1, VII bod 3, IX bod 2, X bod 1.
 | `Obrazky/organizace_tym.jpg` | organizace.html sekce „Bezpečný prostor" (vlevo) |
 | `Obrazky/access_bars_hero.jpg` | access-bars.html page hero pozadí (`background-position: center top`) |
 | `Obrazky/access_bars_sezeni.jpg` | access-bars.html sekce „Jak Barsy pomáhají" (vlevo) |
-| `Obrazky/access_bars_pece.jpg` | access-bars.html sekce „Průběh sezení" (vpravo) |
+| `Obrazky/access_bars_pece.jpg` | access-bars.html sekce „Průběh sezení" (vlevo) |
 | `Obrazky/prostor_poradna.jpg` | pecujici.html a pozustali.html sekce „Praktické info" (vlevo, aspect-ratio 1:1) |
 | `Obrazky/otazky.jpg` | pecujici.html bubble-field pozadí |
 | `Obrazky/o_mne_hero.jpg` | o-mne.html page hero pozadí (`background-position: center 40%`) |
