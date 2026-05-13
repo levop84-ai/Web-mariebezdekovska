@@ -739,6 +739,42 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 
 **Forma cards (sekce 7):** `.forma-card` 2×2 grid — Individuální sezení / Kurz pro jednotlivce / Workshop pro tým / Kurz pro tým.
 
+```css
+.forma-card { background: var(--white); border-radius: var(--r-lg); padding: var(--s4);
+    border: 1px solid rgba(196,168,130,0.14); box-shadow: var(--shadow);
+    display: flex; align-items: flex-start; gap: var(--s3); transition: box-shadow 0.3s; }
+.forma-card:hover { box-shadow: var(--shadow-hover); }
+.forma-card__icon { width: 96px; height: 96px; border-radius: 50%; background: var(--bg);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 8px; }
+.forma-card__title { font-family: var(--font-h); font-size: 1.05rem; font-weight: 600;
+    color: var(--cta); margin-bottom: var(--s1); }
+```
+
+**Mobilní zobrazení forma karet (≤480px):** na úzkých obrazovkách se ikona přesune nad text (sloupcový layout):
+```css
+@media (max-width: 480px) {
+    .forma-card { flex-direction: column; align-items: flex-start; }
+}
+```
+
+**Rozbalovací pole „Čas a cena sezení" (karta Individuální sezení):** implementováno pomocí `<details>/<summary>`. Toggle má styl Lora kurzíva 1.05rem barva `--cta` (shodné s `.forma-card__title`). Šipka `::after` je `font-style: normal` (potlačení zdědění kurzívy), `font-size: 0.8rem` (shodné s FAQ šipkou), rotace 180° při otevření. Obsah po rozbalení: `dot-list` se dvěma položkami a ikonami `fa-solid fa-circle`, štítky „**První sezení:**" a „**Každé další sezení:**" jsou tučné.
+
+```css
+.price-details { margin-top: var(--s2); border-top: 1px solid rgba(196,168,130,0.25); padding-top: var(--s2); }
+.price-details__toggle { display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; font-family: var(--font-h); font-style: italic; font-size: 1.05rem;
+    color: var(--cta); list-style: none; user-select: none; gap: var(--s1); }
+.price-details__toggle::-webkit-details-marker { display: none; }
+.price-details__toggle::after { content: '\f078'; font-family: 'Font Awesome 6 Free';
+    font-weight: 900; font-style: normal; font-size: 0.8rem;
+    transition: transform 0.25s; flex-shrink: 0; }
+details[open] .price-details__toggle::after { transform: rotate(180deg); }
+.price-details__content { margin-top: var(--s2); }
+.price-details__content .dot-list li { padding: 4px 0; }
+```
+
+Ceny: První sezení – 2&nbsp;000&nbsp;Kč / 2&nbsp;hodiny; Každé další sezení – 1&nbsp;500&nbsp;Kč / 1,5&nbsp;hodiny.
+
 ---
 
 ### gdpr.html – Zásady zpracování osobních údajů
