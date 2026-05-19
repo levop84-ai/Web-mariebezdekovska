@@ -145,8 +145,8 @@
         }
 
         p {
-            font-size: 1.05rem;
-            line-height: 1.75;
+            font-size: 1.1rem;
+            line-height: 1.65;
         }
 
         .container {
@@ -502,8 +502,8 @@
         }
 
         .page-hero__lead {
-            font-size: 1.05rem;
-            line-height: 1.85;
+            font-size: 1.2rem;
+            line-height: 1.75;
             color: rgba(255, 255, 255, 0.88);
             max-width: 480px;
             margin-bottom: var(--s5);
@@ -555,7 +555,7 @@
         }
 
         .section-header h2 {
-            margin-bottom: 0;
+            margin-bottom: var(--s3);
         }
 
         .split {
@@ -597,6 +597,10 @@
             padding: var(--s2) var(--s3);
         }
 
+        .split__body h2 {
+            margin-bottom: var(--s3);
+        }
+
         .split__text {
             margin-bottom: var(--s3);
             color: var(--text);
@@ -608,17 +612,18 @@
 
         .dot-list li {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: var(--s2);
             padding: 8px 0;
-            font-size: 1.05rem;
-            line-height: 1.75;
+            font-size: 1.1rem;
+            line-height: 1.65;
         }
 
         .dot-list li i {
             color: var(--gold);
             flex-shrink: 0;
             font-size: 0.7rem;
+            margin-top: 0.80em;
         }
 
         .pull-quote {
@@ -678,8 +683,8 @@
         }
 
         .reason-card__text {
-            font-size: 1.05rem;
-            line-height: 1.75;
+            font-size: 1.1rem;
+            line-height: 1.65;
             color: #333333;
         }
 
@@ -728,8 +733,8 @@
         }
 
         .forma-card__text {
-            font-size: 1rem;
-            line-height: 1.75;
+            font-size: 1.1rem;
+            line-height: 1.65;
             color: var(--text);
         }
 
@@ -745,8 +750,8 @@
         .highlight-box p {
             font-family: var(--font-h);
             font-style: italic;
-            font-size: 1.05rem;
-            line-height: 1.8;
+            font-size: 1.1rem;
+            line-height: 1.7;
         }
 
         /* CONTACT */
@@ -816,7 +821,7 @@
         }
 
         .contact__detail p {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
         }
 
         .contact__detail a {
@@ -863,8 +868,8 @@
             border-radius: var(--r-md);
             font-family: var(--font-h);
             font-style: italic;
-            font-size: 1.05rem;
-            line-height: 1.8;
+            font-size: 1.1rem;
+            line-height: 1.7;
             color: #333333;
             width: 100%;
             transition: box-shadow 0.3s;
@@ -943,9 +948,10 @@
 
         .footer__inner {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
             gap: var(--s6);
             margin-bottom: var(--s6);
+            align-items: first baseline;
         }
 
         .footer__name {
@@ -965,7 +971,7 @@
 
         .footer__blurb {
             font-size: 0.95rem;
-            line-height: 1.75;
+            line-height: 1.65;
             max-width: 280px;
         }
 
@@ -988,7 +994,7 @@
             display: block;
             font-size: 0.95rem;
             color: rgba(250, 247, 242, 0.6);
-            padding: 4px 0;
+            padding-bottom: 8px;
             transition: color 0.2s;
         }
 
@@ -1022,6 +1028,35 @@
             color: var(--bg);
         }
 
+        .footer__ci--highlight a {
+            font-size: 1.05rem;
+            color: rgba(250, 247, 242, 0.85);
+        }
+
+        .footer__ci--highlight a:hover {
+            color: var(--bg);
+        }
+
+        .footer__icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: var(--s4);
+            padding: 8px;
+        }
+
+        .footer__icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
         .footer__bottom {
             border-top: 1px solid rgba(250, 247, 242, 0.1);
             padding-top: var(--s3);
@@ -1032,14 +1067,33 @@
             gap: var(--s2);
         }
 
-        .footer__copy {
-            font-size: 0.72rem;
+        .footer__bottom p {
+            font-size: 0.82rem;
             color: rgba(250, 247, 242, 0.35);
         }
 
-        .footer__legal {
-            font-size: 0.72rem;
+        .footer__copy {
+            flex: 1;
+        }
+
+        .footer__credit {
+            flex: 1;
+            text-align: center;
+        }
+
+        .footer__credit a {
             color: rgba(250, 247, 242, 0.35);
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: color 0.2s, text-decoration-color 0.2s;
+        }
+
+        .footer__credit a:hover {
+            color: rgba(250, 247, 242, 0.7);
+        }
+
+        .footer__legal {
+            flex: 1;
             text-align: right;
         }
 
@@ -1266,8 +1320,8 @@
         }
 
         .how-card__text {
-            font-size: 1.05rem;
-            line-height: 1.75;
+            font-size: 1.1rem;
+            line-height: 1.65;
             color: #333333;
         }
 
@@ -1282,14 +1336,14 @@
         }
 
         .intro__title {
-            margin-bottom: var(--s2);
+            margin-bottom: var(--s3);
             font-style: italic;
         }
 
         .intro__text {
             margin-bottom: var(--s3);
-            font-size: 1.05rem;
-            line-height: 1.85;
+            font-size: 1.1rem;
+            line-height: 1.75;
             color: var(--text);
         }
     </style>
@@ -1319,8 +1373,7 @@
                     </ul>
                 </li>
                 <li class="nav__item"><a href="/o-mne" class="nav__link">O&nbsp;mně</a></li>
-                <li class="nav__item"><a href="/#reference" class="nav__link">Zkušenosti klientů</a></li>
-                <li class="nav__item"><a href="#kontakt" class="nav__link nav__link--btn">Kontakt</a></li>
+                <li class="nav__item"><a href="/kontakt" class="nav__link nav__link--btn">Kontakt</a></li>
             </ul>
             <button class="nav__burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"
                 aria-controls="mobileNav">
@@ -1334,8 +1387,7 @@
             <a href="/organizace" class="nav__mob-link nav__mob-link--sub">Pro organizace</a>
             <a href="/access-bars" class="nav__mob-link nav__mob-link--sub">Access Bars®</a>
             <a href="/o-mne" class="nav__mob-link">O&nbsp;mně</a>
-            <a href="/#reference" class="nav__mob-link">Zkušenosti klientů</a>
-            <a href="#kontakt" class="nav__mob-link nav__mob-link--btn">Kontakt</a>
+            <a href="/kontakt" class="nav__mob-link nav__mob-link--btn">Kontakt</a>
         </nav>
     </nav>
 
@@ -1350,7 +1402,6 @@
             <div class="page-hero__content">
                 <span class="eyebrow">Moje služby</span>
                 <h1 class="page-hero__title" id="ph-title">Pro organizace</h1>
-                <div class="divider divider--left"></div>
                 <p class="page-hero__lead">
                     Podporuji vaše zaměstnance v&nbsp;tom, jak pečovat o&nbsp;klienta v&nbsp;závěru
                     života – odborně, lidsky a&nbsp;s&nbsp;respektem k&nbsp;situaci.
@@ -1372,7 +1423,6 @@
                     <h2 class="intro__title reveal" id="proc-h">
                         Podpora a&nbsp;vzdělávání týmu
                     </h2>
-                    <div class="divider reveal"></div>
                     <p class="intro__text reveal">
                         Péče o&nbsp;klienty v&nbsp;závěru života není pravděpodobně situace, na&nbsp;kterou
                         se běžně tým při volbě své profese připravoval – pokud nejde přímo o&nbsp;hospicovou
@@ -1409,7 +1459,6 @@
                     <div class="split__body reveal rv-d2">
                         <span class="eyebrow">Bezpečný prostor</span>
                         <h2 id="bezpecny-h">Otevřené rozhovory s&nbsp;týmem</h2>
-                        <div class="divider divider--left"></div>
                         <p class="split__text">
                             Když se personál setkává s&nbsp;klienty v&nbsp;závěru života, aniž by k&nbsp;tomu
                             byl vysloveně proškolen, může to mít vliv na&nbsp;jeho psychickou pohodu a&nbsp;fungování.
@@ -1440,8 +1489,7 @@
                 <div class="section-header reveal" style="margin-bottom: var(--s3);">
                     <span class="eyebrow">Výzvy neopečovaných pečujících</span>
                     <h2 id="zatez-h">Péče v&nbsp;závěru života je jiná</h2>
-                    <div class="divider"></div>
-                    <p style="max-width:680px; margin: 0 auto; font-size: 1.05rem; line-height: 1.8;">
+                    <p style="max-width:680px; margin: 0 auto; font-size: 1.1rem; line-height: 1.7;">
                         Bez podpory může tým dovést k&nbsp;vyčerpání, nejistotě i&nbsp;přetížení.
                         I&nbsp;když se na&nbsp;první pohled může zdát, že tomu tak není, ve&nbsp;skutečnosti
                         tento druh péče pracovníkům přináší:
@@ -1474,22 +1522,11 @@
                         <span class="eyebrow">Podpora organizace</span>
                         <h2 class="split__title">Pokud cítíte, že se vaše organizace s&nbsp;těmito výzvami setkává, ráda
                             vás podpořím</h2>
-                        <div class="divider divider--left"></div>
-                        <p class="split__text">
-                            Vím, jaké to je milovat svou práci, ale nevědět, zda to, co dělám, je správně
-                            a&nbsp;zda to nemůže ublížit.<br>
-                            Vím, jaké je mít nezodpovězené otázky a&nbsp;být v&nbsp;nejistotě a&nbsp;zahlcení
-                            – a&nbsp;tím si postupně vytvářet cyklus pochybností a&nbsp;problémů, které se
-                            nabalují.<br>
-                            Protože každá péče, která vybočuje ze&nbsp;standardní, se vryje do&nbsp;paměti.<br>
-                            A&nbsp;pokud tyto zkušenosti nejsou opečované a&nbsp;uzavřené, mohou se vracet.
-                            Právě tehdy se snadno stává, že člověk začne být přetížený a&nbsp;směřuje
-                            k&nbsp;vyhoření.
-                        </p>
-                        <p class="split__text">
-                            Dopřejte svému týmu informace, podporu a&nbsp;péči, která je na&nbsp;místě
-                            a&nbsp;kterou si zaslouží. On vám to vrátí.
-                        </p>
+                        <p class="split__text">Vím, jaké to je milovat svou práci, ale nevědět, zda to, co dělám, je správně a&nbsp;zda to nemůže ublížit.</p>
+                        <p class="split__text">Vím, jaké je mít nezodpovězené otázky a&nbsp;být v&nbsp;nejistotě a&nbsp;zahlcení – a&nbsp;tím si postupně vytvářet cyklus pochybností a&nbsp;problémů, které se nabalují.</p>
+                        <p class="split__text">Protože každá péče, která vybočuje ze&nbsp;standardní, se vryje do&nbsp;paměti.</p>
+                        <p class="split__text">A&nbsp;pokud tyto zkušenosti nejsou opečované a&nbsp;uzavřené, mohou se vracet. Právě tehdy se snadno stává, že člověk začne být přetížený a&nbsp;směřuje k&nbsp;vyhoření.</p>
+                        <p class="split__text">Dopřejte svému týmu informace, podporu a&nbsp;péči, která je na&nbsp;místě a&nbsp;kterou si zaslouží. On vám to vrátí.</p>
                         <a href="#kontakt" class="btn btn--primary" style="margin-top: var(--s4);">Domluvit
                             konzultaci</a>
                     </div>
@@ -1511,18 +1548,16 @@
 ==================================================== -->
         <section class="section section--white" id="sluzby" aria-labelledby="spoluprace-h">
             <div class="container">
-                <div class="section-header reveal">
+                <div class="section-header reveal" style="margin-bottom: var(--s3);">
                     <span class="eyebrow">Spolupráce</span>
                     <h2 id="spoluprace-h">Co mohu vaší organizaci nabídnout</h2>
-                    <div class="divider"></div>
-                    <p style="max-width:680px; margin: 0 auto; font-size: 1.05rem; line-height: 1.8;">
-                        Spolupráce může probíhat různými formami – vždy na&nbsp;míru vaší organizaci
-                        a&nbsp;konkrétní situaci.
-                    </p>
-                    <p style="max-width:680px; margin: var(--s3) auto 0; font-size: 1.05rem; line-height: 1.8;">
-                        Nejčastější témata, která v&nbsp;organizacích školím: Úvod do&nbsp;paliativní péče, Komunikace s&nbsp;rodinou, Doprovázení klientů v&nbsp;sociální péči v&nbsp;závěru života, Péče o&nbsp;sebe v&nbsp;nejen těžkých situacích, a&nbsp;další.
-                    </p>
                 </div>
+
+                <ul class="dot-list reveal" style="max-width:680px; margin: 0 auto var(--s4);">
+                    <li><i class="fa-solid fa-circle" aria-hidden="true"></i>Spolupráce může probíhat různými formami – vždy na&nbsp;míru vaší organizaci a&nbsp;konkrétní situaci.</li>
+                    <li><i class="fa-solid fa-circle" aria-hidden="true"></i>Školení probíhají v&nbsp;místě organizace nebo po&nbsp;domluvě zařídím prostory, které nám zajistí bezpečné prostředí se&nbsp;vším, co potřebujeme.</li>
+                    <li><i class="fa-solid fa-circle" aria-hidden="true"></i>Nejčastější témata, která v&nbsp;organizacích školím: Úvod do&nbsp;paliativní péče, Komunikace s&nbsp;rodinou, Doprovázení klientů v&nbsp;sociální péči v&nbsp;závěru života, Péče o&nbsp;sebe v&nbsp;nejen těžkých situacích, a&nbsp;další.</li>
+                </ul>
 
                 <div class="how-grid reveal" style="grid-template-columns: repeat(4, 1fr); margin-top: var(--s5);"
                     role="list">
@@ -1559,88 +1594,6 @@
         </section>
 
 
-        <!-- CONTACT -->
-        <section class="contact section--white" id="kontakt" aria-labelledby="contact-h"
-            style="background-color: #FAF7F2;">
-            <div class="container">
-                <div class="section-header reveal" style="margin-bottom:var(--s6);">
-                    <span class="eyebrow">Kontakt</span>
-                    <h2 id="contact-h">Ozvěte se mi</h2>
-                    <div class="divider"></div>
-                </div>
-                <div class="contact__grid">
-                    <div class="contact__left reveal">
-                        <div class="contact__top-row">
-                            <div class="contact__photo-wrap">
-                                <img src="Obrazky/marie_hero.jpg" alt="Marie Bezděkovská" loading="lazy">
-                            </div>
-                            <div class="contact__right">
-                                <div class="contact__info">
-                                    <h3 style="font-family:var(--font-h);font-size:1.6rem;margin-bottom:var(--s3);">
-                                        Marie Bezděkovská</h3>
-                                    <div class="contact__detail">
-                                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                                        <p><a href="tel:+420608213485">+420&nbsp;608&nbsp;213&nbsp;485</a></p>
-                                    </div>
-                                    <div class="contact__detail">
-                                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                                        <p><a href="mailto:info.bezdekovska@gmail.com">info.bezdekovska@gmail.com</a>
-                                        </p>
-                                    </div>
-                                    <div class="contact__socials">
-                                        <a href="https://www.facebook.com/opeciazaveru" class="social-btn"
-                                            target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i
-                                                class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-                                        <a href="https://www.instagram.com/poradna_mala_pruvodcepeci" class="social-btn"
-                                            target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i
-                                                class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="contact__note">
-                            Popište mi krátce vaši situaci a&nbsp;přidejte telefon.
-                            Ozvu se vám co&nbsp;nejdříve. Pokud raději voláte – zavolejte rovnou.
-                            Možná telefon nezvednu, jsem často u&nbsp;klientů, ale zavolám nazpět.
-                            <br><br>
-                            Školení probíhají v&nbsp;místě organizace nebo po&nbsp;domluvě zařídím prostory, které nám zajistí bezpečné prostředí se&nbsp;vším, co potřebujeme.
-                        </p>
-                    </div>
-                    <div class="cform reveal rv-d2">
-                        <form action="https://formspree.io/f/mvzlqkdd" method="POST" novalidate
-                            aria-label="Kontaktní formulář">
-                            <label class="hp-field" for="hp-website" aria-hidden="true">Nevyplňujte</label>
-                            <input class="hp-field" type="text" id="hp-website" name="website" tabindex="-1"
-                                autocomplete="off" aria-hidden="true">
-                            <div class="cform__group">
-                                <label class="cform__label" for="fname">Jméno a příjmení *</label>
-                                <input type="text" id="fname" name="name" class="cform__input"
-                                    placeholder="Vaše jméno a příjmení" required autocomplete="name">
-                            </div>
-                            <div class="cform__group">
-                                <label class="cform__label" for="femail">E-mail *</label>
-                                <input type="email" id="femail" name="email" class="cform__input"
-                                    placeholder="vas@email.cz" required autocomplete="email">
-                            </div>
-                            <div class="cform__group">
-                                <label class="cform__label" for="fphone">Telefon</label>
-                                <input type="tel" id="fphone" name="phone" class="cform__input"
-                                    placeholder="+420 000 000 000" autocomplete="tel">
-                            </div>
-                            <div class="cform__group">
-                                <label class="cform__label" for="fmsg">Zpráva *</label>
-                                <textarea id="fmsg" name="message" class="cform__textarea"
-                                    placeholder="Popište, s čím bych mohla pomoci vaší organizaci…" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center;">
-                                Odeslat zprávu
-                            </button>
-                            <p class="cform__notice">* Povinné pole. Vaše údaje nebudou sdíleny se třetími stranami.</p>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
 
     </main>
 
@@ -1649,18 +1602,29 @@
         <div class="container">
             <div class="footer__inner">
                 <div>
+
                     <p class="footer__name">Marie Bezděkovská</p>
                     <p class="footer__tagline">Průvodce péčí v&nbsp;závěru života</p>
                     <p class="footer__blurb">Provedu vás procesem péče s&nbsp;laskavostí, profesionalitou
                         a&nbsp;lidskostí. Jsem tu pro&nbsp;vás i&nbsp;po&nbsp;ztrátě.</p>
-                    <div class="footer__socials">
-                        <a href="https://www.facebook.com/opeciazaveru" class="social-btn social-btn--dark"
-                            target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i
-                                class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="https://www.instagram.com/poradna_mala_pruvodcepeci"
-                            class="social-btn social-btn--dark" target="_blank" rel="noopener noreferrer"
-                            aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                    <div class="footer__icon">
+                        <img src="Obrazky/Ikony/holubice.png" alt="">
                     </div>
+                </div>
+                <div>
+                    <p class="footer__head">Kontakt</p>
+                    <div class="footer__ci footer__ci--highlight"><a href="tel:+420608213485">+420&nbsp;608&nbsp;213&nbsp;485</a></div>
+                    <div class="footer__ci footer__ci--highlight"><a href="mailto:info.bezdekovska@gmail.com">info.bezdekovska@gmail.com</a></div>
+                    <div class="footer__socials">
+                        <a href="https://www.facebook.com/opeciazaveru" class="social-btn social-btn--dark" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/poradna_mala_pruvodcepeci" class="social-btn social-btn--dark" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <p class="footer__head">Povinné údaje</p>
+                    <div class="footer__ci"><span>Polesí 36, 463&nbsp;53 Rynoltice</span></div>
+                    <div class="footer__ci"><span>IČO: 18048391</span></div>
+                    <div class="footer__ci"><span>Fyzická osoba zapsaná v&nbsp;živnostenském rejstříku Magistrátu města Liberce podle §71 odst. 2 živnostenského zákona</span></div>
                 </div>
                 <nav aria-label="Navigace v patičce">
                     <p class="footer__head">Navigace</p>
@@ -1668,26 +1632,13 @@
                     <a href="/pozustali" class="footer__link">Pro pozůstalé</a>
                     <a href="/organizace" class="footer__link">Pro organizace</a>
                     <a href="/access-bars" class="footer__link">Access Bars®</a>
-                    <a href="/#reference" class="footer__link">Zkušenosti klientů</a>
                     <a href="/o-mne" class="footer__link">O&nbsp;mně</a>
-                    <a href="#kontakt" class="footer__link">Kontakt</a>
+                    <a href="/kontakt" class="footer__link">Kontakt</a>
                 </nav>
-                <div>
-                    <p class="footer__head">Kontakt</p>
-                    <div class="footer__ci"><i class="fa-solid fa-phone" aria-hidden="true"></i><a
-                            href="tel:+420608213485">+420&nbsp;608&nbsp;213&nbsp;485</a></div>
-                    <div class="footer__ci"><i class="fa-solid fa-envelope" aria-hidden="true"></i><a
-                            href="mailto:info.bezdekovska@gmail.com">info.bezdekovska@gmail.com</a></div>
-                    <div class="footer__ci"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>Polesí 36,
-                            463&nbsp;53 Rynoltice</span></div>
-                    <div class="footer__ci"><i class="fa-solid fa-building" aria-hidden="true"></i><span>IČO:
-                            18048391</span></div>
-                    <div class="footer__ci"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i><span>Fyzická osoba zapsaná v&nbsp;živnostenském rejstříku Magistrátu města Liberce podle §71
-                            odst. 2 živnostenského zákona</span></div>
-                </div>
             </div>
             <div class="footer__bottom">
                 <p class="footer__copy">&copy; 2026 Marie Bezděkovská. Všechna práva vyhrazena.</p>
+                <p class="footer__credit">Str&#225;nky vytvo&#345;ila <a href="https://voparilova.cz/">Lenka Vopa&#345;ilov&#225;</a></p>
                 <p class="footer__legal"><a href="gdpr.html">Zásady ochrany osobních údajů</a></p>
             </div>
         </div>
@@ -1763,6 +1714,7 @@
         btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     </script>
 
+    <script src="cookie-banner.js"></script>
 </body>
 
 </html>

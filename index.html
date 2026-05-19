@@ -83,10 +83,8 @@
 
             <ul class="nav__links" role="list">
                 <li class="nav__item">
-                    <button class="nav__link" aria-haspopup="true" aria-expanded="false"
-                        style="background:none;border:none;cursor:pointer;font-family:inherit;">
-                        Moje služby <i class="fa-solid fa-chevron-down" style="font-size:.55rem;margin-left:3px;"
-                            aria-hidden="true"></i>
+                    <button class="nav__link nav__button" aria-haspopup="true" aria-expanded="false">
+                        Moje služby <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                     </button>
                     <ul class="nav__dropdown" role="list" aria-label="Podmenu Moje služby">
                         <li><a href="/pecujici" class="nav__drop-link">Pro pečující</a></li>
@@ -96,8 +94,7 @@
                     </ul>
                 </li>
                 <li class="nav__item"><a href="#o-mne" class="nav__link">O&nbsp;mně</a></li>
-                <li class="nav__item"><a href="#reference" class="nav__link">Zkušenosti klientů</a></li>
-                <li class="nav__item"><a href="#kontakt" class="nav__link nav__link--btn">Kontakt</a></li>
+                <li class="nav__item"><a href="/kontakt" class="nav__link nav__link--btn">Kontakt</a></li>
             </ul>
 
             <button class="nav__burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"
@@ -114,8 +111,7 @@
             <a href="/organizace" class="nav__mob-link nav__mob-link--sub">Pro organizace</a>
             <a href="/access-bars" class="nav__mob-link nav__mob-link--sub">Access Bars®</a>
             <a href="#o-mne" class="nav__mob-link">O&nbsp;mně</a>
-            <a href="#reference" class="nav__mob-link">Zkušenosti klientů</a>
-            <a href="#kontakt" class="nav__mob-link nav__mob-link--btn">Kontakt</a>
+            <a href="/kontakt" class="nav__mob-link nav__mob-link--btn">Kontakt</a>
         </nav>
     </nav>
 
@@ -163,7 +159,6 @@
                     <h2 class="intro__title reveal" id="intro-h">
                         Přináším paprsek světla tam, kde tíha a bolest převládají
                     </h2>
-                    <div class="divider reveal"></div>
                     <p class="intro__text reveal">
                         Přeji si, aby každá rodina, která čelí péči o&nbsp;blízkého ať&nbsp;už
                         z&nbsp;důvodu vyššího věku nebo nezvratné diagnózy, měla možnost touto
@@ -171,7 +166,7 @@
                         orientovat v&nbsp;systému, znát všechny předpisy, možnosti, pravidla
                         a&nbsp;být ve&nbsp;stresu, zda to&nbsp;zvládne.
                     </p>
-                    <a href="#sluzby" class="btn btn--outline reveal" style="margin-top:var(--s5)">S čím vám mohu
+                    <a href="#sluzby" class="btn btn--outline reveal intro__action">S čím vám mohu
                         pomoci</a>
                 </div>
             </div>
@@ -185,7 +180,7 @@
             <div class="container">
                 <div class="split__grid">
 
-                    <div class="split__img-wrap reveal" style="aspect-ratio:1/1">
+                    <div class="split__img-wrap split__img-wrap--square reveal">
                         <img src="Obrazky/marie_sezeni.jpg" alt="Laskavé doprovázení a podpora pečujících i pozůstalých"
                             class="split__img" loading="lazy" width="600" height="800">
                     </div>
@@ -195,10 +190,9 @@
                         <h2 class="split__title" id="rodiny-h">
                             S čím za mnou rodiny přicházejí
                         </h2>
-                        <div class="divider divider--left"></div>
-                        <p class="split__text" style="margin-bottom:0.3em">Rodiny, které ke mně přicházejí, jsou často
+                        <p class="split__text split__text--tight">Rodiny, které ke mně přicházejí, jsou často
                             zahlcené, ve strachu a plné otázek.</p>
-                        <p class="split__text" style="margin-bottom:var(--s1)">Nejčastěji řeší:</p>
+                        <p class="split__text split__text--list-lead">Nejčastěji řeší:</p>
 
                         <ul class="dot-list" aria-label="Nejčastější témata">
                             <li><i class="fa-solid fa-circle" aria-hidden="true"></i>jak se orientovat po&nbsp;sdělení
@@ -218,10 +212,12 @@
 
                 </div>
 
-                <div style="margin-top:var(--s7);text-align:center">
-                    <p class="pull-quote" style="font-size:1.3rem;margin-bottom:0.3em">Za každým příběhem je strach. Strach z&nbsp;toho,
+                <div class="split__quote-block">
+                    <p class="pull-quote">Za každým příběhem je strach.
+                        Strach z&nbsp;toho,
                         zda to jako jednotlivec nebo rodina zvládnou. Zda neudělají něco špatně.</p>
-                    <p class="pull-quote" style="font-size:1.3rem;margin-top:0;margin-bottom:var(--s5)">Já k&nbsp;tomu ale ráda říkám –
+                    <p class="pull-quote">Já k&nbsp;tomu
+                        ale ráda říkám –
                         z&nbsp;lásky k&nbsp;druhému děláme vždy to, co považujeme za správné. Tím pádem tady nic jako
                         chyba neexistuje.</p>
                     <a href="#kontakt" class="btn btn--primary">Ozvěte se mi</a>
@@ -239,7 +235,6 @@
                 <div class="section-header reveal">
                     <span class="eyebrow">Moje služby</span>
                     <h2 id="services-h">Jak vám mohu pomoci</h2>
-                    <div class="divider"></div>
                 </div>
 
                 <div class="services__grid">
@@ -342,7 +337,6 @@
                 <div class="section-header reveal">
                     <span class="eyebrow">Proč se mnou spolupracovat</span>
                     <h2 id="reasons-h">Jaké má práce nese hodnoty</h2>
-                    <div class="divider"></div>
                 </div>
 
                 <div class="reasons__grid" role="list">
@@ -415,7 +409,6 @@
                 <div class="section-header reveal">
                     <span class="eyebrow">Časté dotazy</span>
                     <h2 id="faq-h">Na co se lidé často ptají</h2>
-                    <div class="divider"></div>
                 </div>
 
                 <div class="faq__list">
@@ -497,7 +490,7 @@
             <div class="container">
                 <div class="split__grid split__grid--flip">
 
-                    <div class="split__img-wrap reveal" style="aspect-ratio: 1/1;">
+                    <div class="split__img-wrap split__img-wrap--square reveal">
                         <img src="Obrazky/marie_omne.jpg" alt="Marie Bezděkovská – o mně" class="split__img"
                             loading="lazy" width="800" height="800">
                     </div>
@@ -507,7 +500,6 @@
                         <h2 class="split__title" id="about-h">
                             Aneb kudy vedla má cesta<br>k&nbsp;tomu, co&nbsp;dělám
                         </h2>
-                        <div class="divider divider--left"></div>
                         <p class="split__text">
                             Mým přáním je vytvořit bezpečné a&nbsp;laskavé místo pro ty, kteří pečují,
                             procházejí nemocí nebo se vyrovnávají se ztrátou. Každou z&nbsp;těchto rolí
@@ -518,7 +510,7 @@
                             s&nbsp;onkologickým onemocněním (navíc uprostřed doby covidové) mi ukázala,
                             kudy chci dál jít.
                         </p>
-                        <a href="/o-mne" class="btn btn--primary" style="margin-top:var(--s3)">Číst více</a>
+                        <a href="/o-mne" class="btn btn--primary about__cta">Číst více</a>
                     </div>
 
                 </div>
@@ -535,15 +527,22 @@
                 <div class="section-header reveal">
                     <span class="eyebrow">Zkušenosti klientů</span>
                     <h2 id="ref-h">Co o&nbsp;mé práci říkají klienti</h2>
-                    <div class="divider"></div>
                 </div>
 
                 <div class="testimonials__grid">
 
                     <article class="testi-card reveal rv-d1">
                         <div class="testi-card__body">
-                            <p class="testi-card__text testi-card__text--clamped" id="testi-text-1">Maruška se o našeho tatínka starala naprosto skvěle. Pomohla nám zorientovat se v administrativě, které jsme vůbec nerozuměli, a byla nám velkou oporou i v samotné péči. Dokázala zaskočit ve chvílích, kdy jsme s dcerou musely být v práci, a vždy jsme věděly, že je o tatínka dobře postaráno. Původně jsme si přáli dochovat tatínka doma, ale postupně pro nás byla péče natolik náročná, že jsme se i díky otevřené komunikaci a podpoře Marušky rozhodli pro hospic. Bylo to těžké rozhodnutí, ale dnes víme, že bylo správné. Po celou dobu jsme měli dostatek informací, věděli jsme, co se děje, a nebyli jsme na to sami. Maruška s námi byla až do poslední chvíle. Tatínek si ji velmi oblíbil – stejně jako my.</p>
-                            <button class="testi-card__readmore" aria-expanded="false" aria-controls="testi-text-1" onclick="testitoggle(this)">Číst více</button>
+                            <p class="testi-card__text testi-card__text--clamped" id="testi-text-1">Maruška se o našeho
+                                tatínka starala naprosto skvěle. Pomohla nám zorientovat se v administrativě, které jsme
+                                vůbec nerozuměli, a byla nám velkou oporou i v samotné péči. Dokázala zaskočit ve
+                                chvílích, kdy jsme s dcerou musely být v práci, a vždy jsme věděly, že je o tatínka
+                                dobře postaráno. Původně jsme si přáli dochovat tatínka doma, ale postupně pro nás byla
+                                péče natolik náročná, že jsme se i díky otevřené komunikaci a podpoře Marušky rozhodli
+                                pro hospic. Bylo to těžké rozhodnutí, ale dnes víme, že bylo správné. Po celou dobu jsme
+                                měli dostatek informací, věděli jsme, co se děje, a nebyli jsme na to sami. Maruška s
+                                námi byla až do poslední chvíle. Tatínek si ji velmi oblíbil – stejně jako my.</p>
+                            <button class="testi-card__readmore" aria-expanded="false" aria-controls="testi-text-1">Číst více</button>
                         </div>
                         <div class="testi-card__author">
                             <div class="testi-card__icon" aria-hidden="true">
@@ -551,14 +550,20 @@
                             </div>
                             <div class="testi-card__author-info">
                                 <span class="testi-card__name">Marta K.</span>
-                                <span class="testi-card__note">(komplexní provázení rodiny a nemocného až do konce)</span>
+                                <span class="testi-card__note">(komplexní provázení rodiny a nemocného až do
+                                    konce)</span>
                             </div>
                         </div>
                     </article>
 
                     <article class="testi-card reveal rv-d2">
                         <div class="testi-card__body">
-                            <p class="testi-card__text">Po naší konzultaci mám najednou pocit, že všechnu zvládnu. Celou dobu mě paralyzoval strach z toho, že něco neudělám tak, jak by si máma přála, nebo že udělám něco špatně. Marie mě připravila na různé možnosti, pomohla mi vytvořit konkrétní plán a věděl jsem, co všechno budu potřebovat. Velkou úlevou pro mě je i to, že mám možnost se na ni kdykoliv obrátit – telefonicky nebo osobně. Je skvělé vědět, že na to nejsem sám a máma může být doma.</p>
+                            <p class="testi-card__text">Po naší konzultaci mám najednou pocit, že všechnu zvládnu. Celou
+                                dobu mě paralyzoval strach z toho, že něco neudělám tak, jak by si máma přála, nebo že
+                                udělám něco špatně. Marie mě připravila na různé možnosti, pomohla mi vytvořit konkrétní
+                                plán a věděl jsem, co všechno budu potřebovat. Velkou úlevou pro mě je i to, že mám
+                                možnost se na ni kdykoliv obrátit – telefonicky nebo osobně. Je skvělé vědět, že na to
+                                nejsem sám a máma může být doma.</p>
                         </div>
                         <div class="testi-card__author">
                             <div class="testi-card__icon" aria-hidden="true">
@@ -573,7 +578,12 @@
 
                     <article class="testi-card reveal rv-d3">
                         <div class="testi-card__body">
-                            <p class="testi-card__text">Několik let pečuji o svou maminku. Dělám to ráda, ale jsem unavená. Rodina si zvykla, že všechno zvládám, a já už nemám moc prostoru zažít něco nového nebo si opravdu odpočinout. Setkání s Maruškou mi domluvila vnučka, která říkala, že si ho užijeme. A měla pravdu. I když mě ze začátku trochu děsilo, co se bude dít, odcházela jsem odpočatá, uvolněná a bylo mi dobře jako už dlouho ne. Dnes se vídáme každý měsíc a na každé setkání se moc těším.</p>
+                            <p class="testi-card__text">Několik let pečuji o svou maminku. Dělám to ráda, ale jsem
+                                unavená. Rodina si zvykla, že všechno zvládám, a já už nemám moc prostoru zažít něco
+                                nového nebo si opravdu odpočinout. Setkání s Maruškou mi domluvila vnučka, která říkala,
+                                že si ho užijeme. A měla pravdu. I když mě ze začátku trochu děsilo, co se bude dít,
+                                odcházela jsem odpočatá, uvolněná a bylo mi dobře jako už dlouho ne. Dnes se vídáme
+                                každý měsíc a na každé setkání se moc těším.</p>
                         </div>
                         <div class="testi-card__author">
                             <div class="testi-card__icon" aria-hidden="true">
@@ -597,106 +607,16 @@
 ==================================================== -->
         <section class="contact section--bg" id="kontakt" aria-labelledby="contact-h">
             <div class="container">
+                <div class="intro__inner">
 
-                <div class="section-header reveal" style="margin-bottom:var(--s6);">
-                    <span class="eyebrow">Kontakt</span>
-                    <h2 id="contact-h">Ozvěte se mi</h2>
-                    <div class="divider"></div>
-                </div>
-
-                <div class="contact__grid">
-
-                    <!-- Info -->
-                    <div class="contact__left reveal">
-
-                        <div class="contact__top-row">
-                            <div class="contact__photo-wrap">
-                                <img src="Obrazky/marie_hero.jpg" alt="Marie Bezděkovská" loading="lazy">
-                            </div>
-
-                            <div class="contact__right">
-                                <div class="contact__info">
-                                    <h3 style="font-family:var(--font-h);font-size:1.6rem;margin-bottom:var(--s3);">
-                                        Marie Bezděkovská
-                                    </h3>
-                                    <div class="contact__detail">
-                                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                                        <p><a href="tel:+420608213485">+420&nbsp;608&nbsp;213&nbsp;485</a></p>
-                                    </div>
-                                    <div class="contact__detail">
-                                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                                        <p><a href="mailto:info.bezdekovska@gmail.com">info.bezdekovska@gmail.com</a>
-                                        </p>
-                                    </div>
-                                    <div class="contact__socials" style="margin-top:var(--s2);">
-                                        <a href="https://www.facebook.com/opeciazaveru" class="social-btn"
-                                            target="_blank" rel="noopener noreferrer"
-                                            aria-label="Facebook – Marie Bezděkovská">
-                                            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
-                                        </a>
-                                        <a href="https://www.instagram.com/poradna_mala_pruvodcepeci" class="social-btn"
-                                            target="_blank" rel="noopener noreferrer"
-                                            aria-label="Instagram – Poradna Malá">
-                                            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <p class="contact__note">
-                            Možná je toho teď moc. Možná nevíte, co přesně potřebujete. Možná jen cítíte,
-                            že&nbsp;už na&nbsp;to nechcete být sami. To&nbsp;stačí.
-                            <br><br>
-                            Popište mi krátce vaši situaci a&nbsp;přidejte telefon.
-                            Ozvu se vám co&nbsp;nejdříve. Pokud raději voláte – zavolejte rovnou.
-                            Možná telefon nezvednu, jsem často u&nbsp;klientů, ale zavolám nazpět.
-                            <br><br>
-                            Domluvíme se, zda se potkáme v&nbsp;poradně, nebo přijedu za&nbsp;vámi domů.
-                        </p>
-
+                    <div class="contact__photo-wrap contact__photo-wrap--hero reveal">
+                        <img src="Obrazky/marie_kontakt.jpg" alt="Marie Bezděkovská" loading="lazy">
                     </div>
-
-                    <!-- Form -->
-                    <div class="cform reveal rv-d2">
-                        <form action="https://formspree.io/f/mvzlqkdd" method="POST" novalidate
-                            aria-label="Kontaktní formulář">
-                            <!-- Honeypot – anti-spam -->
-                            <label class="hp-field" for="hp-website" aria-hidden="true">Nevyplňujte</label>
-                            <input class="hp-field" type="text" id="hp-website" name="website" tabindex="-1"
-                                autocomplete="off" aria-hidden="true">
-
-                            <div class="cform__group">
-                                <label class="cform__label" for="fname">Jméno a příjmení *</label>
-                                <input type="text" id="fname" name="name" class="cform__input"
-                                    placeholder="Vaše jméno a příjmení" required autocomplete="name">
-                            </div>
-
-                            <div class="cform__group">
-                                <label class="cform__label" for="femail">E-mail *</label>
-                                <input type="email" id="femail" name="email" class="cform__input"
-                                    placeholder="vas@email.cz" required autocomplete="email">
-                            </div>
-
-                            <div class="cform__group">
-                                <label class="cform__label" for="fphone">Telefon</label>
-                                <input type="tel" id="fphone" name="phone" class="cform__input"
-                                    placeholder="+420 000 000 000" autocomplete="tel">
-                            </div>
-
-                            <div class="cform__group">
-                                <label class="cform__label" for="fmsg">Zpráva *</label>
-                                <textarea id="fmsg" name="message" class="cform__textarea"
-                                    placeholder="Popište mi krátce vaši situaci…" required></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center;">
-                                Odeslat zprávu
-                            </button>
-
-                            <p class="cform__notice">* Povinné pole. Vaše údaje nebudou sdíleny se třetími stranami.</p>
-                        </form>
-                    </div>
+                    <h2 class="intro__title contact__intro-title reveal" id="contact-h">
+                        Možná je toho teď moc. Možná nevíte, co přesně potřebujete. Možná jen cítíte,
+                        že&nbsp;už na&nbsp;to nechcete být sami. To&nbsp;stačí. Ozvěte se mi.
+                    </h2>
+                    <a href="/kontakt" class="btn btn--primary reveal contact__cta">Kontaktujte mě</a>
 
                 </div>
             </div>
@@ -714,12 +634,27 @@
 
                 <!-- Brand -->
                 <div>
+
                     <p class="footer__name">Marie Bezděkovská</p>
                     <p class="footer__tagline">Průvodce péčí v&nbsp;závěru života</p>
                     <p class="footer__blurb">
                         Provedu vás procesem péče s&nbsp;laskavostí,
                         profesionalitou a&nbsp;lidskostí. Jsem tu pro&nbsp;vás i&nbsp;po&nbsp;ztrátě.
                     </p>
+                    <div class="footer__icon">
+                        <img src="Obrazky/Ikony/holubice.png" alt="">
+                    </div>
+                </div>
+
+                <!-- Kontakt -->
+                <div>
+                    <p class="footer__head">Kontakt</p>
+                    <div class="footer__ci footer__ci--highlight"><a
+                            href="tel:+420608213485">+420&nbsp;608&nbsp;213&nbsp;485</a>
+                    </div>
+                    <div class="footer__ci footer__ci--highlight"><a
+                            href="mailto:info.bezdekovska@gmail.com">info.bezdekovska@gmail.com</a>
+                    </div>
                     <div class="footer__socials">
                         <a href="https://www.facebook.com/opeciazaveru" class="social-btn social-btn--dark"
                             target="_blank" rel="noopener noreferrer" aria-label="Facebook">
@@ -733,147 +668,64 @@
                     </div>
                 </div>
 
-                <!-- Navigation -->
+                <!-- Povinné údaje -->
+                <div>
+                    <p class="footer__head">Povinné údaje</p>
+                    <div class="footer__ci"><span>Polesí 36, 463&nbsp;53 Rynoltice</span>
+                    </div>
+                    <div class="footer__ci"><span>IČO: 18048391</span>
+                    </div>
+                    <div class="footer__ci"><span>Fyzická osoba zapsaná v&nbsp;živnostenském rejstříku Magistrátu města
+                            Liberce podle §71
+                            odst. 2 živnostenského zákona</span>
+                    </div>
+                </div>
+
+                <!-- Navigace -->
                 <nav aria-label="Navigace v patičce">
                     <p class="footer__head">Navigace</p>
                     <a href="/pecujici" class="footer__link">Pro pečující</a>
                     <a href="/pozustali" class="footer__link">Pro pozůstalé</a>
                     <a href="/organizace" class="footer__link">Pro organizace</a>
                     <a href="/access-bars" class="footer__link">Access Bars®</a>
-                    <a href="#reference" class="footer__link">Zkušenosti klientů</a>
                     <a href="#o-mne" class="footer__link">O&nbsp;mně</a>
-                    <a href="#kontakt" class="footer__link">Kontakt</a>
+                    <a href="/kontakt" class="footer__link">Kontakt</a>
                 </nav>
-
-                <!-- Contact -->
-                <div>
-                    <p class="footer__head">Kontakt</p>
-                    <div class="footer__ci">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                        <a href="tel:+420608213485">+420&nbsp;608&nbsp;213&nbsp;485</a>
-                    </div>
-                    <div class="footer__ci">
-                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                        <a href="mailto:info.bezdekovska@gmail.com">info.bezdekovska@gmail.com</a>
-                    </div>
-                    <div class="footer__ci">
-                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                        <span>Polesí 36, 463&nbsp;53 Rynoltice</span>
-                    </div>
-                    <div class="footer__ci">
-                        <i class="fa-solid fa-building" aria-hidden="true"></i>
-                        <span>IČO: 18048391</span>
-                    </div>
-                    <div class="footer__ci">
-                        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
-                        <span>Fyzická osoba zapsaná v&nbsp;živnostenském rejstříku Magistrátu města Liberce podle §71
-                            odst. 2 živnostenského zákona</span>
-                    </div>
-                </div>
 
             </div>
 
             <div class="footer__bottom">
                 <p class="footer__copy">&copy; 2026 Marie Bezděkovská. Všechna práva vyhrazena.</p>
+                <p class="footer__credit">Str&#225;nky vytvo&#345;ila <a href="https://voparilova.cz/">Lenka
+                        Vopa&#345;ilov&#225;</a></p>
                 <p class="footer__legal"><a href="gdpr.html">Zásady ochrany osobních údajů</a></p>
             </div>
         </div>
     </footer>
 
 
+    <!-- Cookie consent panel -->
+    <div id="cookie-panel" role="dialog" aria-modal="false" aria-label="Souhlas s cookies">
+        <p id="cookie-panel__title">Cookies</p>
+        <p id="cookie-panel__text">
+            Tento web používá technické soubory cookies nezbytné pro správné fungování
+            a&nbsp;CDN služby pro načítání písem (Google Fonts, Font Awesome).
+            Vaše data zpracováváme v&nbsp;souladu s&nbsp;GDPR.
+            <a href="gdpr.html">Více informací</a>
+        </p>
+        <div id="cookie-panel__actions">
+            <button id="cookie-btn-decline" type="button">Odmítnout</button>
+            <button id="cookie-btn-accept" type="button">Přijmout</button>
+        </div>
+    </div>
+
     <!-- Back to top -->
     <button id="backToTop" aria-label="Zpět nahoru">
         <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
     </button>
 
-    <!-- ====================================================
-     JAVASCRIPT
-==================================================== -->
-    <script>
-        // ── Navigation: scroll shadow ─────────────────────
-        const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 20);
-        }, { passive: true });
-
-        // ── Hamburger ─────────────────────────────────────
-        const burger = document.getElementById('burger');
-        const mobileNav = document.getElementById('mobileNav');
-
-        burger.addEventListener('click', () => {
-            const open = mobileNav.classList.toggle('open');
-            burger.classList.toggle('open', open);
-            burger.setAttribute('aria-expanded', open);
-        });
-
-        // close drawer when a link is tapped
-        mobileNav.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => {
-                mobileNav.classList.remove('open');
-                burger.classList.remove('open');
-                burger.setAttribute('aria-expanded', 'false');
-            });
-        });
-
-        // ── Scroll reveal ─────────────────────────────────
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('visible');
-                    observer.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // ── FAQ accordion ────────────────────────────────
-        document.querySelectorAll('.faq__question').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const item = btn.closest('.faq__item');
-                const isOpen = item.classList.contains('open');
-                document.querySelectorAll('.faq__item.open').forEach(el => {
-                    const ans = el.querySelector('.faq__answer');
-                    ans.style.maxHeight = ans.scrollHeight + 'px';
-                    requestAnimationFrame(() => { ans.style.maxHeight = '0'; });
-                    el.classList.remove('open');
-                    el.querySelector('.faq__question').setAttribute('aria-expanded', 'false');
-                });
-                if (!isOpen) {
-                    item.classList.add('open');
-                    btn.setAttribute('aria-expanded', 'true');
-                    const ans = item.querySelector('.faq__answer');
-                    ans.style.maxHeight = ans.scrollHeight + 'px';
-                }
-            });
-        });
-
-        // ── Honeypot guard ────────────────────────────────
-        const form = document.querySelector('form');
-        if (form) {
-            form.addEventListener('submit', e => {
-                if (form.querySelector('[name="website"]').value) {
-                    e.preventDefault();
-                }
-            });
-        }
-
-        // ── Back to top ───────────────────────────────────
-        const btt = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            btt.classList.toggle('visible', window.scrollY > 400);
-        }, { passive: true });
-        btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-        function testitoggle(btn) {
-            const p = document.getElementById(btn.getAttribute('aria-controls'));
-            const expanded = btn.getAttribute('aria-expanded') === 'true';
-            p.classList.toggle('testi-card__text--clamped', expanded);
-            btn.setAttribute('aria-expanded', !expanded);
-            btn.textContent = expanded ? 'Číst více' : 'Zobrazit méně';
-        }
-    </script>
-
+    <script src="main.js" defer></script>
+    <script src="cookie-banner.js" defer></script>
 </body>
 
 </html>

@@ -153,8 +153,8 @@
         }
 
         p {
-            font-size: 1.05rem;
-            line-height: 1.75;
+            font-size: 1.1rem;
+            line-height: 1.65;
         }
 
         .container {
@@ -508,8 +508,8 @@
         }
 
         .page-hero__lead {
-            font-size: 1.05rem;
-            line-height: 1.85;
+            font-size: 1.2rem;
+            line-height: 1.75;
             color: rgba(255, 255, 255, 0.88);
             max-width: 480px;
             margin-bottom: var(--s5);
@@ -540,14 +540,14 @@
         }
 
         .intro__title {
-            margin-bottom: var(--s2);
+            margin-bottom: var(--s3);
             font-style: italic;
         }
 
         .intro__text {
             margin-bottom: var(--s3);
-            font-size: 1.05rem;
-            line-height: 1.85;
+            font-size: 1.1rem;
+            line-height: 1.75;
             color: var(--text);
         }
 
@@ -557,7 +557,7 @@
         }
 
         .section-header h2 {
-            margin-bottom: 0;
+            margin-bottom: var(--s3);
         }
 
         /* SPLIT */
@@ -600,6 +600,10 @@
             padding: var(--s2) var(--s3);
         }
 
+        .split__body h2 {
+            margin-bottom: var(--s3);
+        }
+
         .split__text {
             margin-bottom: var(--s3);
             color: var(--text);
@@ -626,8 +630,8 @@
         .highlight-box p {
             font-family: var(--font-h);
             font-style: italic;
-            font-size: 1.05rem;
-            line-height: 1.8;
+            font-size: 1.1rem;
+            line-height: 1.7;
         }
 
         /* HODNOTY */
@@ -672,8 +676,8 @@
         }
 
         .value-card__text {
-            font-size: 1rem;
-            line-height: 1.75;
+            font-size: 1.1rem;
+            line-height: 1.65;
             color: var(--text);
         }
 
@@ -769,7 +773,7 @@
         }
 
         .contact__detail p {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
         }
 
         .contact__detail a {
@@ -816,8 +820,8 @@
             border-radius: var(--r-md);
             font-family: var(--font-h);
             font-style: italic;
-            font-size: 1.05rem;
-            line-height: 1.8;
+            font-size: 1.1rem;
+            line-height: 1.7;
             color: #333333;
             width: 100%;
             transition: box-shadow 0.3s;
@@ -896,9 +900,10 @@
 
         .footer__inner {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
             gap: var(--s6);
             margin-bottom: var(--s6);
+            align-items: first baseline;
         }
 
         .footer__name {
@@ -918,7 +923,7 @@
 
         .footer__blurb {
             font-size: 0.95rem;
-            line-height: 1.75;
+            line-height: 1.65;
             max-width: 280px;
         }
 
@@ -941,7 +946,7 @@
             display: block;
             font-size: 0.95rem;
             color: rgba(250, 247, 242, 0.6);
-            padding: 4px 0;
+            padding-bottom: 8px;
             transition: color 0.2s;
         }
 
@@ -975,6 +980,35 @@
             color: var(--bg);
         }
 
+        .footer__ci--highlight a {
+            font-size: 1.05rem;
+            color: rgba(250, 247, 242, 0.85);
+        }
+
+        .footer__ci--highlight a:hover {
+            color: var(--bg);
+        }
+
+        .footer__icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: var(--s4);
+            padding: 8px;
+        }
+
+        .footer__icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
         .footer__bottom {
             border-top: 1px solid rgba(250, 247, 242, 0.1);
             padding-top: var(--s3);
@@ -985,14 +1019,33 @@
             gap: var(--s2);
         }
 
-        .footer__copy {
-            font-size: 0.72rem;
+        .footer__bottom p {
+            font-size: 0.82rem;
             color: rgba(250, 247, 242, 0.35);
         }
 
-        .footer__legal {
-            font-size: 0.72rem;
+        .footer__copy {
+            flex: 1;
+        }
+
+        .footer__credit {
+            flex: 1;
+            text-align: center;
+        }
+
+        .footer__credit a {
             color: rgba(250, 247, 242, 0.35);
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: color 0.2s, text-decoration-color 0.2s;
+        }
+
+        .footer__credit a:hover {
+            color: rgba(250, 247, 242, 0.7);
+        }
+
+        .footer__legal {
+            flex: 1;
             text-align: right;
         }
 
@@ -1208,8 +1261,7 @@
                     </ul>
                 </li>
                 <li class="nav__item"><a href="/o-mne" class="nav__link" aria-current="page">O&nbsp;mně</a></li>
-                <li class="nav__item"><a href="/#reference" class="nav__link">Zkušenosti klientů</a></li>
-                <li class="nav__item"><a href="#kontakt" class="nav__link nav__link--btn">Kontakt</a></li>
+                <li class="nav__item"><a href="/kontakt" class="nav__link nav__link--btn">Kontakt</a></li>
             </ul>
             <button class="nav__burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"
                 aria-controls="mobileNav">
@@ -1223,8 +1275,7 @@
             <a href="/organizace" class="nav__mob-link nav__mob-link--sub">Pro organizace</a>
             <a href="/access-bars" class="nav__mob-link nav__mob-link--sub">Access Bars®</a>
             <a href="/o-mne" class="nav__mob-link">O&nbsp;mně</a>
-            <a href="/#reference" class="nav__mob-link">Zkušenosti klientů</a>
-            <a href="#kontakt" class="nav__mob-link nav__mob-link--btn">Kontakt</a>
+            <a href="/kontakt" class="nav__mob-link nav__mob-link--btn">Kontakt</a>
         </nav>
     </nav>
 
@@ -1239,7 +1290,6 @@
             <div class="page-hero__content">
                 <span class="eyebrow">O mně</span>
                 <h1 class="page-hero__title" id="ph-title">Marie Bezděkovská</h1>
-                <div class="divider divider--left"></div>
                 <p class="page-hero__lead">Kdo jsem, aneb kudy vedla má&nbsp;cesta k&nbsp;tomu, co dělám</p>
                 <a href="#pribeh" class="btn btn--glass">Číst více</a>
             </div>
@@ -1252,7 +1302,6 @@
                 <div class="intro__inner">
                     <span class="eyebrow reveal">Můj příběh</span>
                     <h2 class="intro__title reveal" id="pribeh-h">Hledala jsem smysl své práce</h2>
-                    <div class="divider reveal"></div>
                     <p class="intro__text reveal">
                         Několik let jsem sbírala zkušenosti jak v ČR, tak v zahraničí, abych po letech došla do fáze, že
                         už v sociální péči být nechci. Celý život jsem hledala místo, kde bych mohla dělat to, co rodiny
@@ -1284,7 +1333,6 @@
                     <div class="split__body reveal rv-d2">
                         <span class="eyebrow">Vlastní zkušenost</span>
                         <h2 id="zkusenost-h">Sama jsem si prošla péčí i ztrátou blízkého</h2>
-                        <div class="divider divider--left"></div>
                         <p class="split__text">
                             V době covidu, kdy jsem se doma starala o svého nemocného dědečka, za mnou začaly přicházet
                             rodiny, které hledaly informace – co dělat, jak postupovat, čeho se vyvarovat. Ta doba byla
@@ -1310,93 +1358,12 @@
                 <div style="margin-top:var(--s7);text-align:center">
                     <p class="pull-quote" style="font-size:1.3rem;margin-bottom:0.3em">Protože podpora, kterou mohu rodinám dát, může být zásadní pro to, jak celé tohle náročné období zvládnou.</p>
                     <p class="pull-quote" style="font-size:1.3rem;margin-top:0">A proto jsem vděčná, že mohu <strong>nabízet rodinám komplexní péči o jejich blízkého.</strong></p>
+                    <a href="/kontakt" class="btn btn--primary" style="margin-top:var(--s5);">Ozvěte se mi</a>
                 </div>
             </div>
         </section>
 
 
-        <!-- CONTACT -->
-        <section class="contact section--white" id="kontakt" aria-labelledby="contact-h">
-            <div class="container">
-                <div class="section-header reveal" style="margin-bottom:var(--s6);">
-                    <span class="eyebrow">Kontakt</span>
-                    <h2 id="contact-h">Ozvěte se mi</h2>
-                    <div class="divider"></div>
-                </div>
-                <div class="contact__grid">
-                    <div class="contact__left reveal">
-                        <div class="contact__top-row">
-                            <div class="contact__photo-wrap">
-                                <img src="Obrazky/marie_hero.jpg" alt="Marie Bezděkovská" loading="lazy">
-                            </div>
-                            <div class="contact__right">
-                                <div class="contact__info">
-                                    <h3 style="font-family:var(--font-h);font-size:1.6rem;margin-bottom:var(--s3);">
-                                        Marie Bezděkovská</h3>
-                                    <div class="contact__detail">
-                                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                                        <p><a href="tel:+420608213485">+420&nbsp;608&nbsp;213&nbsp;485</a></p>
-                                    </div>
-                                    <div class="contact__detail">
-                                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                                        <p><a href="mailto:info.bezdekovska@gmail.com">info.bezdekovska@gmail.com</a>
-                                        </p>
-                                    </div>
-                                    <div class="contact__socials">
-                                        <a href="https://www.facebook.com/opeciazaveru" class="social-btn"
-                                            target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i
-                                                class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-                                        <a href="https://www.instagram.com/poradna_mala_pruvodcepeci" class="social-btn"
-                                            target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i
-                                                class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="contact__note">
-                            Možná je toho teď moc. Možná nevíte, co přesně potřebujete. Možná jen cítíte,
-                            že&nbsp;už na&nbsp;to nechcete být sami. To&nbsp;stačí.
-                            <br><br>
-                            Popište mi krátce vaši situaci a&nbsp;přidejte telefon.
-                            Ozvu se vám co&nbsp;nejdříve. Pokud raději voláte – zavolejte rovnou.
-                            Možná telefon nezvednu, jsem často u&nbsp;klientů, ale zavolám nazpět.
-                        </p>
-                    </div>
-                    <div class="cform reveal rv-d2">
-                        <form action="https://formspree.io/f/mvzlqkdd" method="POST" novalidate
-                            aria-label="Kontaktní formulář">
-                            <label class="hp-field" for="hp-website" aria-hidden="true">Nevyplňujte</label>
-                            <input class="hp-field" type="text" id="hp-website" name="website" tabindex="-1"
-                                autocomplete="off" aria-hidden="true">
-                            <div class="cform__group">
-                                <label class="cform__label" for="fname">Jméno a příjmení *</label>
-                                <input type="text" id="fname" name="name" class="cform__input"
-                                    placeholder="Vaše jméno a příjmení" required autocomplete="name">
-                            </div>
-                            <div class="cform__group">
-                                <label class="cform__label" for="femail">E-mail *</label>
-                                <input type="email" id="femail" name="email" class="cform__input"
-                                    placeholder="vas@email.cz" required autocomplete="email">
-                            </div>
-                            <div class="cform__group">
-                                <label class="cform__label" for="fphone">Telefon</label>
-                                <input type="tel" id="fphone" name="phone" class="cform__input"
-                                    placeholder="+420 000 000 000" autocomplete="tel">
-                            </div>
-                            <div class="cform__group">
-                                <label class="cform__label" for="fmsg">Zpráva *</label>
-                                <textarea id="fmsg" name="message" class="cform__textarea"
-                                    placeholder="Popište mi krátce vaši situaci…" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center;">
-                                Odeslat zprávu
-                            </button>
-                            <p class="cform__notice">* Povinné pole. Vaše údaje nebudou sdíleny se třetími stranami.</p>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
 
     </main>
 
@@ -1405,18 +1372,29 @@
         <div class="container">
             <div class="footer__inner">
                 <div>
+
                     <p class="footer__name">Marie Bezděkovská</p>
                     <p class="footer__tagline">Průvodce péčí v&nbsp;závěru života</p>
                     <p class="footer__blurb">Provedu vás procesem péče s&nbsp;laskavostí, profesionalitou
                         a&nbsp;lidskostí. Jsem tu pro&nbsp;vás i&nbsp;po&nbsp;ztrátě.</p>
-                    <div class="footer__socials">
-                        <a href="https://www.facebook.com/opeciazaveru" class="social-btn social-btn--dark"
-                            target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i
-                                class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="https://www.instagram.com/poradna_mala_pruvodcepeci"
-                            class="social-btn social-btn--dark" target="_blank" rel="noopener noreferrer"
-                            aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                    <div class="footer__icon">
+                        <img src="Obrazky/Ikony/holubice.png" alt="">
                     </div>
+                </div>
+                <div>
+                    <p class="footer__head">Kontakt</p>
+                    <div class="footer__ci footer__ci--highlight"><a href="tel:+420608213485">+420&nbsp;608&nbsp;213&nbsp;485</a></div>
+                    <div class="footer__ci footer__ci--highlight"><a href="mailto:info.bezdekovska@gmail.com">info.bezdekovska@gmail.com</a></div>
+                    <div class="footer__socials">
+                        <a href="https://www.facebook.com/opeciazaveru" class="social-btn social-btn--dark" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/poradna_mala_pruvodcepeci" class="social-btn social-btn--dark" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <p class="footer__head">Povinné údaje</p>
+                    <div class="footer__ci"><span>Polesí 36, 463&nbsp;53 Rynoltice</span></div>
+                    <div class="footer__ci"><span>IČO: 18048391</span></div>
+                    <div class="footer__ci"><span>Fyzická osoba zapsaná v&nbsp;živnostenském rejstříku Magistrátu města Liberce podle §71 odst. 2 živnostenského zákona</span></div>
                 </div>
                 <nav aria-label="Navigace v patičce">
                     <p class="footer__head">Navigace</p>
@@ -1424,27 +1402,13 @@
                     <a href="/pozustali" class="footer__link">Pro pozůstalé</a>
                     <a href="/organizace" class="footer__link">Pro organizace</a>
                     <a href="/access-bars" class="footer__link">Access Bars®</a>
-                    <a href="/#reference" class="footer__link">Zkušenosti klientů</a>
                     <a href="/o-mne" class="footer__link">O&nbsp;mně</a>
-                    <a href="#kontakt" class="footer__link">Kontakt</a>
+                    <a href="/kontakt" class="footer__link">Kontakt</a>
                 </nav>
-                <div>
-                    <p class="footer__head">Kontakt</p>
-                    <div class="footer__ci"><i class="fa-solid fa-phone" aria-hidden="true"></i><a
-                            href="tel:+420608213485">+420&nbsp;608&nbsp;213&nbsp;485</a></div>
-                    <div class="footer__ci"><i class="fa-solid fa-envelope" aria-hidden="true"></i><a
-                            href="mailto:info.bezdekovska@gmail.com">info.bezdekovska@gmail.com</a></div>
-                    <div class="footer__ci"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>Polesí 36,
-                            463&nbsp;53 Rynoltice</span></div>
-                    <div class="footer__ci"><i class="fa-solid fa-building" aria-hidden="true"></i><span>IČO:
-                            18048391</span></div>
-                    <div class="footer__ci"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i><span>Fyzická
-                            osoba zapsaná v&nbsp;živnostenském rejstříku Magistrátu města Liberce podle §71 odst. 2
-                            živnostenského zákona</span></div>
-                </div>
             </div>
             <div class="footer__bottom">
                 <p class="footer__copy">&copy; 2026 Marie Bezděkovská. Všechna práva vyhrazena.</p>
+                <p class="footer__credit">Str&#225;nky vytvo&#345;ila <a href="https://voparilova.cz/">Lenka Vopa&#345;ilov&#225;</a></p>
                 <p class="footer__legal"><a href="gdpr.html">Zásady ochrany osobních údajů</a></p>
             </div>
         </div>
@@ -1520,6 +1484,7 @@
         btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     </script>
 
+    <script src="cookie-banner.js"></script>
 </body>
 
 </html>
