@@ -129,15 +129,31 @@ Vytvoř moderní mobile-first web: použít můžeš trendy jako souměrný bent
 
 ### Barevná paleta (CSS proměnné)
 
+Pozor: existují **dvě sady hodnot** — style.css (index.html, kontakt.html) a inline `<style>` ve všech ostatních stránkách. Hodnoty jsou neshodné.
+
+**style.css** (index.html, kontakt.html):
 ```css
---bg:         #FAF7F2   /* hlavní pozadí stránky */
---bg-alt:     #EDE0CC   /* alternativní pozadí (placeholder rámečky) */
+--bg:         #FAF7F2
+--bg-alt:     #EDE0CC
 --sand:       #D9C4A8
---gold:       #C4A882   /* ikony, dekorativní prvky, divider, footer nadpisy */
---cta:        #82664A   /* primární barva — tlačítka, eyebrow, pull-quote */
+--gold:       #C4A882
+--cta:        #82664A   /* tmavší varianta */
 --cta-hover:  #634C36
---text:       #333333   /* hlavní barva textu */
---text-muted: #665D56   /* sekundární text */
+--text:       #333333
+--text-muted: #665D56
+--white:      #FFFFFF
+```
+
+**Inline `<style>`** (pecujici, pozustali, organizace, access-bars, o-mne, gdpr):
+```css
+--bg:         #FAF7F2
+--bg-alt:     #EDE0CC
+--sand:       #D9C4A8
+--gold:       #C4A882
+--cta:        #9B7E60   /* světlejší varianta */
+--cta-hover:  #7A6248
+--text:       #333333
+--text-muted: #8A8078
 --white:      #FFFFFF
 ```
 
@@ -328,10 +344,21 @@ Používá se na pecujici.html, pozustali.html, organizace.html a access-bars.ht
 ### Dot list (`.dot-list`)
 
 - `margin-bottom: var(--s4)`
-- `li`: `display: flex; align-items: baseline; gap: var(--s2); padding: 8px 0; font-size: 1.1rem; line-height: 1.65`
-- Ikona: `fa-solid fa-circle`, barva `var(--gold)`, `font-size: 0.7rem; position: relative; top: -2px` — `align-items: baseline` zajistí zarovnání puntíku s účařím prvního řádku, `top: -2px` jemně kompenzuje optický posun ikony vůči textu
+- `li`: `display: flex; gap: var(--s2); padding: 8px 0; font-size: 1.1rem; line-height: 1.65`
+- Ikona: `fa-solid fa-circle`, barva `var(--gold)`, `font-size: 0.7rem`
 
-**Poznámka k access-bars.html:** inline `<style>` blok v tomto souboru obsahuje vlastní `.dot-list li` a `.dot-list li i` — musí se aktualizovat zároveň s `style.css`, jinak přebíjí globální pravidla (jde o stránku s nejvíce dot-list výskyty).
+Implementace ikony se liší dle stránky — dvě varianty:
+
+**Varianta A** — `align-items: baseline` + `position: relative; top: -2px` na ikoně:
+- style.css (index.html, kontakt.html)
+- access-bars.html (inline style)
+
+**Varianta B** — `align-items: flex-start` + `margin-top: 0.80em` na ikoně:
+- pecujici.html, pozustali.html, organizace.html (inline style)
+
+Obě varianty dosahují stejného vizuálního výsledku — optické zarovnání puntíku s účařím prvního řádku textu.
+
+**Poznámka:** access-bars.html inline `<style>` blok přebíjí globální pravidla z style.css (pokud by se style.css někdy na access-bars.html odkazovalo).
 
 **Varianta `.dot-list--2col`** (definována v inline `<style>` pecujici.html, v současnosti se nepoužívá):
 - `display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s4); row-gap: 0`
@@ -441,7 +468,7 @@ Každá bublina má inline CSS proměnné `--float-dur` a `--float-del` pro vari
 Společný pro pecujici.html, pozustali.html, organizace.html, access-bars.html.
 
 ```css
-.page-hero { padding-top: 72px; min-height: 68vh; position: relative;
+.page-hero { padding-top: 72px; min-height: 85vh; position: relative;
     display: flex; align-items: center; overflow: hidden; }
 .page-hero__bg { position: absolute; inset: 0;
     background-color: #3a3028;   /* fallback barva */
@@ -455,8 +482,9 @@ Společný pro pecujici.html, pozustali.html, organizace.html, access-bars.html.
 
 Struktura obsahu: eyebrow (bílá 75% opacity) → H1 → divider (bílý 45% opacity) → lead text (`rgba(255,255,255,0.88)`, `max-width: 480px`, `margin-bottom: var(--s5)`) → `.btn--glass`
 
-**Mobilní zobrazení page-hero (≤768px):** obsah se vycentruje na střed:
+**Mobilní zobrazení page-hero (≤768px):** obsah se vycentruje na střed a výška se sníží na `78vh`:
 ```css
+.page-hero { min-height: 78vh; }
 .page-hero__content { align-items: center; text-align: center; }
 .page-hero__content .divider--left { margin-left: auto; }
 ```
@@ -511,7 +539,9 @@ Přítomen na **všech 6 stránkách** (index, organizace, access-bars, pecujici
 
 ### Cookie banner (`cookie-banner.js`)
 
-Samostatný soubor `cookie-banner.js` vložený na konec `index.html` před `</body>` s atributem `defer`. **HTML panelu je staticky v `index.html`** (ne injektováno přes JS), **CSS je v `style.css`** (sekce `COOKIE BANNER`). JS soubor se stará pouze o zobrazení a uložení stavu.
+Samostatný soubor `cookie-banner.js` vložený na konec každé stránky před `</body>`. **HTML panelu je staticky pouze v `index.html`** (ne injektováno přes JS), **CSS je v `style.css`** (sekce `COOKIE BANNER`). JS soubor se stará pouze o zobrazení a uložení stavu.
+
+**Načítání skriptu:** na index.html s atributem `defer`; na všech ostatních stránkách (pecujici, pozustali, organizace, access-bars, o-mne, kontakt, gdpr) bez `defer`.
 
 **HTML (index.html, těsně před `#backToTop`):**
 ```html
@@ -544,6 +574,20 @@ Samostatný soubor `cookie-banner.js` vložený na konec `index.html` před `</b
 
 ---
 
+### Scroll padding (kotvy + fixní navbar)
+
+Na všech 5 podstránkách (pecujici, pozustali, organizace, access-bars, o-mne) je v `html {}` nastaveno:
+
+```css
+html {
+    scroll-padding-top: 80px;
+}
+```
+
+Zajišťuje, že při kliknutí na kotevní odkaz stránka přeskočí o 80 px dolů od horního okraje (kompenzace fixního navbaru 72 px + malý vizuální odstup), takže cílová sekce začne vždy pod navbarem a bude vidět i eyebrow.
+
+---
+
 ### Scroll reveal (`.reveal`)
 
 ```css
@@ -558,6 +602,13 @@ Samostatný soubor `cookie-banner.js` vložený na konec `index.html` před `</b
 ```
 
 JS: IntersectionObserver, threshold 0.1, rootMargin `0px 0px -40px 0px`; po zobrazení třída `.visible` zůstane, prvek se přestane sledovat.
+
+---
+
+### Font Awesome načítání
+
+- **index.html:** asynchronní, neblokuje render — `<link rel="stylesheet" media="print" onload="this.media='all'">` + `<noscript>` fallback
+- **Ostatní stránky** (pecujici, pozustali, organizace, access-bars, o-mne, kontakt, gdpr): synchronní `<link rel="stylesheet">` — blokuje render, ale na podstránkách je přijatelné
 
 ---
 
@@ -741,11 +792,14 @@ Na `organizace.html`, `access-bars.html` a `o-mne.html` **není žádná kontakt
 
 **Reasons:** grid `repeat(3, 1fr)`; 6 karet s ikonami PNG ze složky `Obrazky/Ikony/` (nejste_sami, prakticnost, respekt, bezpeci, po_ztrate, zkusenosti).
 
-**Services:** grid `repeat(2, 1fr)`, karty čtvercové `aspect-ratio: 1/1`; overlay `rgba(0,0,0,0.45)`; obsah přes `z-index: 2`; tlačítka `.btn--outline-light`. `.svc-card__title`: `1.45rem`, váha `600`, barva bílá. Fotky:
-- Pro pečující: `Obrazky/pro_pecujici.jpg`
-- Pro pozůstalé: `Obrazky/pro_pozustale.png`
-- Pro organizace: `Obrazky/pro_organizace.jpg`
-- Access Bars: `Obrazky/access_bars.jpg`
+**Services:** grid `repeat(2, 1fr)`, karty čtvercové `aspect-ratio: 1/1`; overlay `rgba(0,0,0,0.45)`; obsah přes `z-index: 2`; tlačítka `.btn--outline-light`. `.svc-card__title`: `1.45rem`, váha `600`, barva bílá. Struktura karty: `svc-card__media` (foto) + `svc-card__body` (ikona + nadpis + text + btn). Fotky a ikony:
+
+| Karta | Fotka | Ikona |
+|---|---|---|
+| Pro pečující | `Obrazky/pro_pecujici.jpg` | `Obrazky/Ikony/pecujici.png` |
+| Pro pozůstalé | `Obrazky/pro_pozustale.png` | `Obrazky/Ikony/pozustali.png` |
+| Pro organizace | `Obrazky/pro_organizace.jpg` | `Obrazky/Ikony/organizace.png` |
+| Access Bars® | `Obrazky/access_bars.jpg` | `Obrazky/Ikony/access_bars.png` |
 
 **FAQ:** accordion, 5 položek; chevron ikona, `aria-expanded`. Animace otevření: JS měří `answer.scrollHeight` a nastavuje `max-height` dynamicky (ne fixní `600px`), takže animace trvá vždy stejně bez ohledu na délku odpovědi. Transition: `max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1)`. Při zavření: nejprve se nastaví `max-height` na aktuální `scrollHeight`, pak v `requestAnimationFrame` na `0` (pro plynulou CSS animaci).
 
@@ -791,7 +845,7 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 
 **Příběh (sekce 2):** H2 „Hledala jsem smysl své práce". 3 odstavce — (1) zkušenosti z ČR i zahraničí, odchod ze systémové soc. péče; (2) hospicové působení a odchod z oboru; (3) kurzívou „Ale jak se říká – řekněte Bohu své plány…" (inline styl `font-family: var(--font-h); font-style: italic`).
 
-**Vlastní zkušenost (sekce 3):** eyebrow „Vlastní zkušenost", H2 „Sama jsem si prošla péčí i ztrátou blízkého". Split grid: foto vlevo (`marie_muj_pribeh.jpg`, `aspect-ratio: 4/5`, `align-self: center`), text vpravo — 5 odstavců (péče o dědečka v době covidu, přicházející rodiny, náročnost péče i přes zkušenosti, dědův odchod a formování vlastní cesty, odvaha jít touto cestou). Pod gridem (mimo split, `margin-top: var(--s7); text-align: center`) dva pull-quote odstavce (`font-size: 1.3rem`): „Protože podpora, kterou mohu rodinám dát, může být zásadní pro to, jak celé tohle náročné období zvládnou." a „A proto jsem vděčná, že mohu **nabízet rodinám komplexní péči o jejich blízkého.**" (slovo tučně `<strong>`). Pull-quote nemá levý pruh — je centrovaný, stejný styl jako pull-quote na index.html. **Pod pull-quotes** je tlačítko `.btn--primary` „Ozvěte se mi" → `/kontakt` (`margin-top: var(--s5)`).
+**Vlastní zkušenost (sekce 3):** eyebrow „Vlastní zkušenost", H2 „Sama jsem si prošla péčí i ztrátou blízkého". Split grid: foto vlevo (`marie_muj_pribeh.jpg`, `aspect-ratio: 4/5`, `align-self: center`), text vpravo — 5 odstavců (péče o dědečka v době covidu, přicházející rodiny, náročnost péče i přes zkušenosti, dědův odchod a formování vlastní cesty, odvaha jít touto cestou). Pod gridem (mimo split, `margin-top: var(--s7); text-align: center`) dva pull-quote odstavce (`font-size: 1.3rem`): „Protože podpora, kterou mohu rodinám dát, může být zásadní pro to, jak celé tohle náročné období zvládnou." a „A proto jsem vděčná, že mohu **nabízet rodinám komplexní péči o jejich blízkého.**" (slovo tučně `<strong>`). Pull-quote nemá levý pruh — je centrovaný, stejný styl jako pull-quote na index.html. **Pod pull-quotes** je tlačítko `.btn--primary` „Ozvěte se mi" → `kontakt.html` (`margin-top: var(--s5)`).
 
 **Kontaktní sekce na o-mne.html není** — stránka nemá sekci s formulářem ani teaserem.
 
@@ -850,27 +904,27 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 ### organizace.html
 
 **Meta:** „Pro organizace | Marie Bezděkovská"
-**Canonical:** `https://www.poradnamala.cz/organizace.html`
+**Canonical:** `https://www.poradnamala.cz/organizace`
 **Structured Data:** `@type: Service`
 
 **Page Hero:** foto `Obrazky/pro_organizace_hero.jpg`, `background-position: center bottom` (vidět spodní část s Marie u projekční plochy), overlay `rgba(30,22,14,0.45)`. Fallback barva `#3a3028`. H1 `white-space: nowrap`.
 
 | Pořadí | Sekce | Třída pozadí | Poznámka |
 |---|---|---|---|
-| 1 | Page Hero | foto + overlay | btn--glass „Ozvěte se mi" → `#kontakt` |
+| 1 | Page Hero | foto + overlay | btn--glass „Možnosti spolupráce" → `#sluzby` |
 | 2 | Proč využít mé služby | `intro section--white` | Centrovaná intro sekce; eyebrow „Proč využít mé služby", h2 italic „Podpora a vzdělávání týmu", 3 odstavce, btn--outline „Jak vám mohu pomoci" → `#sluzby` |
 | 3 | Bezpečný prostor | `section section--bg` | split grid `align-items:start`; vlevo foto `organizace_tym.jpg` (`align-self:stretch`, `min-height:360px`); vpravo eyebrow „Bezpečný prostor", h2 „Otevřené rozhovory s týmem", text, dot-list 4 body, btn--primary |
 | 4 | Výzvy neopečovaných pečujících | `section section--white` | section-header (eyebrow + h2 + divider + text) s `margin-bottom: var(--s3)`; pod tím centrovaný `.dot-list` (`display: table; margin: 0 auto`) — 4 odrážky |
-| 5 | Podpora organizace | `section section--bg` | split grid `align-items:start`; vlevo `split__body` s `align-self:start` — eyebrow „Podpora organizace", h2 „Pokud cítíte, že se vaše organizace s těmito výzvami setkává, ráda vás podpořím", divider, 3 odstavce, btn--primary „Domluvit konzultaci" → `#kontakt`; vpravo foto `pro_organizace.jpg` (`align-self:stretch`, `min-height:360px`) |
-| 6 | Spolupráce | `section section--white` | id="sluzby"; section-header (eyebrow + h2, `margin-bottom: var(--s3)`) + `ul.dot-list` 3 body (`max-width:680px; margin: 0 auto var(--s4)`) + 4 `.reason-card` v `how-grid repeat(4,1fr)` (`margin-top: var(--s5)`) + btn--primary → `#kontakt` |
+| 5 | Podpora organizace | `section section--bg` | split grid `align-items:start`; vlevo `split__body` s `align-self:start` — eyebrow „Podpora organizace", h2 „Pokud cítíte, že se vaše organizace s těmito výzvami setkává, ráda vás podpořím", 5 odstavců, btn--primary „Možnosti spolupráce" → `#sluzby`; vpravo foto `organizace_prednaska.jpg` (`align-self:stretch`, `min-height:360px`) |
+| 6 | Spolupráce | `section section--white` | id="sluzby"; section-header (eyebrow + h2, `margin-bottom: var(--s3)`) + `ul.dot-list` 3 body (`max-width:680px; margin: 0 auto var(--s4)`) + 4 `.reason-card` v `how-grid repeat(4,1fr)` (`margin-top: var(--s5)`) + btn--primary „Domluvit konzultaci" → `kontakt.html` |
 
 **Sekce Výzvy neopečovaných pečujících:** místo karet je `ul.dot-list` s `display: table; margin: 0 auto` (vycentrovaný seznam). Section-header má `margin-bottom: var(--s3)` (ne výchozích `var(--s6)`).
 
-**Sekce Podpora organizace — odstavce:** každý odstavec je samostatný `<p class="split__text">` element (ne text oddělený `<br>`).
+**Sekce Podpora organizace:** foto `organizace_prednaska.jpg` (Marie přednáší, prezentace „Proč se bojíme" na plátně, publikum zády). Každý odstavec je samostatný `<p class="split__text">` element (ne text oddělený `<br>`). Žádný divider — jen eyebrow + h2 + odstavce + btn.
 
 **Sekce Spolupráce (id="sluzby"):** section-header s `margin-bottom: var(--s3)` → `ul.dot-list` 3 položky (`max-width:680px; margin: 0 auto var(--s4)`) → 4 `.reason-card` v `how-grid repeat(4,1fr)` → btn--primary. Ikony reason-card: `skoleni.png`, `workshopy.png`, `besedy.png`, `podpora.png`.
 
-**Kontaktní sekce na organizace.html není** — stránka nemá sekci s formulářem ani teaserem. Tlačítka „Domluvit konzultaci" odkazují na `#kontakt` (odkaz na kontaktní stránku přes hash, ale na stránce žádná kontaktní sekce neexistuje — upozornění: může být potřeba přepsat na `/kontakt`).
+**Kontaktní sekce na organizace.html není** — stránka nemá sekci s formulářem ani teaserem. Tlačítko „Domluvit konzultaci" v sekci Spolupráce odkazuje na `kontakt.html`.
 
 ---
 
@@ -882,13 +936,13 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 
 | Pořadí | Sekce | ID / třída | Pozadí | Poznámka |
 |---|---|---|---|---|
-| 1 | Page Hero | — | foto + overlay | btn--glass „Rezervovat sezení" → `#kontakt` |
-| 2 | Co jsou Access Bars® | `co-h` | `intro section--white` | Centrovaná intro sekce — 3 odstavce + btn--outline „Více o této metodě" → `#prinaset-h` |
-| 3 | Jak „Barsy" pomáhají | `prinaset-title` | `section--bg` | split grid `align-items:start`; vlevo foto `access_bars_sezeni.jpg` (`align-self:stretch`, `min-height:360px`); vpravo eyebrow, h2 „Každý prožitek je individuální", divider, 3 odstavce + dot-list 6 bodů |
+| 1 | Page Hero | — | foto + overlay | btn--glass „Více o této metodě" → `#co-sekce` |
+| 2 | Co jsou Access Bars® | `id="co-sekce"` na section, h2 `id="co-h"` | `intro section--white` | Centrovaná intro sekce — 3 odstavce (bez tlačítka) |
+| 3 | Jak „Barsy" pomáhají | `id="prinaset-h"` na section | `section--bg` | split grid `align-items:start`; vlevo foto `access_bars_sezeni.jpg` (`align-self:stretch`, `min-height:360px`); vpravo eyebrow, h2 „Každý prožitek je individuální", divider, 3 odstavce + dot-list 6 bodů |
 | 4 | Kdy využít sílu Access Bars® | `kdy-h` | `section--white` | Centrovaný `section-header` + `.kdy-grid` (2 karty + šipka uprostřed) |
-| 5 | Kdo může Access Bars® využít | `kdo-h` | `section--bg` | split grid `align-items:start`; vlevo text (eyebrow + h2 + divider + 2 odstavce); vpravo foto `access_bars.jpg` (`align-self:stretch`, `min-height:360px`) |
-| 6 | Průběh sezení | `jak-h` | `section--white` | split grid; vlevo foto `access_bars_pece.jpg` (`align-self:stretch`, `min-height:360px`); vpravo eyebrow + h2 + divider + text + 3 kroky `.steps` + btn--primary „Domluvit sezení" |
-| 7 | Access Bars® pro každého | `formy-h` | inline `background: #FAF7F2` | section-header + 4 `.forma-card` 2×2 + btn--primary „Kontaktujte mě" → `/kontakt` |
+| 5 | Kdo může Access Bars® využít | `kdo-h` na section | `section--bg` | split grid `align-items:start`; vlevo text (eyebrow + h2 + divider + 2 odstavce + btn--outline „Jak to probíhá" → `#jak-sekce`); vpravo foto `access_bars.jpg` (`align-self:stretch`, `min-height:360px`) |
+| 6 | Průběh sezení | `id="jak-sekce"` na section, h2 `id="jak-h"` | `section--white` | split grid; vlevo foto `access_bars_pece.jpg` (`align-self:stretch`, `min-height:360px`); vpravo eyebrow + h2 + divider + text + 3 kroky `.steps` + btn--primary „Formy spolupráce" → `#formy-sekce` |
+| 7 | Access Bars® pro každého | `id="formy-sekce"` na section, h2 `id="formy-h"` | inline `background: #FAF7F2` | section-header + 4 `.forma-card` 2×2 + btn--primary „Kontaktujte mě" → `kontakt.html` |
 
 **Kdy grid (sekce 4):** vlastní komponenta `.kdy-grid`:
 ```css
@@ -919,7 +973,7 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
     color: var(--cta); margin-bottom: var(--s1); }
 ```
 
-**Kontaktní sekce na access-bars.html není** — stránka nemá sekci s formulářem ani teaserem. Tlačítko „Rezervovat sezení" v page-hero odkazuje na `/kontakt`.
+**Kontaktní sekce na access-bars.html není** — stránka nemá sekci s formulářem ani teaserem. Tlačítko „Kontaktujte mě" v sekci „Access Bars pro každého" odkazuje na `kontakt.html`.
 
 **Mobilní zobrazení forma karet (≤480px):** na úzkých obrazovkách se ikona přesune nad text (sloupcový layout):
 ```css
@@ -1000,7 +1054,8 @@ Použito v sekcích: IV/F bod 1, VII bod 3, IX bod 2, X bod 1.
 | `Obrazky/marie_omne.jpg` | index.html split „O mně"; o-mne.html OG image a structured data (jen v meta tagu, ve split sekci již není) |
 | `Obrazky/pro_pecujici.jpg` | index.html service karta „Pro pečující" |
 | `Obrazky/pro_pozustale.png` | index.html service karta „Pro pozůstalé" |
-| `Obrazky/pro_organizace.jpg` | index.html service karta „Pro organizace"; organizace.html sekce „Podpora organizace" (vpravo) |
+| `Obrazky/pro_organizace.jpg` | index.html service karta „Pro organizace" |
+| `Obrazky/organizace_prednaska.jpg` | organizace.html sekce „Podpora organizace" (vpravo) — Marie přednáší, prezentace na plátně |
 | `Obrazky/access_bars.jpg` | index.html service karta „Access Bars"; access-bars.html sekce „Kdo může Access Bars® využít" (vpravo) |
 | `Obrazky/pro_pecujici_hero.jpg` | pecujici.html page hero pozadí |
 | `Obrazky/pro_pecujici_sezeni.jpg` | pecujici.html split „Co možná řešíte" (vlevo) |
@@ -1019,7 +1074,33 @@ Použito v sekcích: IV/F bod 1, VII bod 3, IX bod 2, X bod 1.
 | `Obrazky/marie_podpora.jpg` | o-mne.html split „Zkušenost z praxe" (vlevo) — původní foto, nahrazeno `marie_muj_pribeh.jpg` |
 | `Obrazky/marie_2.jpg` | původně access-bars.html „Průběh sezení" — nahrazeno `access_bars_pece.jpg` |
 | `Obrazky/Ikony/holubice.png` | Patička — Brand sloupec, ikona holubice v kroužku (`.footer__icon`), umístěna pod blurbem |
-| `Obrazky/Ikony/po_ztrate.png` | index.html — Reason card „Jsem tu i po ztrátě" v sekci „Proč se mnou spolupracovat" |
+| `Obrazky/Ikony/nejste_sami.png` | index.html — Reason card „Nejste na to sami" |
+| `Obrazky/Ikony/prakticnost.png` | index.html — Reason card „Spojuji praktičnost s lidskostí" |
+| `Obrazky/Ikony/respekt.png` | index.html — Reason card „Respektuji váš příběh" |
+| `Obrazky/Ikony/bezpeci.png` | index.html — Reason card „Bezpečný prostor" |
+| `Obrazky/Ikony/po_ztrate.png` | index.html — Reason card „Jsem tu i po ztrátě" |
+| `Obrazky/Ikony/zkusenosti.png` | index.html — Reason card „Zkušenosti i vlastní prožitek" |
+| `Obrazky/Ikony/pecujici.png` | index.html — Service card „Pro pečující" (ikona v svc-card__body) |
+| `Obrazky/Ikony/pozustali.png` | index.html — Service card „Pro pozůstalé" |
+| `Obrazky/Ikony/organizace.png` | index.html — Service card „Pro organizace" |
+| `Obrazky/Ikony/access_bars.png` | index.html — Service card „Access Bars®" |
+| `Obrazky/Ikony/testimonial.png` | index.html — avatar u všech 3 referencí |
+| `Obrazky/Ikony/kratkodoba_pece.png` | pecujici.html — How-card „Krátkodobá péče" |
+| `Obrazky/Ikony/nahla_zmena.png` | pecujici.html — How-card „Náhlá změna situace" |
+| `Obrazky/Ikony/dlouhodoba_pece.png` | pecujici.html — How-card „Dlouhodobá péče" |
+| `Obrazky/Ikony/jednorazova_spoluprace.png` | pecujici.html + pozustali.html — How-card „Jednorázová konzultace" |
+| `Obrazky/Ikony/dlouhodobe_provazeni.png` | pecujici.html + pozustali.html — How-card „Dlouhodobé provázení" |
+| `Obrazky/Ikony/organizacni_zalezitosti.png` | pecujici.html — How-card „Převzetí organizačních záležitostí" |
+| `Obrazky/Ikony/skoleni.png` | organizace.html — Reason card „Školení" |
+| `Obrazky/Ikony/workshopy.png` | organizace.html — Reason card „Workshopy" |
+| `Obrazky/Ikony/besedy.png` | organizace.html — Reason card „Besedy" |
+| `Obrazky/Ikony/podpora.png` | organizace.html — Reason card „Pravidelná podpora týmu" |
+| `Obrazky/Ikony/individualni_sezeni.png` | access-bars.html — Forma card „Individuální sezení" |
+| `Obrazky/Ikony/kurz_jednotlivci.png` | access-bars.html — Forma card „Kurz pro jednotlivce" |
+| `Obrazky/Ikony/workshop_tym.png` | access-bars.html — Forma card „Workshop pro tým" |
+| `Obrazky/Ikony/kurz_tym.png` | access-bars.html — Forma card „Kurz pro tým" |
+| `Obrazky/Ikony/access_bars_sipka.png` | access-bars.html — Šipka uprostřed kdy-grid |
+| `Obrazky/Ikony/pripravenost.png` | Není aktuálně použita v žádné stránce |
 
 ---
 
