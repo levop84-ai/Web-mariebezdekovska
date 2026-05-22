@@ -1174,13 +1174,12 @@ p {
 
 .contact__detail a {
     color: var(--cta);
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    transition: text-decoration-color 0.2s;
+    text-decoration: none;
+    transition: color 0.2s;
 }
 
 .contact__detail a:hover {
-    text-decoration-color: var(--cta);
+    color: #3a2b1d;
 }
 
 .contact__socials {

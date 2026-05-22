@@ -637,7 +637,7 @@ Samostatná stránka dostupná na `/kontakt`. Obsah: nav + jedna sekce `contact 
 **Levý sloupec (`.contact__left`):**
 - `.contact__top-row`: horizontální layout — fotka (kruh 230×230px, `marie_kontakt.jpg`) + kontaktní info vedle sebe
 - Jméno: Lora, `1.6rem`
-- `.contact__detail`: řádek FA ikona (phone/envelope) + odkaz — `align-items: center`
+- `.contact__detail`: řádek FA ikona (phone/envelope) + odkaz — `align-items: center`; hover: barva odkazu `#3a2b1d` (bez podtržení, bez tučnění — `text-decoration: none`, `transition: color 0.2s`)
 - Social tlačítka (FB + IG) — `.social-btn` (světlá varianta)
 - `.contact__note`: Lora, italic — text začíná „Popište mi krátce vaši situaci a přidejte telefon..."
 
