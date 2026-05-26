@@ -98,7 +98,7 @@ Více stránkový web.
 - Kontakt
 
 - Jednotlivé položky z „Moje služby" budou mít každá svou stránku.
-- Na „Reference" a „O mně" se může dojet pomocí kotvy.
+- Na „Reference" se může dojet pomocí kotvy (`#reference`). Položka „O mně" v menu vždy odkazuje na stránku `o-mne.html` (ne na kotvu).
 - Na každé stránce bude patička s kontaktními údaji a kontaktním formulářem – dej si na ní záležet.
 
 ## Další prvky na webu
@@ -827,7 +827,7 @@ Samostatná stránka `/kontakt`. Používá `style.css` (stejně jako index.html
 |---|---|---|
 | 1 | Kontakt (plný formulář) | `section--bg` |
 
-**Layout:** Nav (shodná s index.html, ale „O mně" a sekce kotevní → `/#o-mne`, `/#reference`) → kontaktní sekce → footer. Žádná hero sekce.
+**Layout:** Nav (shodná s index.html, ale „Reference" odkazuje kotvou `/#reference`; „O mně" odkazuje na `/o-mne`) → kontaktní sekce → footer. Žádná hero sekce.
 
 **Kontaktní sekce** — viz popis „kontakt.html — plná kontaktní stránka" výše. Foto `marie_kontakt.jpg` (230×230px kruh), kontaktní info, Formspree formulář.
 
