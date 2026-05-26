@@ -904,7 +904,7 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 ### organizace.html
 
 **Meta:** „Pro organizace | Marie Bezděkovská"
-**Canonical:** `https://www.poradnamala.cz/organizace`
+**Canonical:** `https://mariebezdekovska.cz/organizace.html`
 **Structured Data:** `@type: Service`
 
 **Page Hero:** foto `Obrazky/pro_organizace_hero.jpg`, `background-position: center bottom` (vidět spodní část s Marie u projekční plochy), overlay `rgba(30,22,14,0.45)`. Fallback barva `#3a3028`. H1 `white-space: nowrap`.
@@ -1116,6 +1116,34 @@ Kontaktní sekce (`#kontakt`) — pozadí dle stránky:
 
 ---
 
+## SEO – aktuální stav nasazení
+
+### Kanonická doména
+
+Všechny stránky používají `https://mariebezdekovska.cz` (bez `www`). Vzor canonical URL:
+- Úvodní stránka: `https://mariebezdekovska.cz/`
+- Podstránky: `https://mariebezdekovska.cz/[nazev-stranky].html`
+
+### Meta robots
+
+Všechny stránky mají nastaveno `index, follow` — web je plně indexovatelný.
+
+### Open Graph a Structured Data
+
+Všechny `og:url`, `og:image` a URL v Structured Data odkazují na `mariebezdekovska.cz`. Při přidávání nových stránek nebo úpravě meta tagů nikdy nepoužívat `poradnamala.cz`.
+
+### Soubory v kořeni webu
+
+- **`robots.txt`** — povoluje indexaci všem robotům (`User-agent: * / Allow: /`), odkazuje na sitemapu
+- **`sitemap.xml`** — obsahuje všech 8 stránek s priority a changefreq; po přidání nové stránky přidat i sem a aktualizovat `lastmod`
+- **`llms.txt`** — pro AI crawlery; obsahuje stručný popis webu a seznam stránek s popisy
+
+### Google Search Console
+
+Web přidán do Google Search Console, sitemap odeslána. Indexace probíhá.
+
+---
+
 ## Kontaktní údaje (používat všude konzistentně)
 
 - **Jméno:** Marie Bezděkovská
@@ -1125,4 +1153,4 @@ Kontaktní sekce (`#kontakt`) — pozadí dle stránky:
 - **IČO:** 18048391
 - **Facebook:** https://www.facebook.com/opeciazaveru
 - **Instagram:** https://www.instagram.com/poradna_mala_pruvodcepeci
-- **Doména:** https://www.poradnamala.cz
+- **Doména:** https://mariebezdekovska.cz
