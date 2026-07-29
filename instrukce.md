@@ -95,7 +95,8 @@ Více stránkový web.
   - Pro organizace
   - Access Bars
 - O mně
-- Kontakt
+- Kontakt *(obrysové tlačítko `.nav__link--btn`)*
+- Domluvit konzultaci *(obrysové tlačítko `.nav__link--cta`, odkaz na Calendly `https://calendly.com/info-bezdekovska/mariebezdekovska`, `target="_blank"`)*
 
 - Jednotlivé položky z „Moje služby" budou mít každá svou stránku.
 - Na „Reference" se může dojet pomocí kotvy (`#reference`). Položka „O mně" v menu vždy odkazuje na stránku `o-mne.html` (ne na kotvu).
@@ -232,9 +233,13 @@ Pozor: existují **dvě sady hodnot** — style.css (index.html, kontakt.html) a
 
 **Tlačítko Kontakt (`.nav__link--btn`):** `border: 1.5px solid var(--cta)`, `border-radius: 50px`; hover: pozadí `--cta`, text bílý
 
+**Tlačítko Domluvit konzultaci (`.nav__link--cta`):** stejný obrysový styl jako `.nav__link--btn` (border, border-radius, barva `--cta`); odkazuje na Calendly `https://calendly.com/info-bezdekovska/mariebezdekovska`, otvírá se v novém tabu (`target="_blank"`). Přidáno na všechny stránky vedle tlačítka Kontakt. CSS: `border: 1.5px solid var(--cta); border-radius: 50px; padding: 6px 18px; color: var(--cta); transition: background 0.22s, color 0.22s;` — hover: `background: var(--cta); color: var(--white);`
+
 **Mobilní menu:** `.nav__mob-link` `0.94rem`, váha `500`, uppercase; podmenu `.nav__mob-link--sub` `0.84rem` bez uppercase, barva `--text-muted`
 
 **Tlačítko Kontakt v mobilním menu (`.nav__mob-link--btn`):** má `align-self: flex-start` — zarovnání vlevo, velikost dle obsahu (ne full-width). Bez `align-self` by se jako flex-child natáhlo přes celou šířku menu.
+
+**Tlačítko Domluvit konzultaci v mobilním menu (`.nav__mob-link--cta`):** obrysový styl shodný s `.nav__mob-link--btn`; `align-self: flex-start; margin: 12px 24px; border: 1.5px solid var(--cta); border-radius: 50px; color: var(--cta);` Odkaz na Calendly, nový tab.
 
 **Invisible bridge (podmenu hover fix):** Na všech stránkách je CSS pseudo-element zabraňující zavření podmenu při přejezdu myší z tlačítka do dropdownu:
 ```css
@@ -705,7 +710,7 @@ Na `organizace.html`, `access-bars.html` a `o-mne.html` **není žádná kontakt
 **Struktura 4 sloupců (HTML pořadí):**
 
 1. **Brand** (první `<div>`) — `footer__name` + `footer__tagline` + `footer__blurb` + `footer__icon` (dole)
-2. **Kontakt** (`<div>`) — `footer__head` „Kontakt" + 2× `footer__ci footer__ci--highlight` (telefon, email, bez FA ikon) + `footer__socials`
+2. **Kontakt** (`<div>`) — `footer__head` „Kontakt" + 2× `footer__ci footer__ci--highlight` (telefon, email, bez FA ikon) + `footer__socials` + tlačítko `.footer__cta-btn` „Domluvit konzultaci" → Calendly (pod social ikonami)
 3. **Povinné údaje** (`<div>`) — `footer__head` „Povinné údaje" + 3× `footer__ci` (adresa, IČO, živnostenský rejstřík, bez FA ikon, text v `<span>`)
 4. **Navigace** (`<nav>`) — `footer__head` „Navigace" + 6× `footer__link` (Pro pečující / Pro pozůstalé / Pro organizace / Access Bars® / O mně / Kontakt)
 
@@ -752,6 +757,28 @@ Na `organizace.html`, `access-bars.html` a `o-mne.html` **není žádná kontakt
 .footer__ci--highlight a:hover { color: var(--bg); }
 ```
 
+**Tlačítko Domluvit konzultaci v patičce (`.footer__cta-btn`):**
+```css
+.footer__cta-btn {
+    display: inline-block;
+    margin-top: var(--s3);
+    padding: 9px 20px;
+    border: 1.5px solid rgba(250, 247, 242, 0.35);
+    border-radius: 50px;
+    font-size: 0.82rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(250, 247, 242, 0.75);
+    transition: background 0.22s, border-color 0.22s, color 0.22s;
+}
+.footer__cta-btn:hover {
+    background: var(--cta); border-color: var(--cta); color: var(--white);
+}
+```
+- Světlý obrysový styl přizpůsobený tmavému pozadí patičky; při hoveru se vyplní `--cta` hnědou
+- Umístěn v HTML za uzavíracím `</div>` tagu `.footer__socials`, ale stále uvnitř `<div>` sloupce Kontakt
+- Odkaz na Calendly `https://calendly.com/info-bezdekovska/mariebezdekovska`, `target="_blank"`
+- CSS definováno v `style.css` (pro index.html, kontakt.html) a inline `<style>` (pro ostatní 6 stránek)
+
 **Spodní lišta (`.footer__bottom`):**
 - `display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--s2)`
 - `border-top: 1px solid rgba(250, 247, 242, 0.1); padding-top: var(--s3)`
@@ -786,20 +813,20 @@ Na `organizace.html`, `access-bars.html` a `o-mne.html` **není žádná kontakt
 | 8 | Reference (`.testimonials`, 3 karty) | `section--white` | `#reference` |
 | 9 | Kontakt (teaser — foto + text + tlačítko → /kontakt) | `section--bg` | `#kontakt` |
 
-**Hero:** layout 1fr 1fr, výška 100svh, foto `Obrazky/marie_hero.jpg` vpravo (max-height calc, border-radius, shadow), text vlevo. Tlačítka: btn--primary „Napište mi" → `#kontakt`, btn--outline „Moje služby" → `#sluzby`.
+**Hero:** layout 1fr 1fr, výška 100svh, foto `Obrazky/marie_hero.jpg` vpravo (max-height calc, border-radius, shadow), text vlevo. Sub-text (`.hero__sub`): „Jsem Marie, průvodce péčí v závěru života, průvodce pro pozůstalé a vzdělávám odborníky a širokou veřejnost v rámci paliativní péče a péče o pozůstalé". Tlačítka: btn--primary „Napište mi" → `#kontakt`, btn--outline „Moje služby" → `#sluzby`.
 
 **Intro:** centrovaný text max-width 820px, h2 italic, tlačítko `.btn--outline` → `#sluzby`.
 
 **Reasons:** grid `repeat(3, 1fr)`; 6 karet s ikonami PNG ze složky `Obrazky/Ikony/` (nejste_sami, prakticnost, respekt, bezpeci, po_ztrate, zkusenosti).
 
-**Services:** grid `repeat(2, 1fr)`, karty čtvercové `aspect-ratio: 1/1`; overlay `rgba(0,0,0,0.45)`; obsah přes `z-index: 2`; tlačítka `.btn--outline-light`. `.svc-card__title`: `1.45rem`, váha `600`, barva bílá. Struktura karty: `svc-card__media` (foto) + `svc-card__body` (ikona + nadpis + text + btn). Fotky a ikony:
+**Services:** grid `repeat(2, 1fr)`, karty čtvercové `aspect-ratio: 1/1`; overlay `rgba(0,0,0,0.45)`; obsah přes `z-index: 2`; tlačítka `.btn--outline-light`. `.svc-card__title`: `1.45rem`, váha `600`, barva bílá, `line-height: 1.4`. Struktura karty: `svc-card__media` (foto) + `svc-card__body` (ikona + nadpis + text + btn). Fotky a ikony:
 
-| Karta | Fotka | Ikona |
-|---|---|---|
-| Pro pečující | `Obrazky/pro_pecujici.jpg` | `Obrazky/Ikony/pecujici.png` |
-| Pro pozůstalé | `Obrazky/pro_pozustale.png` | `Obrazky/Ikony/pozustali.png` |
-| Pro organizace | `Obrazky/pro_organizace.jpg` | `Obrazky/Ikony/organizace.png` |
-| Access Bars® | `Obrazky/access_bars.jpg` | `Obrazky/Ikony/access_bars.png` |
+| Karta | Fotka | Ikona | Text (`.svc-card__text`) |
+|---|---|---|---|
+| Konzultace pro pečující a nemocné | `Obrazky/pro_pecujici.jpg` | `Obrazky/Ikony/pecujici.png` | Konkrétní kroky a jasné informace o tom, jak pečovat a co dělat v rámci péče o sebe a o nemocného |
+| Poradenství a péče pro pozůstalé | `Obrazky/pro_pozustale.png` | `Obrazky/Ikony/pozustali.png` | Bezpečný prostor ke sdílení i tichu složený z rozhovoru a další péče |
+| Školení, semináře a kurzy pro odborníky a širokou veřejnost | `Obrazky/pro_organizace.jpg` | `Obrazky/Ikony/organizace.png` | Informace, možnosti a posílení sebe v praxi,`<br>`inovace, novinky a sebezkušenost |
+| Access Bars® | `Obrazky/access_bars.jpg` | `Obrazky/Ikony/access_bars.png` | Jemná terapie pracující s 32 body na hlavě. Přináší hluboké uvolnění, klid mysli a lehkost. Vhodná pro pečující, pozůstalé i každého, kdo potřebuje zpomalit. |
 
 **FAQ:** accordion, 5 položek; chevron ikona, `aria-expanded`. Animace otevření: JS měří `answer.scrollHeight` a nastavuje `max-height` dynamicky (ne fixní `600px`), takže animace trvá vždy stejně bez ohledu na délku odpovědi. Transition: `max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1)`. Při zavření: nejprve se nastaví `max-height` na aktuální `scrollHeight`, pak v `requestAnimationFrame` na `0` (pro plynulou CSS animaci).
 

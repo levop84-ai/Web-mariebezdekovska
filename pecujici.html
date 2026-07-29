@@ -353,6 +353,23 @@
             color: var(--white);
         }
 
+        .nav__link--cta {
+            border: 1.5px solid var(--cta);
+            border-radius: 50px;
+            padding: 6px 18px;
+            color: var(--cta);
+            transition: background 0.22s, color 0.22s;
+        }
+
+        .nav__link--cta::after {
+            display: none;
+        }
+
+        .nav__link--cta:hover {
+            background: var(--cta);
+            color: var(--white);
+        }
+
         .nav__dropdown {
             position: absolute;
             top: calc(100% + 14px);
@@ -481,6 +498,17 @@
 
         .nav__mob-link:hover {
             color: var(--cta);
+        }
+
+        .nav__mob-link--cta {
+            align-self: flex-start;
+            margin: 12px 24px;
+            padding: 10px 20px;
+            border: 1.5px solid var(--cta);
+            border-radius: 50px;
+            color: var(--cta);
+            text-align: center;
+            letter-spacing: 0.1em;
         }
 
         /* ================================================
@@ -1091,6 +1119,26 @@
             margin-top: var(--s4);
         }
 
+        .footer__cta-btn {
+            display: inline-block;
+            margin-top: var(--s3);
+            padding: 9px 20px;
+            border: 1.5px solid rgba(250, 247, 242, 0.35);
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(250, 247, 242, 0.75);
+            transition: background 0.22s, border-color 0.22s, color 0.22s;
+        }
+
+        .footer__cta-btn:hover {
+            background: var(--cta);
+            border-color: var(--cta);
+            color: var(--white);
+        }
+
         .footer__head {
             font-size: 0.76rem;
             font-weight: 500;
@@ -1453,6 +1501,7 @@
                 </li>
                 <li class="nav__item"><a href="/o-mne" class="nav__link">O&nbsp;mně</a></li>
                 <li class="nav__item"><a href="/kontakt" class="nav__link nav__link--btn">Kontakt</a></li>
+                <li class="nav__item"><a href="https://calendly.com/info-bezdekovska/mariebezdekovska" class="nav__link nav__link--cta" target="_blank" rel="noopener noreferrer">Domluvit konzultaci</a></li>
             </ul>
             <button class="nav__burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"
                 aria-controls="mobileNav">
@@ -1467,6 +1516,7 @@
             <a href="/access-bars" class="nav__mob-link nav__mob-link--sub">Access Bars®</a>
             <a href="/o-mne" class="nav__mob-link">O&nbsp;mně</a>
             <a href="#kontakt" class="nav__mob-link nav__mob-link--btn">Kontakt</a>
+            <a href="https://calendly.com/info-bezdekovska/mariebezdekovska" class="nav__mob-link nav__mob-link--cta" target="_blank" rel="noopener noreferrer">Domluvit konzultaci</a>
         </nav>
     </nav>
 
@@ -1819,6 +1869,7 @@
                         <a href="https://www.facebook.com/opeciazaveru" class="social-btn social-btn--dark" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
                         <a href="https://www.instagram.com/poradna_mala_pruvodcepeci" class="social-btn social-btn--dark" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
                     </div>
+                    <a href="https://calendly.com/info-bezdekovska/mariebezdekovska" class="footer__cta-btn" target="_blank" rel="noopener noreferrer">Domluvit konzultaci</a>
                 </div>
                 <div>
                     <p class="footer__head">Povinné údaje</p>
