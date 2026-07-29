@@ -130,9 +130,9 @@ Vytvoř moderní mobile-first web: použít můžeš trendy jako souměrný bent
 
 ### Barevná paleta (CSS proměnné)
 
-Pozor: existují **dvě sady hodnot** — style.css (index.html, kontakt.html) a inline `<style>` ve všech ostatních stránkách. Hodnoty jsou neshodné.
+Pozor: existují **dvě sady hodnot** barvy `--cta` / `--cta-hover` / `--text-muted`. Zbytek proměnných je shodný všude.
 
-**style.css** (index.html, kontakt.html):
+**Tmavší varianta** — style.css (index.html, kontakt.html) a inline `<style>` na **gdpr.html**:
 ```css
 --bg:         #FAF7F2
 --bg-alt:     #EDE0CC
@@ -145,7 +145,7 @@ Pozor: existují **dvě sady hodnot** — style.css (index.html, kontakt.html) a
 --white:      #FFFFFF
 ```
 
-**Inline `<style>`** (pecujici, pozustali, organizace, access-bars, o-mne, gdpr):
+**Světlejší varianta** — inline `<style>` na pecujici, pozustali, organizace, access-bars, o-mne (gdpr.html **není** v této skupině, používá tmavší variantu shodnou se style.css):
 ```css
 --bg:         #FAF7F2
 --bg-alt:     #EDE0CC
@@ -176,7 +176,7 @@ Pozor: existují **dvě sady hodnot** — style.css (index.html, kontakt.html) a
 | h4 | `clamp(1.05rem, 1.5vw, 1.25rem)` | 400 | Lora |
 | p (běžný text) | `1.1rem` | 400 | Jost, line-height 1.65 |
 | `.eyebrow` | `0.87rem` | 500 | Jost, uppercase, letter-spacing 0.18em, barva `--cta` |
-| `.pull-quote` | `1.15rem` (třída) / **`1.3rem`** (inline na index.html a o-mne.html) | 400 | Lora, italic, barva `--cta`, line-height 1.7 |
+| `.pull-quote` | `1.15rem` (třída) / **`1.3rem`** (na index.html přes CSS třídu `.split__quote-block .pull-quote`; na o-mne.html inline `style`) | 400 | Lora, italic, barva `--cta`, line-height 1.7 |
 | `.btn` | `0.9rem` | 500 | Jost, uppercase, letter-spacing 0.09em |
 
 ---
@@ -209,11 +209,15 @@ Pozor: existují **dvě sady hodnot** — style.css (index.html, kontakt.html) a
 --shadow-hover: 0 8px 36px rgba(155, 126, 96, 0.15)
 ```
 
-**Hover na kartách:** většina karet má hover pouze stín (`box-shadow: var(--shadow-hover)`). Výjimky:
+**Hover na kartách:** hover chování je nekonzistentní mezi stránkami — část karet má jen stín, část i poskočení nahoru. Přehled:
 - `.how-card` (pozustali.html): `transform: translateY(-4px)` + `var(--shadow-hover)`
 - `.how-card` (pecujici.html): pouze `var(--shadow-hover)` — bez translateY (záměrné rozhodnutí: v sekci „Jak pracuji" se nepoužívá poskočení)
 - `.testi-card`: `transform: translateY(-4px)` + `var(--shadow-hover)`
 - `.kdy-col` (access-bars.html): pouze `var(--shadow-hover)` — bez translateY
+- `.reason-card` (style.css, index.html): `transform: translateY(-4px)` + `var(--shadow-hover)`
+- `.reason-card` (inline styl, organizace.html): pouze `var(--shadow-hover)` — bez translateY (nekonzistentní s index.html verzí téže komponenty)
+- `.svc-card` (index.html): `transform: translateY(-5px)` + `var(--shadow-hover)`
+- `.faq__item` (index.html): `transform: translateY(-4px)` + `var(--shadow-hover)`
 - Tlačítka `.btn`: `transform: translateY(-2px)`
 
 ---
@@ -402,8 +406,8 @@ Primární typ karet používaný na pecujici.html a pozustali.html.
 .how-card:hover { box-shadow: var(--shadow-hover); }   /* pecujici.html */
 /* pozustali.html: transition: transform 0.3s, box-shadow 0.3s;
    hover přidává: transform: translateY(-4px); */
-.how-card__icon { width: 72px; height: 72px; border-radius: 50%; background: var(--bg);
-    display: flex; align-items: center; justify-content: center; margin-bottom: var(--s3); }
+.how-card__icon { width: 96px; height: 96px; border-radius: 50%; background: var(--bg);
+    display: flex; align-items: center; justify-content: center; margin-bottom: var(--s3); padding: 8px; }
 .how-card__title { font-family: var(--font-h); font-size: 1.2rem; font-weight: 600;
     color: var(--cta); margin-bottom: var(--s1); }
 .how-card__text { font-size: 1.1rem; line-height: 1.65; color: #333333; }
@@ -434,7 +438,7 @@ Aktivně používány v sekci Spolupráce na organizace.html (4 karty s ikonami)
 .reason-card__text { font-size: 1.1rem; line-height: 1.65; color: #333333; }
 ```
 
-Hover: pouze `var(--shadow-hover)` (bez translateY).
+Hover: na index.html (style.css) `transform: translateY(-4px)` + `var(--shadow-hover)`; na organizace.html (inline styl) pouze `var(--shadow-hover)`, bez translateY — obě implementace jsou samostatné a nejsou mezi sebou sladěné.
 
 **Ikony v reason-card (organizace.html – Spolupráce):** obrázky PNG ze složky `Obrazky/Ikony/` — `skoleni.png`, `workshopy.png`, `besedy.png`, `podpora.png`. Ikona i nadpis vycentrovány (`text-align: center` na article, `margin: 0 auto var(--s3)` na icon div).
 
@@ -479,11 +483,13 @@ Společný pro pecujici.html, pozustali.html, organizace.html, access-bars.html.
     background-color: #3a3028;   /* fallback barva */
     background-size: cover; background-position: center; }
 .page-hero__overlay { position: absolute; inset: 0;
-    background: rgba(30, 22, 14, 0.45); }
+    background: rgba(30, 22, 14, 0.45); }   /* organizace.html, access-bars.html — viz níže pro odlišné hodnoty */
 .page-hero__content { position: relative; z-index: 1;
     display: flex; flex-direction: column; align-items: flex-start;
     padding: var(--s6) var(--s8); }
 ```
+
+**Overlay opacita se liší dle stránky:** organizace.html a access-bars.html používají `rgba(30, 22, 14, 0.45)`; **pecujici.html a pozustali.html používají `rgba(30, 22, 14, 0.58)`** (tmavší overlay).
 
 Struktura obsahu: eyebrow (bílá 75% opacity) → H1 → divider (bílý 45% opacity) → lead text (`rgba(255,255,255,0.88)`, `max-width: 480px`, `margin-bottom: var(--s5)`) → `.btn--glass`
 
@@ -515,7 +521,9 @@ o-mne.html používá stejný tmavý page-hero jako ostatní podstránky — fot
 
 ### Back to top button (`#backToTop`)
 
-Přítomen na **všech 6 stránkách** (index, organizace, access-bars, pecujici, pozustali, o-mne). CSS a JS jsou na každé stránce inline (před `</body>`), na index.html je CSS v hlavním `<style>` bloku.
+Přítomen na **všech 8 stránkách** (index, kontakt, gdpr, organizace, access-bars, pecujici, pozustali, o-mne).
+- **index.html:** CSS je ve `style.css` (na konci souboru), JS je v externím `main.js` — nic inline.
+- **Ostatní stránky** (kontakt, gdpr, pecujici, pozustali, organizace, access-bars, o-mne): CSS i JS jsou na stránce inline, těsně před `</body>`.
 
 ```css
 #backToTop {
@@ -551,7 +559,6 @@ Samostatný soubor `cookie-banner.js` vložený na konec každé stránky před 
 **HTML (index.html, těsně před `#backToTop`):**
 ```html
 <div id="cookie-panel" role="dialog" aria-modal="false" aria-label="Souhlas s cookies">
-    <p id="cookie-panel__title">Cookies</p>
     <p id="cookie-panel__text">...</p>
     <div id="cookie-panel__actions">
         <button id="cookie-btn-decline" type="button">Odmítnout</button>
@@ -559,6 +566,7 @@ Samostatný soubor `cookie-banner.js` vložený na konec každé stránky před 
     </div>
 </div>
 ```
+Pozn.: `style.css` obsahuje i pravidlo pro `#cookie-panel__title`, ale odpovídající `<p id="cookie-panel__title">` element se v HTML nepoužívá (CSS je nevyužité).
 
 **Chování (cookie-banner.js):**
 - Při prvním načtení přidá třídu `.visible` na panel; pokud `localStorage.getItem('cookie-consent')` vrátí hodnotu, nic se neprovede.
@@ -612,8 +620,8 @@ JS: IntersectionObserver, threshold 0.1, rootMargin `0px 0px -40px 0px`; po zobr
 
 ### Font Awesome načítání
 
-- **index.html:** asynchronní, neblokuje render — `<link rel="stylesheet" media="print" onload="this.media='all'">` + `<noscript>` fallback
-- **Ostatní stránky** (pecujici, pozustali, organizace, access-bars, o-mne, kontakt, gdpr): synchronní `<link rel="stylesheet">` — blokuje render, ale na podstránkách je přijatelné
+- **Asynchronní** (neblokuje render) — `<link rel="stylesheet" media="print" onload="this.media='all'">` + `<noscript>` fallback: **index.html, kontakt.html, gdpr.html**
+- **Synchronní** (obyčejný `<link rel="stylesheet">`, blokuje render, ale na podstránkách je přijatelné): **pecujici, pozustali, organizace, access-bars, o-mne**
 
 ---
 
@@ -661,10 +669,11 @@ Samostatná stránka dostupná na `/kontakt`. Obsah: nav + jedna sekce `contact 
 
 #### Zjednodušená kontaktní sekce (teaser) — index.html, pecujici.html, pozustali.html
 
-Nahrazuje starý layout s formulářem. Sekce neslouží k odeslání zprávy — pouze směřuje na `/kontakt`.
+Nahrazuje starý layout s formulářem. Sekce neslouží k odeslání zprávy — pouze směřuje na `/kontakt`. Text nadpisu je na všech třech stránkách identický. **Implementace se ale liší** — index.html používá vyhrazené CSS třídy ve `style.css`, pecujici.html a pozustali.html dosahují stejného vzhledu přes inline `style` atributy (tyto třídy tam vůbec nejsou definované ani použité).
 
+**index.html** (pozadí `section--bg`):
 ```html
-<section class="contact section--[bg/white]" id="kontakt" aria-labelledby="contact-h">
+<section class="contact section--bg" id="kontakt" aria-labelledby="contact-h">
   <div class="container">
     <div class="intro__inner">
       <div class="contact__photo-wrap contact__photo-wrap--hero reveal">
@@ -674,19 +683,35 @@ Nahrazuje starý layout s formulářem. Sekce neslouží k odeslání zprávy �
         Možná je toho teď moc. Možná nevíte, co přesně potřebujete. Možná jen cítíte,
         že&nbsp;už na&nbsp;to nechcete být sami. To&nbsp;stačí. Ozvěte se mi.
       </h2>
-      <a href="/kontakt" class="btn btn--primary reveal contact__cta">Kontakt</a>
+      <a href="/kontakt" class="btn btn--primary reveal contact__cta">Kontaktujte mě</a>
     </div>
   </div>
 </section>
 ```
-
-- Foto: `marie_kontakt.jpg`, kruh **290×290px** (třída `.contact__photo-wrap--hero` v style.css: `margin: 0 auto var(--s5); width: 290px; height: 290px`)
+- Foto: `.contact__photo-wrap.contact__photo-wrap--hero` — třída v style.css nastavuje kruh **290×290px** (`margin: 0 auto var(--s5); width: 290px; height: 290px`)
 - Titulek: `.intro__title.contact__intro-title` (Lora, italic), `font-size: clamp(1.45rem, 2.5vw, 2rem)` definováno v CSS třídě
-- Tlačítko: `.btn--primary.contact__cta` → `/kontakt`, `margin-top: var(--s5)` v CSS třídě
-- **index.html:** pozadí `section--bg`
-- **pecujici.html, pozustali.html:** pozadí `section--white`
+- Tlačítko: `.btn--primary.contact__cta`, text „Kontaktujte mě" → `/kontakt`, `margin-top: var(--s5)` v CSS třídě
 
-**`.contact__photo-wrap` (definice v style.css):** základní velikost 230×230px kruh; na teaseru rozšířeno třídou `.contact__photo-wrap--hero` na 290×290px
+**pecujici.html a pozustali.html** (pozadí `section--white`) — stejný vzhled, ale bez pomocných tříd, přes inline styly:
+```html
+<section class="contact section--white" id="kontakt" aria-labelledby="contact-h">
+  <div class="container">
+    <div class="intro__inner">
+      <div class="contact__photo-wrap reveal" style="margin:0 auto var(--s5);width:290px;height:290px;">
+        <img src="Obrazky/marie_kontakt.jpg" alt="Marie Bezděkovská" loading="lazy">
+      </div>
+      <h2 class="intro__title reveal" id="contact-h" style="font-size:clamp(1.45rem, 2.5vw, 2rem);">
+        Možná je toho teď moc. Možná nevíte, co přesně potřebujete. Možná jen cítíte,
+        že&nbsp;už na&nbsp;to nechcete být sami. To&nbsp;stačí. Ozvěte se mi.
+      </h2>
+      <a href="\kontakt" class="btn btn--primary reveal" style="margin-top:var(--s5);">Kontakt</a>
+    </div>
+  </div>
+</section>
+```
+- Tlačítko má na obou stránkách text „Kontakt" (ne „Kontaktujte mě" jako na indexu), odkaz `href="/kontakt"`.
+
+**`.contact__photo-wrap` (definice v style.css):** základní velikost 230×230px kruh (používá se na kontakt.html); na teaseru rozšířeno na 290×290px — na indexu třídou `.contact__photo-wrap--hero`, na pecujici/pozustali inline stylem se stejnými hodnotami.
 
 #### Stránky bez kontaktní sekce
 
@@ -834,7 +859,7 @@ Na `organizace.html`, `access-bars.html` a `o-mne.html` **není žádná kontakt
 
 **Reference:** grid `repeat(3, 1fr)`; hover `translateY(-4px)`; ikona autora `Obrazky/Ikony/testimonial.png`. Skutečné reference:
 - **Marta K.** — „Maruška se o našeho tatínka starala naprosto skvěle…" (poznámka: komplexní provázení rodiny a nemocného až do konce). Text oříznut na 9 řádků třídou `testi-card__text--clamped` (`-webkit-line-clamp: 9`), tlačítko „Číst více" / „Zobrazit méně" (event listener v `main.js`, bez inline `onclick`).
-- **Karel R.** — „Po naší konzultaci mám najednou pocit, že všechno zvládnu…" (poznámka: konzultace s plánem péče)
+- **Karel R.** — „Po naší konzultaci mám najednou pocit, že všechnu zvládnu…" (poznámka: konzultace s plánem péče) — pozn.: v textu na webu je „všechnu" místo „všechno", pravděpodobně překlep v obsahu, ne záměr
 - **Vilma O.** — „Několik let pečuji o svou maminku…" (poznámka: sezení Access Bars®)
 
 **Struktura testi-card:**
@@ -854,7 +879,7 @@ Samostatná stránka `/kontakt`. Používá `style.css` (stejně jako index.html
 |---|---|---|
 | 1 | Kontakt (plný formulář) | `section--bg` |
 
-**Layout:** Nav (shodná s index.html, ale „Reference" odkazuje kotvou `/#reference`; „O mně" odkazuje na `/o-mne`) → kontaktní sekce → footer. Žádná hero sekce.
+**Layout:** Nav (zcela shodná s index.html — položka „Reference" v navigaci neexistuje na žádné stránce, jen sekce s `id="reference"` na indexu) → kontaktní sekce → footer. Žádná hero sekce.
 
 **Kontaktní sekce** — viz popis „kontakt.html — plná kontaktní stránka" výše. Foto `marie_kontakt.jpg` (230×230px kruh), kontaktní info, Formspree formulář.
 
@@ -882,7 +907,7 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 
 **Meta:** „Pro pečující | Marie Bezděkovská – Průvodce péčí v závěru života"
 
-**Page Hero:** `Obrazky/pro_pecujici_hero.jpg` (nastaveno v CSS), `background-position: center`, overlay `rgba(30,22,14,0.45)`, H1 `white-space: nowrap`.
+**Page Hero:** `Obrazky/pro_pecujici_hero.jpg` (nastaveno v CSS), `background-position: center`, overlay `rgba(30,22,14,0.58)`, H1 `white-space: nowrap`.
 
 | Pořadí | Sekce | Pozadí | Poznámka |
 |---|---|---|---|
@@ -892,12 +917,12 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 | 4 | Bezpečný prostor | `section--white` | split grid `align-items:start`: text vlevo (5 odstavců), bubble-field vpravo |
 | 5 | Jak pracuji | `background:#FAF7F2` | split grid `align-items:start`: text vlevo, 2×2 how-cards vpravo |
 | 6 | Spolupráce | `section--white` | section-header + 3 how-cards (grid 3 cols) + pull-quote + btn--primary |
-| 7 | Praktické info | `section--bg` | id="prakticke-info"; split grid: foto vlevo `prostor_poradna.jpg` (aspect 1:1), vpravo eyebrow + h2 „Místo a cena" + divider + dot-list (2 odrážky) + btn--primary „Ozvěte se mi" → `#kontakt` |
+| 7 | Praktické info | `section--bg` | id="prakticke-info"; split grid: foto vlevo `prostor_poradna.jpg` (aspect 1:1), vpravo eyebrow + h2 „Místo a cena" + dot-list (2 odrážky, bez divideru) + btn--primary „Ozvěte se mi" → `#kontakt` |
 | 8 | Kontakt (teaser) | `section--white` | id="kontakt" — foto 290px + text + btn → /kontakt |
 
 **Sekce Jak pracuji — odstavce:** každý odstavec v pravém sloupci splitu je samostatný `<p class="split__text">` element (ne text oddělený `<br>`).
 
-**Bubble field (sekce Bezpečný prostor):** foto `Obrazky/otazky.jpg`, overlay 0.58, 14 plovoucích bublin s otázkami. Bubliny pokrývají celou plochu (top 7–89%, left 6–62%). Animace pouze float (translateY ±9px), bez fade.
+**Bubble field (sekce Bezpečný prostor):** foto `Obrazky/otazky.jpg`, overlay 0.58, 14 plovoucích bublin s otázkami. Bubliny pokrývají celou plochu (top 7–89%, left 6–67%). Animace pouze float (translateY ±9px), bez fade.
 
 **How-cards (sekce Jak pracuji):** 2×2 grid v pravém sloupci splitu — Krátkodobá péče / Náhlá změna situace / Dlouhodobá péče / Potřeba se připravit.
 
@@ -913,7 +938,7 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 
 **Meta:** „Pro pozůstalé | Marie Bezděkovská – Průvodce péčí v závěru života"
 
-**Page Hero:** `Obrazky/pro_pozustale_hero.png` (nastaveno v CSS), `background-position: center`, overlay `rgba(30,22,14,0.45)`.
+**Page Hero:** `Obrazky/pro_pozustale_hero.png` (nastaveno v CSS), `background-position: center`, overlay `rgba(30,22,14,0.58)`.
 
 | Pořadí | Sekce | Pozadí | Poznámka |
 |---|---|---|---|
@@ -921,7 +946,7 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 | 2 | Intro | `section--white` | eyebrow „Dopřejte si čas", h2 „Cílem není zapomenout", btn--outline → `#bezpecny-prostor` |
 | 3 | Bezpečný prostor | `section--bg` | id="bezpecny-prostor"; split grid: foto vlevo `Obrazky/bezpecny_prostor.png` (aspect 1:1), text vpravo (dot-list 4 body, btn--primary) |
 | 4 | Spolupráce | `section--white` | section-header + 3 how-cards (grid 3 cols) + pull-quote + btn--primary |
-| 5 | Praktické info | `section--bg` | id="prakticke-info"; identická sekce jako na pecujici.html — split grid: foto vlevo `prostor_poradna.jpg` (aspect 1:1), vpravo eyebrow + h2 + divider + dot-list (2 odrážky) + btn--primary „Ozvěte se mi" → `#kontakt` |
+| 5 | Praktické info | `section--bg` | id="prakticke-info"; identická sekce jako na pecujici.html — split grid: foto vlevo `prostor_poradna.jpg` (aspect 1:1), vpravo eyebrow + h2 + dot-list (2 odrážky, bez divideru) + btn--primary „Ozvěte se mi" → `#kontakt` |
 | 6 | Kontakt (teaser) | `section--white` | id="kontakt" — foto 290px + text + btn → /kontakt |
 
 **How-cards (sekce Spolupráce):** 3 karty — Jednorázová konzultace / Dlouhodobé provázení / Praktická pomoc.
@@ -934,7 +959,7 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 **Canonical:** `https://mariebezdekovska.cz/organizace.html`
 **Structured Data:** `@type: Service`
 
-**Page Hero:** foto `Obrazky/pro_organizace_hero.jpg`, `background-position: center bottom` (vidět spodní část s Marie u projekční plochy), overlay `rgba(30,22,14,0.45)`. Fallback barva `#3a3028`. H1 `white-space: nowrap`.
+**Page Hero:** foto `Obrazky/pro_organizace_hero.jpg`, `background-position: center bottom` (vidět spodní část s Marie u projekční plochy), overlay `rgba(30,22,14,0.45)`. Fallback barva `#3a3028`. **Bez `white-space: nowrap` na titulu** (dlouhý nadpis „Školení, semináře a kurzy pro odborníky a veřejnost" se přirozeně zalamuje — stejně jako na o-mne.html; nowrap odstraněn, protože nadpis přetékal mimo obrazovku).
 
 | Pořadí | Sekce | Třída pozadí | Poznámka |
 |---|---|---|---|
