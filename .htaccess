@@ -12,6 +12,10 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # Vynucení HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
     # /index.html nebo /index → / (301)
     RewriteCond %{THE_REQUEST} \s/index(\.html)?[\s?] [NC]
     RewriteRule ^ / [R=301,L]
@@ -59,8 +63,8 @@ ErrorDocument 404 /404.html
         connect-src 'self' https://formspree.io; \
         frame-ancestors 'self'"
 
-    # Strict Transport Security – aktivovat až po přechodu na HTTPS
-    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    # Strict Transport Security – vynucuje HTTPS i při dalších návštěvách
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 
 </IfModule>
 
