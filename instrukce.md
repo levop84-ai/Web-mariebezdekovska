@@ -96,7 +96,7 @@ Více stránkový web.
   - Access Bars
 - O mně
 - Kontakt *(obrysové tlačítko `.nav__link--btn`)*
-- Domluvit konzultaci *(obrysové tlačítko `.nav__link--cta`, odkaz na Calendly `https://calendly.com/info-bezdekovska/mariebezdekovska`, `target="_blank"`)*
+- Domluvit konzultaci *(obrysové tlačítko `.nav__link--cta`, odkaz na Calendly `https://calendly.com/info-bezdekovska`, `target="_blank"`)*
 
 - Jednotlivé položky z „Moje služby" budou mít každá svou stránku.
 - Na „Reference" se může dojet pomocí kotvy (`#reference`). Položka „O mně" v menu vždy odkazuje na stránku `o-mne.html` (ne na kotvu).
@@ -237,7 +237,7 @@ Pozor: existují **dvě sady hodnot** barvy `--cta` / `--cta-hover` / `--text-mu
 
 **Tlačítko Kontakt (`.nav__link--btn`):** `border: 1.5px solid var(--cta)`, `border-radius: 50px`; hover: pozadí `--cta`, text bílý
 
-**Tlačítko Domluvit konzultaci (`.nav__link--cta`):** stejný obrysový styl jako `.nav__link--btn` (border, border-radius, barva `--cta`); odkazuje na Calendly `https://calendly.com/info-bezdekovska/mariebezdekovska`, otvírá se v novém tabu (`target="_blank"`). Přidáno na všechny stránky vedle tlačítka Kontakt. CSS: `border: 1.5px solid var(--cta); border-radius: 50px; padding: 6px 18px; color: var(--cta); transition: background 0.22s, color 0.22s;` — hover: `background: var(--cta); color: var(--white);`
+**Tlačítko Domluvit konzultaci (`.nav__link--cta`):** stejný obrysový styl jako `.nav__link--btn` (border, border-radius, barva `--cta`); odkazuje na Calendly `https://calendly.com/info-bezdekovska`, otvírá se v novém tabu (`target="_blank"`). Přidáno na všechny stránky vedle tlačítka Kontakt. CSS: `border: 1.5px solid var(--cta); border-radius: 50px; padding: 6px 18px; color: var(--cta); transition: background 0.22s, color 0.22s;` — hover: `background: var(--cta); color: var(--white);`
 
 **Mobilní menu:** `.nav__mob-link` `0.94rem`, váha `500`, uppercase; podmenu `.nav__mob-link--sub` `0.84rem` bez uppercase, barva `--text-muted`
 
@@ -801,7 +801,7 @@ Na `organizace.html`, `access-bars.html` a `o-mne.html` **není žádná kontakt
 ```
 - Světlý obrysový styl přizpůsobený tmavému pozadí patičky; při hoveru se vyplní `--cta` hnědou
 - Umístěn v HTML za uzavíracím `</div>` tagu `.footer__socials`, ale stále uvnitř `<div>` sloupce Kontakt
-- Odkaz na Calendly `https://calendly.com/info-bezdekovska/mariebezdekovska`, `target="_blank"`
+- Odkaz na Calendly `https://calendly.com/info-bezdekovska`, `target="_blank"`
 - CSS definováno v `style.css` (pro index.html, kontakt.html) a inline `<style>` (pro ostatní 6 stránek)
 
 **Spodní lišta (`.footer__bottom`):**
