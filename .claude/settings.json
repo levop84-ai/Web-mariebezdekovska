@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit -m ' *)",
+      "PowerShell(Start-Process \"c:\\\\VC weby\\\\Marie Bezd�kovsk�\\\\Web mariebezdekovska\\\\pozustali.html\")",
+      "PowerShell(Start-Process \"c:\\\\VC weby\\\\Marie Bezd�kovsk�\\\\Web mariebezdekovska\\\\organizace.html\")",
+      "PowerShell(Start-Process \"c:\\\\VC weby\\\\Marie Bezd�kovsk�\\\\Web mariebezdekovska\\\\access-bars.html\")",
+      "PowerShell(Start-Process \"c:\\\\VC weby\\\\Marie Bezd�kovsk�\\\\Web mariebezdekovska\\\\o-mne.html\")",
+      "PowerShell(Start-Process \"c:\\\\VC weby\\\\Marie Bezd�kovsk�\\\\Web mariebezdekovska\\\\besedy.html\")",
+      "PowerShell(Start-Process \"c:\\\\VC weby\\\\Marie Bezd�kovsk�\\\\Web mariebezdekovska\\\\kontakt.html\")"
+    ]
+  }
+}
