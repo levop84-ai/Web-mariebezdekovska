@@ -95,6 +95,7 @@ Více stránkový web.
   - Pro organizace
   - Access Bars
 - O mně
+- Živá setkání
 - Kontakt *(obrysové tlačítko `.nav__link--btn`)*
 - Domluvit konzultaci *(obrysové tlačítko `.nav__link--cta`, odkaz na Calendly `https://calendly.com/info-bezdekovska`, `target="_blank"`)*
 
@@ -305,7 +306,15 @@ Na index.html je tento blok vícenásobně formátovaný (víceřádkový styl).
 - **`.split__body h2`:** Na pecujici.html, pozustali.html, organizace.html, o-mne.html a access-bars.html je v inline `<style>` přidáno `.split__body h2 { margin-bottom: var(--s3); }` — zajišťuje správný spacing nadpisu od textu uvnitř split sekcí (vyšší specificita než globální pravidlo).
 - Inline `style="align-items: start"` na gridu tam, kde je jeden sloupec výrazně vyšší než druhý
 - Na o-mne.html (sekce Vlastní zkušenost): foto má `align-self: center` (centrováno v řádku mřížky); pull-quote je umístěn **mimo grid**, v samostatném `div` pod oběma sloupci (`margin-top: var(--s7); text-align: center`), bez levého pruhu — stejný vzor jako pull-quote na index.html
-- Na mobilu (≤768px): `grid-template-columns: 1fr`, `direction: ltr`
+- Na mobilu (≤768px): `grid-template-columns: 1fr`, `direction: ltr`; obecně se zároveň mění `.split__img-wrap { aspect-ratio: 4/3 }` (na desktopu nemá `.split__img-wrap` vlastní `aspect-ratio`, řídí se obsahem/inline stylem)
+
+**Modifikátor `.split__img-wrap--square`** (`aspect-ratio: 1/1`, použito na index.html v sekcích „S čím za mnou rodiny přicházejí" a „O mně"): protože obecné mobilní pravidlo výše má stejnou specificitu a je v CSS pozdější, na mobilu by čtvercový poměr přebilo na 4:3 a u fotek, kde je hlava blízko horního okraje čtverce, by to ořízlo hlavu. Proto je v mobilní media query explicitně znovu deklarováno:
+```css
+.split__img-wrap--square {
+    aspect-ratio: 1 / 1;
+}
+```
+umístěno **za** obecným pravidlem `.split__img-wrap { aspect-ratio: 4/3 }`, aby vyhrálo pořadím v kaskádě.
 
 **Fotky v split sekcích:** pokud foto vyplňuje celou výšku sousedního textového sloupce, používá se inline styl:
 ```html
@@ -453,7 +462,7 @@ Používá se v sekci „Bezpečný prostor" na pecujici.html.
 ```css
 .bubble-field { position: relative; aspect-ratio: 3/4; overflow: hidden;
     border-radius: var(--r-lg);
-    background: url('Obrazky/otazky.jpg') center / cover no-repeat; }
+    background: url('Obrazky/marie_otazky.jpg') center / cover no-repeat; }
 .bubble-field::before { content: ''; position: absolute; inset: 0;
     background: rgba(30, 22, 14, 0.58); z-index: 0; }
 .bubble { position: absolute; z-index: 1;
@@ -469,6 +478,24 @@ Používá se v sekci „Bezpečný prostor" na pecujici.html.
 ```
 
 Každá bublina má inline CSS proměnné `--float-dur` a `--float-del` pro variaci animace. Pozice pomocí inline `top`/`left`.
+
+---
+
+### Hero (`.hero`) – index.html
+
+Desktop: `display: grid; grid-template-columns: 1fr 1fr; height: 100svh; padding-top: 72px`. Fotka vpravo (`.hero__img-wrap`) má `width: auto; height: auto; max-height: calc(100svh - 72px - 128px)` — na desktopu se tedy **neořezává** (žádný `object-fit`), zobrazuje se v nativním poměru stran fotky.
+
+**Mobilní zobrazení (≤900px, dolaďováno dál na ≤768px):** `.hero__img-wrap` se přesune přes `order: -1` nad textový obsah. Používá `object-fit: cover`, proto **musí mít stejný poměr stran jako aktuální fotka**, jinak dojde k nechtěnému oříznutí (např. hlavy). Aktuální fotka (`marie_hero.jpg`) je čtvercová (1365×1365), proto:
+```css
+.hero__img-wrap {
+    order: -1;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    max-height: 500px;   /* 480px na ≤768px */
+    padding: 0;
+}
+```
+Dřív měl wrapper pevnou výšku v `vw` jednotkách (65vw na ≤768px, 55vw na ≤900px) — to fungovalo jen pro fotky se stejným poměrem stran, jaký tato hodnota implikovala, a s aktuální čtvercovou fotkou ořezávalo vršek hlavy. **Při výměně hero fotky za jinak orientovanou (ne čtvercovou) je nutné `aspect-ratio` přepočítat podle nové fotky**, jinak se mobilní crop opět rozjede.
 
 ---
 
@@ -501,19 +528,19 @@ Struktura obsahu: eyebrow (bílá 75% opacity) → H1 → divider (bílý 45% op
 ```
 `margin-left: auto` přebíjí `.divider--left { margin-left: 0 }` a divider se vycentruje spolu se zbytkem obsahu.
 
-**Fotky v page-hero:** nastaveny přes inline `style` na `.page-hero__bg`:
-- pecujici.html: v CSS `.page-hero__bg { background-image: url('Obrazky/pro_pecujici_hero.jpg'); background-position: center; }`
-- pozustali.html: v CSS `.page-hero__bg { background-image: url('Obrazky/pro_pozustale_hero.png'); background-position: center; }`
-- organizace.html: inline `style="background-image: url('Obrazky/pro_organizace_hero.jpg'); background-position: center bottom;"` — na mobilu (≤768px) přebito přes media query: `.page-hero__bg { background-position: 85% bottom !important; }` (žena je vpravo, `!important` nutné kvůli inline stylu)
-- access-bars.html: inline `style="background-image: url('Obrazky/access_bars_hero.jpg'); background-position: center top;"`
+**Fotky v page-hero:** nastaveny přes inline `style` (nebo v CSS) na `.page-hero__bg`. U každé stránky je nutné držet pohromadě desktopovou hodnotu a mobilní `!important` override (pokud existuje) — nejčastější zdroj chyby je, že se pozice fotky doladí jen na jedné z obou variant:
+- pecujici.html: v CSS `.page-hero__bg { background-image: url('Obrazky/pecujici_nemocni_hero_2026.jpg'); background-position: center 25%; }` — žádné zvláštní mobilní přebití (stejná hodnota platí i na mobilu)
+- pozustali.html: v CSS `.page-hero__bg { background-image: url('Obrazky/pozustali_hero_2026.jpg'); background-position: center 25%; }` — na mobilu (≤768px) přebito přes media query: `.page-hero__bg { background-position: 42% 25% !important; }` (fotka na šířku ukazuje dvě ženy naproti sobě, na úzké mobilní obrazovce se do záběru nevejdou obě najednou, proto horizontální posun blíž k levé ženě)
+- organizace.html: inline `style="background-image: url('Obrazky/organizace_skoleni_seminare_2026.jpg'); background-position: center top;"` — na mobilu (≤768px) přebito přes media query: `.page-hero__bg { background-position: 72% 25% !important; }` (fotka shora na zápisník a ruce, na mobilu posun doprava, aby byly vidět obě ruce, a nahoru, aby byl vidět vršek fotky; `!important` nutné kvůli inline stylu)
+- access-bars.html: inline `style="background-image: url('Obrazky/access_bars_hero_2026.jpg'); background-position: center top;"` — na mobilu (≤768px) přebito přes media query: `.page-hero__bg { background-position: 55% top !important; }`
 
-`background-position` je výchozí `center`, ale lze přepsat inline stylem pro lepší ořez konkrétní fotky. organizace.html používá `center bottom` (vidět spodní část s Marie), access-bars.html `center top` (vidět horní část s rukama). Pokud je subjekt fotky posunutý mimo střed a na mobilu vypadá mimo záběr, použij `background-position` override s `!important` v media query.
+`background-position` je výchozí `center`, ale lze přepsat inline stylem nebo v CSS pro lepší ořez konkrétní fotky. Pokud je subjekt fotky posunutý mimo střed a na mobilu vypadá mimo záběr, použij `background-position` override s `!important` v media query (viz výše u pozustali.html, organizace.html a access-bars.html).
 
 ### Page hero (`.page-hero`) – o-mne.html
 
 o-mne.html používá stejný tmavý page-hero jako ostatní podstránky — foto na pozadí s overlay. Třída a CSS jsou totožné s ostatními podstránkami (viz sekce výše).
 
-- **Fotka pozadí:** `Obrazky/o_mne_hero.jpg`, `background-position: center 40%` — na mobilu (≤768px) přebito přes media query: `.page-hero__bg { background-position: 75% 40% !important; }` (žena je vpravo)
+- **Fotka pozadí:** `Obrazky/o_mne_hero_2026.jpg`, `background-position: center 15%` (stejná hodnota na desktopu i mobilu, žádný zvláštní mobilní override). Uživatelka fotku sama předem oříznula, takže výsledná hodnota `15%` je nižší, než by odpovídalo neupravené fotce — při další výměně fotky v této sekci je potřeba hodnotu znovu zkontrolovat/doladit.
 - **Obsah:** eyebrow „O mně" → H1 „Marie Bezděkovská" → divider → lead text → `btn--glass` „Číst více" → `#pribeh`
 - Bez `white-space: nowrap` na titulu (název se může zalomit)
 
@@ -521,9 +548,9 @@ o-mne.html používá stejný tmavý page-hero jako ostatní podstránky — fot
 
 ### Back to top button (`#backToTop`)
 
-Přítomen na **všech 8 stránkách** (index, kontakt, gdpr, organizace, access-bars, pecujici, pozustali, o-mne).
+Přítomen na **všech 9 stránkách** (index, kontakt, gdpr, organizace, access-bars, pecujici, pozustali, o-mne, besedy).
 - **index.html:** CSS je ve `style.css` (na konci souboru), JS je v externím `main.js` — nic inline.
-- **Ostatní stránky** (kontakt, gdpr, pecujici, pozustali, organizace, access-bars, o-mne): CSS i JS jsou na stránce inline, těsně před `</body>`.
+- **Ostatní stránky** (kontakt, gdpr, pecujici, pozustali, organizace, access-bars, o-mne, besedy): CSS i JS jsou na stránce inline, těsně před `</body>`.
 
 ```css
 #backToTop {
@@ -554,7 +581,7 @@ Přítomen na **všech 8 stránkách** (index, kontakt, gdpr, organizace, access
 
 Samostatný soubor `cookie-banner.js` vložený na konec každé stránky před `</body>`. **HTML panelu je staticky pouze v `index.html`** (ne injektováno přes JS), **CSS je v `style.css`** (sekce `COOKIE BANNER`). JS soubor se stará pouze o zobrazení a uložení stavu.
 
-**Načítání skriptu:** na index.html s atributem `defer`; na všech ostatních stránkách (pecujici, pozustali, organizace, access-bars, o-mne, kontakt, gdpr) bez `defer`.
+**Načítání skriptu:** na index.html s atributem `defer`; na všech ostatních stránkách (pecujici, pozustali, organizace, access-bars, o-mne, kontakt, gdpr, besedy) bez `defer`.
 
 **HTML (index.html, těsně před `#backToTop`):**
 ```html
@@ -589,7 +616,7 @@ Pozn.: `style.css` obsahuje i pravidlo pro `#cookie-panel__title`, ale odpovída
 
 ### Scroll padding (kotvy + fixní navbar)
 
-Na všech 5 podstránkách (pecujici, pozustali, organizace, access-bars, o-mne) je v `html {}` nastaveno:
+Na všech 6 podstránkách (pecujici, pozustali, organizace, access-bars, o-mne, besedy) je v `html {}` nastaveno:
 
 ```css
 html {
@@ -621,7 +648,7 @@ JS: IntersectionObserver, threshold 0.1, rootMargin `0px 0px -40px 0px`; po zobr
 ### Font Awesome načítání
 
 - **Asynchronní** (neblokuje render) — `<link rel="stylesheet" media="print" onload="this.media='all'">` + `<noscript>` fallback: **index.html, kontakt.html, gdpr.html**
-- **Synchronní** (obyčejný `<link rel="stylesheet">`, blokuje render, ale na podstránkách je přijatelné): **pecujici, pozustali, organizace, access-bars, o-mne**
+- **Synchronní** (obyčejný `<link rel="stylesheet">`, blokuje render, ale na podstránkách je přijatelné): **pecujici, pozustali, organizace, access-bars, o-mne, besedy**
 
 ---
 
@@ -648,7 +675,7 @@ Samostatná stránka dostupná na `/kontakt`. Obsah: nav + jedna sekce `contact 
 **Layout (`.contact__grid`):** `1fr 1fr`, gap `var(--s7)`; na mobilu `1fr`
 
 **Levý sloupec (`.contact__left`):**
-- `.contact__top-row`: horizontální layout — fotka (kruh 230×230px, `marie_kontakt.jpg`) + kontaktní info vedle sebe
+- `.contact__top-row`: horizontální layout — fotka (kruh 230×230px, `marie_kontakt_2026.jpg`) + kontaktní info vedle sebe
 - Jméno: Lora, `1.6rem`
 - `.contact__detail`: řádek FA ikona (phone/envelope) + odkaz — `align-items: center`; hover: barva odkazu `#3a2b1d` (bez podtržení, bez tučnění — `text-decoration: none`, `transition: color 0.2s`)
 - Social tlačítka (FB + IG) — `.social-btn` (světlá varianta)
@@ -677,7 +704,7 @@ Nahrazuje starý layout s formulářem. Sekce neslouží k odeslání zprávy �
   <div class="container">
     <div class="intro__inner">
       <div class="contact__photo-wrap contact__photo-wrap--hero reveal">
-        <img src="Obrazky/marie_kontakt.jpg" alt="Marie Bezděkovská" loading="lazy">
+        <img src="Obrazky/marie_kontakt_2026.jpg" alt="Marie Bezděkovská" loading="lazy">
       </div>
       <h2 class="intro__title contact__intro-title reveal" id="contact-h">
         Možná je toho teď moc. Možná nevíte, co přesně potřebujete. Možná jen cítíte,
@@ -698,7 +725,7 @@ Nahrazuje starý layout s formulářem. Sekce neslouží k odeslání zprávy �
   <div class="container">
     <div class="intro__inner">
       <div class="contact__photo-wrap reveal" style="margin:0 auto var(--s5);width:290px;height:290px;">
-        <img src="Obrazky/marie_kontakt.jpg" alt="Marie Bezděkovská" loading="lazy">
+        <img src="Obrazky/marie_kontakt_2026.jpg" alt="Marie Bezděkovská" loading="lazy">
       </div>
       <h2 class="intro__title reveal" id="contact-h" style="font-size:clamp(1.45rem, 2.5vw, 2rem);">
         Možná je toho teď moc. Možná nevíte, co přesně potřebujete. Možná jen cítíte,
@@ -713,9 +740,17 @@ Nahrazuje starý layout s formulářem. Sekce neslouží k odeslání zprávy �
 
 **`.contact__photo-wrap` (definice v style.css):** základní velikost 230×230px kruh (používá se na kontakt.html); na teaseru rozšířeno na 290×290px — na indexu třídou `.contact__photo-wrap--hero`, na pecujici/pozustali inline stylem se stejnými hodnotami.
 
+**Mobilní zobrazení (≤768px):** obecné pravidlo `.contact__photo-wrap` nastavuje 290×290px (dřív 160px, sjednoceno s vzhledem na pecujici/pozustali — použije se na kontakt.html). Protože `.contact__photo-wrap--hero` (index.html) má stejnou specificitu, ale je v CSS deklarována dřív, musí mít v mobilní media query vlastní explicitní přebití, jinak by ji obecné pravidlo přepsalo zpět na 290×290 shodně (dřív na 160px, což bylo bugem — kolečko na indexu bylo na mobilu nápadně menší než na pecujici/pozustali, kde velikost drží inline styl a obecné pravidlo ho nemůže přebít):
+```css
+.contact__photo-wrap--hero {
+    width: 290px;
+    height: 290px;
+}
+```
+
 #### Stránky bez kontaktní sekce
 
-Na `organizace.html`, `access-bars.html` a `o-mne.html` **není žádná kontaktní sekce**. Navigace „Kontakt" v těchto stránkách odkazuje na `/kontakt`.
+Na `organizace.html`, `access-bars.html`, `o-mne.html` a `besedy.html` **není žádná kontaktní sekce**. Navigace „Kontakt" v těchto stránkách odkazuje na `/kontakt`.
 
 ---
 
@@ -838,7 +873,7 @@ Na `organizace.html`, `access-bars.html` a `o-mne.html` **není žádná kontakt
 | 8 | Reference (`.testimonials`, 3 karty) | `section--white` | `#reference` |
 | 9 | Kontakt (teaser — foto + text + tlačítko → /kontakt) | `section--bg` | `#kontakt` |
 
-**Hero:** layout 1fr 1fr, výška 100svh, foto `Obrazky/marie_hero.jpg` vpravo (max-height calc, border-radius, shadow), text vlevo. Sub-text (`.hero__sub`): „Jsem Marie, průvodce péčí v závěru života, průvodce pro pozůstalé a vzdělávám odborníky a širokou veřejnost v rámci paliativní péče a péče o pozůstalé". Tlačítka: btn--primary „Napište mi" → `#kontakt`, btn--outline „Moje služby" → `#sluzby`.
+**Hero:** layout 1fr 1fr, výška 100svh, foto `Obrazky/marie_hero.jpg` vpravo (max-height calc, border-radius, shadow), text vlevo. *(Pozor: soubor `marie_hero.jpg` byl při poslední výměně fotek přejmenován — obsahuje teď jinou fotku, než jakou název napovídá z historie projektu. Při další výměně zkontroluj i navázané `og:image`/structured-data odkazy, viz tabulka „Přehled fotografií" níže.)* Sub-text (`.hero__sub`): „Jsem Marie, průvodce péčí v závěru života, průvodce pro pozůstalé a vzdělávám odborníky a širokou veřejnost v rámci paliativní péče a péče o pozůstalé". Tlačítka: btn--primary „Napište mi" → `#kontakt`, btn--outline „Moje služby" → `#sluzby`.
 
 **Intro:** centrovaný text max-width 820px, h2 italic, tlačítko `.btn--outline` → `#sluzby`.
 
@@ -848,14 +883,16 @@ Na `organizace.html`, `access-bars.html` a `o-mne.html` **není žádná kontakt
 
 | Karta | Fotka | Ikona | Text (`.svc-card__text`) |
 |---|---|---|---|
-| Konzultace pro pečující a nemocné | `Obrazky/pro_pecujici.jpg` | `Obrazky/Ikony/pecujici.png` | Konkrétní kroky a jasné informace o tom, jak pečovat a co dělat v rámci péče o sebe a o nemocného |
-| Poradenství a péče pro pozůstalé | `Obrazky/pro_pozustale.png` | `Obrazky/Ikony/pozustali.png` | Bezpečný prostor ke sdílení i tichu složený z rozhovoru a další péče |
-| Školení, semináře a kurzy pro odborníky a širokou veřejnost | `Obrazky/pro_organizace.jpg` | `Obrazky/Ikony/organizace.png` | Informace, možnosti a posílení sebe v praxi,`<br>`inovace, novinky a sebezkušenost |
-| Access Bars® | `Obrazky/access_bars.jpg` | `Obrazky/Ikony/access_bars.png` | Jemná terapie pracující s 32 body na hlavě. Přináší hluboké uvolnění, klid mysli a lehkost. Vhodná pro pečující, pozůstalé i každého, kdo potřebuje zpomalit. |
+| Konzultace pro pečující a nemocné | `Obrazky/pecujici_nemocni_konzultace_2026.jpg` | `Obrazky/Ikony/pecujici.png` | Konkrétní kroky a jasné informace o tom, jak pečovat a co dělat v rámci péče o sebe a o nemocného |
+| Poradenství a péče pro pozůstalé | `Obrazky/pozustali_podpora_2026.jpg` | `Obrazky/Ikony/pozustali.png` | Bezpečný prostor ke sdílení i tichu složený z rozhovoru a další péče |
+| Školení, semináře a kurzy pro odborníky a širokou veřejnost | `Obrazky/skoleni_seminare_2026.jpg` | `Obrazky/Ikony/organizace.png` | Informace, možnosti a posílení sebe v praxi,`<br>`inovace, novinky a sebezkušenost |
+| Access Bars® | `Obrazky/access_bars_pece_2026.jpg` | `Obrazky/Ikony/access_bars.png` | Jemná terapie pracující s 32 body na hlavě. Přináší hluboké uvolnění, klid mysli a lehkost. Vhodná pro pečující, pozůstalé i každého, kdo potřebuje zpomalit. |
+
+*(Poznámka: sekce „Kdo může Access Bars® využít" na access-bars.html dřív sdílela tuto stejnou fotku, teď má vlastní odlišnou — viz `access-bars.html` níže. `svc-card__icon` u karty Access Bars® zůstává liniová ikona `Ikony/access_bars.png`, ne fotka — CSS filtr `brightness(0) invert(1)` z každého obrázku v tomto slotu udělá bílou siluetu, takže sem lze vkládat pouze jednoduché liniové ikony s průhledným pozadím, nikdy fotografii.)*
 
 **FAQ:** accordion, 5 položek; chevron ikona, `aria-expanded`. Animace otevření: JS měří `answer.scrollHeight` a nastavuje `max-height` dynamicky (ne fixní `600px`), takže animace trvá vždy stejně bez ohledu na délku odpovědi. Transition: `max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1)`. Při zavření: nejprve se nastaví `max-height` na aktuální `scrollHeight`, pak v `requestAnimationFrame` na `0` (pro plynulou CSS animaci).
 
-**O mně:** split flip (foto `Obrazky/marie_omne.jpg` vlevo, text vpravo); tlačítko „Číst více" → `o-mne.html`.
+**O mně:** split flip (foto `Obrazky/marie_o_mne_2026.jpg` vlevo, text vpravo); tlačítko „Číst více" → `o-mne.html`.
 
 **Reference:** grid `repeat(3, 1fr)`; hover `translateY(-4px)`; ikona autora `Obrazky/Ikony/testimonial.png`. Skutečné reference:
 - **Marta K.** — „Maruška se o našeho tatínka starala naprosto skvěle…" (poznámka: komplexní provázení rodiny a nemocného až do konce). Text oříznut na 9 řádků třídou `testi-card__text--clamped` (`-webkit-line-clamp: 9`), tlačítko „Číst více" / „Zobrazit méně" (event listener v `main.js`, bez inline `onclick`).
@@ -881,23 +918,23 @@ Samostatná stránka `/kontakt`. Používá `style.css` (stejně jako index.html
 
 **Layout:** Nav (zcela shodná s index.html — položka „Reference" v navigaci neexistuje na žádné stránce, jen sekce s `id="reference"` na indexu) → kontaktní sekce → footer. Žádná hero sekce.
 
-**Kontaktní sekce** — viz popis „kontakt.html — plná kontaktní stránka" výše. Foto `marie_kontakt.jpg` (230×230px kruh), kontaktní info, Formspree formulář.
+**Kontaktní sekce** — viz popis „kontakt.html — plná kontaktní stránka" výše. Foto `marie_kontakt_2026.jpg` (230×230px kruh), kontaktní info, Formspree formulář.
 
 ---
 
 ### o-mne.html
 
-Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_mne_hero.jpg` na pozadí s overlayem, `background-position: center 40%`.
+Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_mne_hero_2026.jpg` na pozadí s overlayem, `background-position: center 15%`.
 
 | Pořadí | Sekce | Pozadí |
 |---|---|---|
-| 1 | Page Hero (tmavý, foto + overlay) | `Obrazky/o_mne_hero.jpg`, `center 40%` |
+| 1 | Page Hero (tmavý, foto + overlay) | `Obrazky/o_mne_hero_2026.jpg`, `center 15%` |
 | 2 | Příběh (`id="pribeh"`, intro – centrovaný text) | `section--white` — bez fotky, třída `.intro` |
-| 3 | Vlastní zkušenost (split, foto vlevo) | `section--bg` — foto `Obrazky/marie_muj_pribeh.jpg` (aspect 4:5, `align-self: center`) |
+| 3 | Vlastní zkušenost (split, foto vlevo) | `section--bg` — foto `Obrazky/marie_muj_pribeh_2026.jpg` (aspect 4:5, `align-self: center`) |
 
 **Příběh (sekce 2):** H2 „Hledala jsem smysl své práce". 3 odstavce — (1) zkušenosti z ČR i zahraničí, odchod ze systémové soc. péče; (2) hospicové působení a odchod z oboru; (3) kurzívou „Ale jak se říká – řekněte Bohu své plány…" (inline styl `font-family: var(--font-h); font-style: italic`).
 
-**Vlastní zkušenost (sekce 3):** eyebrow „Vlastní zkušenost", H2 „Sama jsem si prošla péčí i ztrátou blízkého". Split grid: foto vlevo (`marie_muj_pribeh.jpg`, `aspect-ratio: 4/5`, `align-self: center`), text vpravo — 5 odstavců (péče o dědečka v době covidu, přicházející rodiny, náročnost péče i přes zkušenosti, dědův odchod a formování vlastní cesty, odvaha jít touto cestou). Pod gridem (mimo split, `margin-top: var(--s7); text-align: center`) dva pull-quote odstavce (`font-size: 1.3rem`): „Protože podpora, kterou mohu rodinám dát, může být zásadní pro to, jak celé tohle náročné období zvládnou." a „A proto jsem vděčná, že mohu **nabízet rodinám komplexní péči o jejich blízkého.**" (slovo tučně `<strong>`). Pull-quote nemá levý pruh — je centrovaný, stejný styl jako pull-quote na index.html. **Pod pull-quotes** je tlačítko `.btn--primary` „Ozvěte se mi" → `kontakt.html` (`margin-top: var(--s5)`).
+**Vlastní zkušenost (sekce 3):** eyebrow „Vlastní zkušenost", H2 „Sama jsem si prošla péčí i ztrátou blízkého". Split grid: foto vlevo (`marie_muj_pribeh_2026.jpg`, `aspect-ratio: 4/5`, `align-self: center`), text vpravo — 5 odstavců (péče o dědečka v době covidu, přicházející rodiny, náročnost péče i přes zkušenosti, dědův odchod a formování vlastní cesty, odvaha jít touto cestou). Pod gridem (mimo split, `margin-top: var(--s7); text-align: center`) dva pull-quote odstavce (`font-size: 1.3rem`): „Protože podpora, kterou mohu rodinám dát, může být zásadní pro to, jak celé tohle náročné období zvládnou." a „A proto jsem vděčná, že mohu **nabízet rodinám komplexní péči o jejich blízkého.**" (slovo tučně `<strong>`). Pull-quote nemá levý pruh — je centrovaný, stejný styl jako pull-quote na index.html. **Pod pull-quotes** je tlačítko `.btn--primary` „Ozvěte se mi" → `kontakt.html` (`margin-top: var(--s5)`).
 
 **Kontaktní sekce na o-mne.html není** — stránka nemá sekci s formulářem ani teaserem.
 
@@ -907,22 +944,22 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 
 **Meta:** „Pro pečující | Marie Bezděkovská – Průvodce péčí v závěru života"
 
-**Page Hero:** `Obrazky/pro_pecujici_hero.jpg` (nastaveno v CSS), `background-position: center`, overlay `rgba(30,22,14,0.58)`, H1 `white-space: nowrap`.
+**Page Hero:** `Obrazky/pecujici_nemocni_hero_2026.jpg` (nastaveno v CSS), `background-position: center 25%`, overlay `rgba(30,22,14,0.58)`, H1 `white-space: nowrap`.
 
 | Pořadí | Sekce | Pozadí | Poznámka |
 |---|---|---|---|
 | 1 | Page Hero | foto + overlay | btn--glass |
 | 2 | Intro | `section--white` | eyebrow „Poradenství pro pečující", h2 „Uvolněte si ruce pro to důležité", btn--outline „S čím vám mohu pomoci" → `#co-resite` |
-| 3 | Co možná řešíte | `section--bg` | id="co-resite"; split grid: foto vlevo `pro_pecujici_sezeni.jpg` (aspect 1:1), text vpravo (dot-list 7 bodů v 1 sloupci `.dot-list`, btn--primary) |
+| 3 | Co možná řešíte | `section--bg` | id="co-resite"; split grid: foto vlevo `pecujici_rozhovory_2026.jpg` (aspect 1:1), text vpravo (dot-list 7 bodů v 1 sloupci `.dot-list`, btn--primary) |
 | 4 | Bezpečný prostor | `section--white` | split grid `align-items:start`: text vlevo (5 odstavců), bubble-field vpravo |
 | 5 | Jak pracuji | `background:#FAF7F2` | split grid `align-items:start`: text vlevo, 2×2 how-cards vpravo |
 | 6 | Spolupráce | `section--white` | section-header + 3 how-cards (grid 3 cols) + pull-quote + btn--primary |
-| 7 | Praktické info | `section--bg` | id="prakticke-info"; split grid: foto vlevo `prostor_poradna.jpg` (aspect 1:1), vpravo eyebrow + h2 „Místo a cena" + dot-list (2 odrážky, bez divideru) + btn--primary „Ozvěte se mi" → `#kontakt` |
+| 7 | Praktické info | `section--bg` | id="prakticke-info"; split grid: foto vlevo `poradna_prostor_2026.jpg` (aspect 1:1), vpravo eyebrow + h2 „Místo a cena" + dot-list (2 odrážky, bez divideru) + btn--primary „Ozvěte se mi" → `#kontakt` |
 | 8 | Kontakt (teaser) | `section--white` | id="kontakt" — foto 290px + text + btn → /kontakt |
 
 **Sekce Jak pracuji — odstavce:** každý odstavec v pravém sloupci splitu je samostatný `<p class="split__text">` element (ne text oddělený `<br>`).
 
-**Bubble field (sekce Bezpečný prostor):** foto `Obrazky/otazky.jpg`, overlay 0.58, 14 plovoucích bublin s otázkami. Bubliny pokrývají celou plochu (top 7–89%, left 6–67%). Animace pouze float (translateY ±9px), bez fade.
+**Bubble field (sekce Bezpečný prostor):** foto `Obrazky/marie_otazky.jpg`, overlay 0.58, 14 plovoucích bublin s otázkami. Bubliny pokrývají celou plochu (top 7–89%, left 6–67%). Animace pouze float (translateY ±9px), bez fade. *(CSS třída `.bubble-field` se stejným odkazem na `marie_otazky.jpg` je zkopírovaná i do sdíleného inline `<style>` bloku na besedy.html, ale tam se v HTML vůbec nepoužívá — mrtvý kód.)*
 
 **How-cards (sekce Jak pracuji):** 2×2 grid v pravém sloupci splitu — Krátkodobá péče / Náhlá změna situace / Dlouhodobá péče / Potřeba se připravit.
 
@@ -938,15 +975,15 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 
 **Meta:** „Pro pozůstalé | Marie Bezděkovská – Průvodce péčí v závěru života"
 
-**Page Hero:** `Obrazky/pro_pozustale_hero.png` (nastaveno v CSS), `background-position: center`, overlay `rgba(30,22,14,0.58)`.
+**Page Hero:** `Obrazky/pozustali_hero_2026.jpg` (nastaveno v CSS), `background-position: center 25%` (na mobilu ≤768px přebito na `42% 25% !important` — fotka ukazuje dvě ženy naproti sobě, na úzké obrazovce se do záběru nevejdou obě, proto horizontální posun), overlay `rgba(30,22,14,0.58)`.
 
 | Pořadí | Sekce | Pozadí | Poznámka |
 |---|---|---|---|
 | 1 | Page Hero | foto + overlay | btn--glass |
 | 2 | Intro | `section--white` | eyebrow „Dopřejte si čas", h2 „Cílem není zapomenout", btn--outline → `#bezpecny-prostor` |
-| 3 | Bezpečný prostor | `section--bg` | id="bezpecny-prostor"; split grid: foto vlevo `Obrazky/bezpecny_prostor.png` (aspect 1:1), text vpravo (dot-list 4 body, btn--primary) |
+| 3 | Bezpečný prostor | `section--bg` | id="bezpecny-prostor"; split grid: foto vlevo `Obrazky/marie_bezpecny_prostor_2026.jpg` (aspect 1:1), text vpravo (dot-list 4 body, btn--primary) |
 | 4 | Spolupráce | `section--white` | section-header + 3 how-cards (grid 3 cols) + pull-quote + btn--primary |
-| 5 | Praktické info | `section--bg` | id="prakticke-info"; identická sekce jako na pecujici.html — split grid: foto vlevo `prostor_poradna.jpg` (aspect 1:1), vpravo eyebrow + h2 + dot-list (2 odrážky, bez divideru) + btn--primary „Ozvěte se mi" → `#kontakt` |
+| 5 | Praktické info | `section--bg` | id="prakticke-info"; identická sekce jako na pecujici.html — split grid: foto vlevo `poradna_prostor_2026.jpg` (aspect 1:1), vpravo eyebrow + h2 + dot-list (2 odrážky, bez divideru) + btn--primary „Ozvěte se mi" → `#kontakt` |
 | 6 | Kontakt (teaser) | `section--white` | id="kontakt" — foto 290px + text + btn → /kontakt |
 
 **How-cards (sekce Spolupráce):** 3 karty — Jednorázová konzultace / Dlouhodobé provázení / Praktická pomoc.
@@ -959,20 +996,22 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 **Canonical:** `https://mariebezdekovska.cz/organizace.html`
 **Structured Data:** `@type: Service`
 
-**Page Hero:** foto `Obrazky/pro_organizace_hero.jpg`, `background-position: center bottom` (vidět spodní část s Marie u projekční plochy), overlay `rgba(30,22,14,0.45)`. Fallback barva `#3a3028`. **Bez `white-space: nowrap` na titulu** (dlouhý nadpis „Školení, semináře a kurzy pro odborníky a veřejnost" se přirozeně zalamuje — stejně jako na o-mne.html; nowrap odstraněn, protože nadpis přetékal mimo obrazovku).
+**Page Hero:** foto `Obrazky/organizace_skoleni_seminare_2026.jpg` (pohled shora na psaní do diáře), `background-position: center top` (vidět vršek fotky) — na mobilu (≤768px) přebito na `72% 25% !important` (posun doprava, aby byly vidět obě ruce, a nahoru, aby byl vidět vršek fotky), overlay `rgba(30,22,14,0.45)`. Fallback barva `#3a3028`. **Bez `white-space: nowrap` na titulu** (dlouhý nadpis „Školení, semináře a kurzy pro odborníky a veřejnost" se přirozeně zalamuje — stejně jako na o-mne.html; nowrap odstraněn, protože nadpis přetékal mimo obrazovku).
+
+*(Pozor: fotka `pro_organizace_hero.jpg` byla nahrazena úplně jiným motivem — dřív šlo o fotku Marie u projekčního plátna (odtud historicky `center bottom`), teď je to detail rukou a diáře. Hodnoty `background-position` výše už tuto novou fotku reflektují.)*
 
 | Pořadí | Sekce | Třída pozadí | Poznámka |
 |---|---|---|---|
 | 1 | Page Hero | foto + overlay | btn--glass „Možnosti spolupráce" → `#sluzby` |
 | 2 | Proč využít mé služby | `intro section--white` | Centrovaná intro sekce; eyebrow „Proč využít mé služby", h2 italic „Podpora a vzdělávání týmu", 3 odstavce, btn--outline „Jak vám mohu pomoci" → `#sluzby` |
-| 3 | Bezpečný prostor | `section section--bg` | split grid `align-items:start`; vlevo foto `organizace_tym.jpg` (`align-self:stretch`, `min-height:360px`); vpravo eyebrow „Bezpečný prostor", h2 „Otevřené rozhovory s týmem", text, dot-list 4 body, btn--primary |
+| 3 | Bezpečný prostor | `section section--bg` | split grid `align-items:start`; vlevo foto `rozhovory_tymy_2026.jpg` (`align-self:stretch`, `min-height:360px`); vpravo eyebrow „Bezpečný prostor", h2 „Otevřené rozhovory s týmem", text, dot-list 4 body, btn--primary |
 | 4 | Výzvy neopečovaných pečujících | `section section--white` | section-header (eyebrow + h2 + divider + text) s `margin-bottom: var(--s3)`; pod tím centrovaný `.dot-list` (`display: table; margin: 0 auto`) — 4 odrážky |
-| 5 | Podpora organizace | `section section--bg` | split grid `align-items:start`; vlevo `split__body` s `align-self:start` — eyebrow „Podpora organizace", h2 „Pokud cítíte, že se vaše organizace s těmito výzvami setkává, ráda vás podpořím", 5 odstavců, btn--primary „Možnosti spolupráce" → `#sluzby`; vpravo foto `organizace_prednaska.jpg` (`align-self:stretch`, `min-height:360px`) |
+| 5 | Podpora organizace | `section section--bg` | split grid `align-items:start`; vlevo `split__body` s `align-self:start` — eyebrow „Podpora organizace", h2 „Pokud cítíte, že se vaše organizace s těmito výzvami setkává, ráda vás podpořím", 5 odstavců, btn--primary „Možnosti spolupráce" → `#sluzby`; vpravo foto `organizace_podpora_2026.jpg` (`align-self:stretch`, `min-height:360px`) |
 | 6 | Spolupráce | `section section--white` | id="sluzby"; section-header (eyebrow + h2, `margin-bottom: var(--s3)`) + `ul.dot-list` 3 body (`max-width:680px; margin: 0 auto var(--s4)`) + 4 `.reason-card` v `how-grid repeat(4,1fr)` (`margin-top: var(--s5)`) + btn--primary „Domluvit konzultaci" → `kontakt.html` |
 
 **Sekce Výzvy neopečovaných pečujících:** místo karet je `ul.dot-list` s `display: table; margin: 0 auto` (vycentrovaný seznam). Section-header má `margin-bottom: var(--s3)` (ne výchozích `var(--s6)`).
 
-**Sekce Podpora organizace:** foto `organizace_prednaska.jpg` (Marie přednáší, prezentace „Proč se bojíme" na plátně, publikum zády). Každý odstavec je samostatný `<p class="split__text">` element (ne text oddělený `<br>`). Žádný divider — jen eyebrow + h2 + odstavce + btn.
+**Sekce Podpora organizace:** foto `organizace_podpora_2026.jpg` (Marie v portrétním záběru, bez kontextu přednášky — alt text upraven na „Marie Bezděkovská – podpora pro organizace", protože se změnil motiv fotky z přednášky na portrét). Každý odstavec je samostatný `<p class="split__text">` element (ne text oddělený `<br>`). Žádný divider — jen eyebrow + h2 + odstavce + btn.
 
 **Sekce Spolupráce (id="sluzby"):** section-header s `margin-bottom: var(--s3)` → `ul.dot-list` 3 položky (`max-width:680px; margin: 0 auto var(--s4)`) → 4 `.reason-card` v `how-grid repeat(4,1fr)` → btn--primary. Ikony reason-card: `skoleni.png`, `workshopy.png`, `besedy.png`, `podpora.png`.
 
@@ -984,16 +1023,16 @@ Tmavý page-hero stejného stylu jako ostatní podstránky — foto `Obrazky/o_m
 
 **Meta:** „Access Bars® | Marie Bezděkovská"
 
-**Page Hero:** foto `Obrazky/access_bars_hero.jpg`, `background-position: center top` (vidět horní část s rukama), overlay `rgba(30,22,14,0.45)`. Fallback barva `#3a3028`. H1 „Access Bars®".
+**Page Hero:** foto `Obrazky/access_bars_hero_2026.jpg`, `background-position: center top` — na mobilu (≤768px) přebito na `55% top !important`, overlay `rgba(30,22,14,0.45)`. Fallback barva `#3a3028`. H1 „Access Bars®".
 
 | Pořadí | Sekce | ID / třída | Pozadí | Poznámka |
 |---|---|---|---|---|
 | 1 | Page Hero | — | foto + overlay | btn--glass „Více o této metodě" → `#co-sekce` |
 | 2 | Co jsou Access Bars® | `id="co-sekce"` na section, h2 `id="co-h"` | `intro section--white` | Centrovaná intro sekce — 3 odstavce (bez tlačítka) |
-| 3 | Jak „Barsy" pomáhají | `id="prinaset-h"` na section | `section--bg` | split grid `align-items:start`; vlevo foto `access_bars_sezeni.jpg` (`align-self:stretch`, `min-height:360px`); vpravo eyebrow, h2 „Každý prožitek je individuální", divider, 3 odstavce + dot-list 6 bodů |
+| 3 | Jak „Barsy" pomáhají | `id="prinaset-h"` na section | `section--bg` | split grid `align-items:start`; vlevo foto `access_bars_sezeni_2026.jpg` (`align-self:stretch`, `min-height:360px`); vpravo eyebrow, h2 „Každý prožitek je individuální", divider, 3 odstavce + dot-list 6 bodů |
 | 4 | Kdy využít sílu Access Bars® | `kdy-h` | `section--white` | Centrovaný `section-header` + `.kdy-grid` (2 karty + šipka uprostřed) |
-| 5 | Kdo může Access Bars® využít | `kdo-h` na section | `section--bg` | split grid `align-items:start`; vlevo text (eyebrow + h2 + divider + 2 odstavce + btn--outline „Jak to probíhá" → `#jak-sekce`); vpravo foto `access_bars.jpg` (`align-self:stretch`, `min-height:360px`) |
-| 6 | Průběh sezení | `id="jak-sekce"` na section, h2 `id="jak-h"` | `section--white` | split grid; vlevo foto `access_bars_pece.jpg` (`align-self:stretch`, `min-height:360px`); vpravo eyebrow + h2 + divider + text + 3 kroky `.steps` + btn--primary „Formy spolupráce" → `#formy-sekce` |
+| 5 | Kdo může Access Bars® využít | `kdo-h` na section | `section--bg` | split grid `align-items:start`; vlevo text (eyebrow + h2 + divider + 2 odstavce + btn--outline „Jak to probíhá" → `#jak-sekce`); vpravo foto `access_bars_pro_kazdeho_2026.jpg` (`align-self:stretch`, `min-height:360px`) |
+| 6 | Průběh sezení | `id="jak-sekce"` na section, h2 `id="jak-h"` | `section--white` | split grid; vlevo foto `access_bars_prubeh_2026.jpg` (`align-self:stretch`, `min-height:360px`, alt „Průběh terapie Access Bars – Marie pečuje o klientku" — fotka teď ukazuje terapii v procesu, ne prázdný prostor jako dřív); vpravo eyebrow + h2 + divider + text + 3 kroky `.steps` + btn--primary „Formy spolupráce" → `#formy-sekce` |
 | 7 | Access Bars® pro každého | `id="formy-sekce"` na section, h2 `id="formy-h"` | inline `background: #FAF7F2` | section-header + 4 `.forma-card` 2×2 + btn--primary „Kontaktujte mě" → `kontakt.html` |
 
 **Kdy grid (sekce 4):** vlastní komponenta `.kdy-grid`:
@@ -1054,6 +1093,27 @@ Ceny: První sezení – 2&nbsp;000&nbsp;Kč / 2&nbsp;hodiny; Každé další se
 
 ---
 
+### besedy.html – Živá setkání
+
+Nová, zatím velmi jednoduchá stránka (nebyla v původním zadání, přidána později; položka „Živá setkání" v navigaci mezi „O mně" a „Kontakt"). Struktura: nav → page-hero → jedna sekce „Termíny" → footer. Žádná kontaktní sekce.
+
+**Meta:** „Živá setkání | Marie Bezděkovská – Průvodce péčí v závěru života"
+
+**Page Hero:** foto `Obrazky/marie_bezdekovska_besedy_2026.jpg`, `background-position: center 20%`, standardní tmavý page-hero styl shodný s ostatními podstránkami. Eyebrow „Besedy" → H1 „Potkejme se osobně" → lead text „Živá setkání, besedy, přednášky, workshopy aneb, kde se můžeme setkat naživo." → `btn--glass` „Aktuální termíny akcí" → `#terminy`.
+
+| Pořadí | Sekce | Pozadí |
+|---|---|---|
+| 1 | Page Hero | foto + overlay |
+| 2 | Termíny (`id="terminy"`) | `intro section--white` |
+
+**Sekce Termíny:** zatím jen placeholder — eyebrow „Kdy a kde" + h2 „Termíny podzimních setkání budou brzy upřesněny právě zde". Žádný obsah navíc (žádné karty, žádný seznam akcí) — sekci bude potřeba doplnit, až budou termíny známé.
+
+**Technické detaily shodné s ostatními podstránkami:** synchronní Font Awesome, `scroll-padding-top: 80px`, `cookie-banner.js` bez `defer`, `#backToTop` inline CSS/JS, víceřádkově formátovaný invisible-bridge blok pro podmenu navigace.
+
+**Poznámka k SEO:** stránka byla při vytvoření opomenuta v `sitemap.xml` a `llms.txt` — v rámci tohoto auditu doplněno do obou souborů.
+
+---
+
 ### gdpr.html – Zásady zpracování osobních údajů
 
 Samostatná stránka s plným zněním GDPR dokumentu. Stejná struktura jako ostatní podstránky: inline `<style>`, navigace, page-hero, obsah, patička.
@@ -1100,31 +1160,32 @@ Použito v sekcích: IV/F bod 1, VII bod 3, IX bod 2, X bod 1.
 
 | Soubor | Použití |
 |---|---|
-| `Obrazky/marie_hero.jpg` | index.html hero (vpravo) |
-| `Obrazky/marie_kontakt.jpg` | kontakt.html (levý sloupec, kruh 230×230px); index.html, pecujici.html, pozustali.html (teaser kontaktní sekce, kruh 290×290px inline) |
-| `Obrazky/marie_sezeni.jpg` | index.html split „S čím za mnou rodiny přicházejí" |
-| `Obrazky/marie_omne.jpg` | index.html split „O mně"; o-mne.html OG image a structured data (jen v meta tagu, ve split sekci již není) |
-| `Obrazky/pro_pecujici.jpg` | index.html service karta „Pro pečující" |
-| `Obrazky/pro_pozustale.png` | index.html service karta „Pro pozůstalé" |
-| `Obrazky/pro_organizace.jpg` | index.html service karta „Pro organizace" |
-| `Obrazky/organizace_prednaska.jpg` | organizace.html sekce „Podpora organizace" (vpravo) — Marie přednáší, prezentace na plátně |
-| `Obrazky/access_bars.jpg` | index.html service karta „Access Bars"; access-bars.html sekce „Kdo může Access Bars® využít" (vpravo) |
-| `Obrazky/pro_pecujici_hero.jpg` | pecujici.html page hero pozadí |
-| `Obrazky/pro_pecujici_sezeni.jpg` | pecujici.html split „Co možná řešíte" (vlevo) |
-| `Obrazky/pro_pozustale_hero.png` | pozustali.html page hero pozadí |
-| `Obrazky/bezpecny_prostor.png` | pozustali.html split „Bezpečný prostor" (vlevo) |
-| `Obrazky/pro_organizace_hero.jpg` | organizace.html page hero pozadí (`background-position: center bottom`) |
-| `Obrazky/organizace_tym.jpg` | organizace.html sekce „Bezpečný prostor" (vlevo) |
-| `Obrazky/access_bars_hero.jpg` | access-bars.html page hero pozadí (`background-position: center top`) |
-| `Obrazky/access_bars_sezeni.jpg` | access-bars.html sekce „Jak Barsy pomáhají" (vlevo) |
-| `Obrazky/access_bars_pece.jpg` | access-bars.html sekce „Průběh sezení" (vlevo) |
-| `Obrazky/prostor_poradna.jpg` | pecujici.html a pozustali.html sekce „Praktické info" (vlevo, aspect-ratio 1:1) |
-| `Obrazky/otazky.jpg` | pecujici.html bubble-field pozadí |
-| `Obrazky/o_mne_hero.jpg` | o-mne.html page hero pozadí (`background-position: center 40%`) |
-| `Obrazky/marie_muj_pribeh.jpg` | o-mne.html split „Vlastní zkušenost" (vlevo, aspect 4:5, `align-self: center`) |
-| `Obrazky/marie_1.jpg` | o-mne.html split „Příběh" — sekce Příběh je nyní intro (bez fotky), foto nevyužito |
-| `Obrazky/marie_podpora.jpg` | o-mne.html split „Zkušenost z praxe" (vlevo) — původní foto, nahrazeno `marie_muj_pribeh.jpg` |
-| `Obrazky/marie_2.jpg` | původně access-bars.html „Průběh sezení" — nahrazeno `access_bars_pece.jpg` |
+| `Obrazky/marie_hero.jpg` | index.html hero (vpravo); index.html, access-bars.html, organizace.html, kontakt.html OG image a structured data. *Pozor: název souboru je stejný jako od začátku projektu, ale fotka uvnitř je jiná — dřív šlo o fotku v lese, dnes je to fotka s knihou (přejmenováno z `marie_o_mne_2026.jpg`, viz níže).* |
+| `Obrazky/marie_kontakt_2026.jpg` | kontakt.html (levý sloupec, kruh 230×230px); index.html, pecujici.html, pozustali.html (teaser kontaktní sekce, kruh 290×290px) |
+| `Obrazky/marie_konzultace_2026.jpg` | index.html split „S čím za mnou rodiny přicházejí" |
+| `Obrazky/marie_o_mne_2026.jpg` | index.html split „O mně"; o-mne.html OG image a structured data (jen v meta tagu, ve split sekci již není) |
+| `Obrazky/pecujici_nemocni_konzultace_2026.jpg` | index.html service karta „Pro pečující"; pecujici.html OG image |
+| `Obrazky/pozustali_podpora_2026.jpg` | index.html service karta „Pro pozůstalé"; pozustali.html OG image |
+| `Obrazky/skoleni_seminare_2026.jpg` | index.html service karta „Pro organizace" |
+| `Obrazky/organizace_podpora_2026.jpg` | organizace.html sekce „Podpora organizace" (vpravo) — portrét, bez kontextu přednášky |
+| `Obrazky/access_bars_pece_2026.jpg` | index.html service karta „Access Bars®" |
+| `Obrazky/access_bars_pro_kazdeho_2026.jpg` | access-bars.html sekce „Kdo může Access Bars® využít" (vpravo) — vlastní odlišná fotka, dřív sdílela `access_bars_pece_2026.jpg` s kartou na indexu |
+| `Obrazky/pecujici_nemocni_hero_2026.jpg` | pecujici.html page hero pozadí (`background-position: center 25%`) |
+| `Obrazky/pecujici_rozhovory_2026.jpg` | pecujici.html split „Co možná řešíte" (vlevo) |
+| `Obrazky/pozustali_hero_2026.jpg` | pozustali.html page hero pozadí (`center 25%`, na mobilu `42% 25% !important`) |
+| `Obrazky/marie_bezpecny_prostor_2026.jpg` | pozustali.html split „Bezpečný prostor" (vlevo) |
+| `Obrazky/organizace_skoleni_seminare_2026.jpg` | organizace.html page hero pozadí (`background-position: center top`, na mobilu `72% 25% !important`) |
+| `Obrazky/rozhovory_tymy_2026.jpg` | organizace.html sekce „Bezpečný prostor" (vlevo) |
+| `Obrazky/access_bars_hero_2026.jpg` | access-bars.html page hero pozadí (`background-position: center top`, na mobilu `55% top !important`) |
+| `Obrazky/access_bars_sezeni_2026.jpg` | access-bars.html sekce „Jak Barsy pomáhají" (vlevo) |
+| `Obrazky/access_bars_prubeh_2026.jpg` | access-bars.html sekce „Průběh sezení" (vlevo) — ukazuje terapii v procesu, ne prázdný prostor |
+| `Obrazky/poradna_prostor_2026.jpg` | pecujici.html a pozustali.html sekce „Praktické info" (vlevo, aspect-ratio 1:1) |
+| `Obrazky/marie_otazky.jpg` | pecujici.html bubble-field pozadí; CSS pro `.bubble-field` se stejným odkazem je i v inline `<style>` na besedy.html, ale tam se nepoužívá (mrtvý kód) |
+| `Obrazky/marie_bezdekovska_besedy_2026.jpg` | besedy.html page hero pozadí (`background-position: center 20%`) a OG image |
+| `Obrazky/o_mne_hero_2026.jpg` | o-mne.html page hero pozadí (`background-position: center 15%`) |
+| `Obrazky/marie_muj_pribeh_2026.jpg` | o-mne.html split „Vlastní zkušenost" (vlevo, aspect 4:5, `align-self: center`) |
+| `Obrazky/marie_2.jpg` | nepoužitá, osiřelá fotka ve složce (nikde na webu neodkazovaná) |
+| `Obrazky/pozadi_kontakt.jpg` | nepoužitá, osiřelá fotka ve složce (nikde na webu neodkazovaná) |
 | `Obrazky/Ikony/holubice.png` | Patička — Brand sloupec, ikona holubice v kroužku (`.footer__icon`), umístěna pod blurbem |
 | `Obrazky/Ikony/nejste_sami.png` | index.html — Reason card „Nejste na to sami" |
 | `Obrazky/Ikony/prakticnost.png` | index.html — Reason card „Spojuji praktičnost s lidskostí" |
@@ -1164,7 +1225,7 @@ Kontaktní sekce (`#kontakt`) — pozadí dle stránky:
 - index.html: `section--bg` (teaser — foto + text + btn → /kontakt)
 - pecujici.html, pozustali.html: `section--white` (teaser — foto + text + btn → /kontakt)
 - kontakt.html: `section--bg` (plná stránka s formulářem)
-- organizace.html, access-bars.html, o-mne.html: **kontaktní sekce neexistuje**
+- organizace.html, access-bars.html, o-mne.html, besedy.html: **kontaktní sekce neexistuje**
 
 ---
 
@@ -1187,7 +1248,7 @@ Všechny `og:url`, `og:image` a URL v Structured Data odkazují na `mariebezdeko
 ### Soubory v kořeni webu
 
 - **`robots.txt`** — povoluje indexaci všem robotům (`User-agent: * / Allow: /`), odkazuje na sitemapu
-- **`sitemap.xml`** — obsahuje všech 8 stránek s priority a changefreq; po přidání nové stránky přidat i sem a aktualizovat `lastmod`
+- **`sitemap.xml`** — obsahuje všech 9 stránek s priority a changefreq; po přidání nové stránky přidat i sem a aktualizovat `lastmod` (besedy.html v sitemapě dřív chyběla — doplněno)
 - **`llms.txt`** — pro AI crawlery; obsahuje stručný popis webu a seznam stránek s popisy
 
 ### Google Search Console
