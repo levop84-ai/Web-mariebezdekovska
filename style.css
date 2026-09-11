@@ -1717,7 +1717,8 @@ p {
 
     .hero__img-wrap {
         order: -1;
-        height: 55vw;
+        height: auto;
+        aspect-ratio: 1 / 1;
         max-height: 480px;
         padding: 0;
     }
@@ -1794,8 +1795,9 @@ p {
 
     .hero__img-wrap {
         order: -1;
-        height: 65vw;
-        max-height: 400px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        max-height: 500px;
         padding: 0;
     }
 
@@ -1822,6 +1824,10 @@ p {
 
     .split__img-wrap {
         aspect-ratio: 4 / 3;
+    }
+
+    .split__img-wrap--square {
+        aspect-ratio: 1 / 1;
     }
 
     /* cards */
@@ -1875,8 +1881,13 @@ p {
     }
 
     .contact__photo-wrap {
-        width: 160px;
-        height: 160px;
+        width: 290px;
+        height: 290px;
+    }
+
+    .contact__photo-wrap--hero {
+        width: 290px;
+        height: 290px;
     }
 
     .contact__right {
