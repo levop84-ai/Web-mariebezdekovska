@@ -1095,7 +1095,7 @@ Ceny: První sezení – 2&nbsp;000&nbsp;Kč / 2&nbsp;hodiny; Každé další se
 
 ### besedy.html – Živá setkání
 
-Nová, zatím velmi jednoduchá stránka (nebyla v původním zadání, přidána později; položka „Živá setkání" v navigaci mezi „O mně" a „Kontakt"). Struktura: nav → page-hero → jedna sekce „Termíny" → footer. Žádná kontaktní sekce.
+Nová stránka (nebyla v původním zadání, přidána později; položka „Živá setkání" v navigaci mezi „O mně" a „Kontakt"). Struktura: nav → page-hero → jedna sekce „Beseda" (`id="terminy"`) → footer. Žádná kontaktní sekce.
 
 **Meta:** „Živá setkání | Marie Bezděkovská – Průvodce péčí v závěru života"
 
@@ -1104,13 +1104,22 @@ Nová, zatím velmi jednoduchá stránka (nebyla v původním zadání, přidán
 | Pořadí | Sekce | Pozadí |
 |---|---|---|
 | 1 | Page Hero | foto + overlay |
-| 2 | Termíny (`id="terminy"`) | `intro section--white` |
+| 2 | Beseda (`id="terminy"`) | `section section--white` |
 
-**Sekce Termíny:** zatím jen placeholder — eyebrow „Kdy a kde" + h2 „Termíny podzimních setkání budou brzy upřesněny právě zde". Žádný obsah navíc (žádné karty, žádný seznam akcí) — sekci bude potřeba doplnit, až budou termíny známé.
+**Sekce Beseda (pozvánka na konkrétní akci „Na slovíčko s pohřebákem"):** dvousloupcový `split__grid` (`align-items: start`), oba sloupce `split__body` (standardní dvojice tříd z existujícího design systému, žádné nové CSS třídy).
+
+*Levý sloupec:* eyebrow „Beseda" → h2 „Na slovíčko s pohřebákem" (`id="terminy-h"`, zachováno kvůli kotvě `#terminy` z hero tlačítka) → `split__img-wrap` s obrázkem `Obrazky/na_slovicko_letak.jpg` (portrétový leták, `aspect-ratio: 1414/2000` inline, protože `.split__img-wrap` na této stránce nemá vlastní pevný poměr stran). Mezera mezi h2 a obrázkem je navýšena inline `margin-top: var(--s5)` na obrázkovém wrapu (nad rámec běžného `.split__body h2 { margin-bottom: var(--s3) }`), protože defaultní rozestup na přání klientky nepůsobil dost vzdušně.
+
+*Pravý sloupec:* menší nadpis jako `<h3>` (ne `<h2>`) se třemi inline styly: `font-style: italic` (stejný vizuální vzor jako `.intro__title` na pecujici.html, ale záměrně **zarovnaný doleva**, ne na střed), `line-height: 1.4` (větší řádkování na přání klientky) a `margin-bottom: var(--s3)`. Zůstává v tagu `<h3>`, takže je velikostí (`clamp(1.25rem, 2vw, 1.7rem)`) stále menší než h2 vlevo. Pod nadpisem šest odstavců `split__text` s popisem akce; v textu jsou tučně (`<strong>`) pouze jména tří účastníků a fráze „rezervace místa nutná!" — nic jiného tučně zvýrazněno není.
+
+**Box s termíny a CTA tlačítkem:** poslední odstavec („Dvě setkání s omezeným počtem účastníků…"), seznam termínů a tlačítko „Registrovat se" jsou společně obalené v jednom `<div>` s inline stylem `background: var(--bg); border-radius: var(--r-md); padding: var(--s4);` — jemný krémový rámeček bez ohraničení (stejný odstín, jaký má jako podkladová barva stránka kontakt.html díky `section--bg`). Box má `margin-top: var(--s5)` od předchozího odstavce (klientka chtěla výrazně větší odstup, aby blok s termíny vizuálně „vystoupil"). Uvnitř boxu:
+- odstavec s textem „Dvě setkání s omezeným počtem účastníků (**rezervace místa nutná!**):"
+- `ul.dot-list` (`margin-top: var(--s3)`) se dvěma položkami — stejný vzor jako „Praktické info" na pecujici.html/pozustali.html (ikona `fa-solid fa-circle`, text data/místa `font-family: var(--font-h); font-style: italic; font-size: 1.2rem; color: var(--cta)`), ale bez druhého (vysvětlujícího) odstavce pod titulkem, proto `margin-bottom: 0` na `<p>` uvnitř `<li>`
+- `btn btn--primary` „Registrovat se" s odkazem na externí Google Form (`target="_blank" rel="noopener noreferrer"`), `margin-top: var(--s1)` — záměrně malý odstup od seznamu termínů, aby blok termíny+tlačítko působil kompaktně
 
 **Technické detaily shodné s ostatními podstránkami:** synchronní Font Awesome, `scroll-padding-top: 80px`, `cookie-banner.js` bez `defer`, `#backToTop` inline CSS/JS, víceřádkově formátovaný invisible-bridge blok pro podmenu navigace.
 
-**Poznámka k SEO:** stránka byla při vytvoření opomenuta v `sitemap.xml` a `llms.txt` — v rámci tohoto auditu doplněno do obou souborů.
+**Poznámka k SEO:** stránka byla při vytvoření opomenuta v `sitemap.xml` a `llms.txt` — v rámci staršího auditu doplněno do obou souborů.
 
 ---
 
@@ -1182,6 +1191,7 @@ Použito v sekcích: IV/F bod 1, VII bod 3, IX bod 2, X bod 1.
 | `Obrazky/poradna_prostor_2026.jpg` | pecujici.html a pozustali.html sekce „Praktické info" (vlevo, aspect-ratio 1:1) |
 | `Obrazky/marie_otazky.jpg` | pecujici.html bubble-field pozadí; CSS pro `.bubble-field` se stejným odkazem je i v inline `<style>` na besedy.html, ale tam se nepoužívá (mrtvý kód) |
 | `Obrazky/marie_bezdekovska_besedy_2026.jpg` | besedy.html page hero pozadí (`background-position: center 20%`) a OG image |
+| `Obrazky/na_slovicko_letak.jpg` | besedy.html sekce „Beseda" (vlevo) — portrétový leták k akci „Na slovíčko s pohřebákem", `aspect-ratio: 1414/2000` |
 | `Obrazky/o_mne_hero_2026.jpg` | o-mne.html page hero pozadí (`background-position: center 15%`) |
 | `Obrazky/marie_muj_pribeh_2026.jpg` | o-mne.html split „Vlastní zkušenost" (vlevo, aspect 4:5, `align-self: center`) |
 | `Obrazky/marie_2.jpg` | nepoužitá, osiřelá fotka ve složce (nikde na webu neodkazovaná) |
