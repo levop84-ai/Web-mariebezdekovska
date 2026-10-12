@@ -1108,7 +1108,7 @@ Nová stránka (nebyla v původním zadání, přidána později; položka „Ž
 
 **Sekce Beseda (pozvánka na konkrétní akci „Na slovíčko s pohřebákem"):** dvousloupcový `split__grid` (`align-items: start`), oba sloupce `split__body` (standardní dvojice tříd z existujícího design systému, žádné nové CSS třídy).
 
-*Levý sloupec:* eyebrow „Beseda" → h2 „Na slovíčko s pohřebákem" (`id="terminy-h"`, zachováno kvůli kotvě `#terminy` z hero tlačítka) → `split__img-wrap` s obrázkem `Obrazky/na_slovicko_letak.jpg` (portrétový leták, `aspect-ratio: 1414/2000` inline, protože `.split__img-wrap` na této stránce nemá vlastní pevný poměr stran). Mezera mezi h2 a obrázkem je navýšena inline `margin-top: var(--s5)` na obrázkovém wrapu (nad rámec běžného `.split__body h2 { margin-bottom: var(--s3) }`), protože defaultní rozestup na přání klientky nepůsobil dost vzdušně.
+*Levý sloupec:* eyebrow „Beseda" → h2 „Na slovíčko s pohřebákem" (`id="terminy-h"`, zachováno kvůli kotvě `#terminy` z hero tlačítka) → `split__img-wrap` s obrázkem `Obrazky/letak_na_slovicko_s_pohrebakem.jpg` (portrétový leták, `aspect-ratio: 1414/2000` inline, protože `.split__img-wrap` na této stránce nemá vlastní pevný poměr stran). Mezera mezi h2 a obrázkem je navýšena inline `margin-top: var(--s5)` na obrázkovém wrapu (nad rámec běžného `.split__body h2 { margin-bottom: var(--s3) }`), protože defaultní rozestup na přání klientky nepůsobil dost vzdušně. **Mobil (≤ 768px):** eyebrow i h2 jsou zarovnané na střed pravidlem `.split__body .eyebrow, .split__body h2 { text-align: center; }` v mobilním `@media` bloku inline `<style>` této stránky; na desktopu zůstávají vlevo a zbytek sekce (leták, pravý sloupec, box s termíny) se na mobilu nemění.
 
 *Pravý sloupec:* menší nadpis jako `<h3>` (ne `<h2>`) se třemi inline styly: `font-style: italic` (stejný vizuální vzor jako `.intro__title` na pecujici.html, ale záměrně **zarovnaný doleva**, ne na střed), `line-height: 1.4` (větší řádkování na přání klientky) a `margin-bottom: var(--s3)`. Zůstává v tagu `<h3>`, takže je velikostí (`clamp(1.25rem, 2vw, 1.7rem)`) stále menší než h2 vlevo. Pod nadpisem šest odstavců `split__text` s popisem akce; v textu jsou tučně (`<strong>`) pouze jména tří účastníků a fráze „rezervace místa nutná!" — nic jiného tučně zvýrazněno není.
 
@@ -1191,7 +1191,7 @@ Použito v sekcích: IV/F bod 1, VII bod 3, IX bod 2, X bod 1.
 | `Obrazky/poradna_prostor_2026.jpg` | pecujici.html a pozustali.html sekce „Praktické info" (vlevo, aspect-ratio 1:1) |
 | `Obrazky/marie_otazky.jpg` | pecujici.html bubble-field pozadí; CSS pro `.bubble-field` se stejným odkazem je i v inline `<style>` na besedy.html, ale tam se nepoužívá (mrtvý kód) |
 | `Obrazky/marie_bezdekovska_besedy_2026.jpg` | besedy.html page hero pozadí (`background-position: center 20%`) a OG image |
-| `Obrazky/na_slovicko_letak.jpg` | besedy.html sekce „Beseda" (vlevo) — portrétový leták k akci „Na slovíčko s pohřebákem", `aspect-ratio: 1414/2000` |
+| `Obrazky/letak_na_slovicko_s_pohrebakem.jpg` | besedy.html sekce „Beseda" (vlevo) — portrétový leták k akci „Na slovíčko s pohřebákem", `aspect-ratio: 1414/2000` |
 | `Obrazky/o_mne_hero_2026.jpg` | o-mne.html page hero pozadí (`background-position: center 15%`) |
 | `Obrazky/marie_muj_pribeh_2026.jpg` | o-mne.html split „Vlastní zkušenost" (vlevo, aspect 4:5, `align-self: center`) |
 | `Obrazky/marie_2.jpg` | nepoužitá, osiřelá fotka ve složce (nikde na webu neodkazovaná) |
